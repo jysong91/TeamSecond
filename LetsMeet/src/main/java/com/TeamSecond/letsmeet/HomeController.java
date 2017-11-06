@@ -36,4 +36,9 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping("member")
+	public String member(Locale locale, Model model) {
+		
+		return "member";
+	}
 }
