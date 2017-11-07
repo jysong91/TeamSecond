@@ -1,4 +1,4 @@
-package com.TeamSecond.letsmeet;
+package com.TeamSecond.letsmeet.Controller;
 
 import java.text.DateFormat;
 import java.util.Date;

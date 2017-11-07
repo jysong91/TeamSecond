@@ -11,7 +11,7 @@
 Adunaa
 </h1>
 <p>hihihihihi</p>
-<P>  The time on the server is ${serverTime}. </P>
+<button type="button" onclick="location.href='${home}map'">지도로 가기</button>
 <form action="${home }member">
 	<input type="submit" value="회원가입"/>
 </form>
