@@ -12,7 +12,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="${res }css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>
+  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
+</head>
 
 <body>
   <nav class="navbar navbar-fixed-top navbar-expand-md bg-secondary navbar-dark">
