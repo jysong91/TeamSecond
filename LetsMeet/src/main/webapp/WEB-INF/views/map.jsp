@@ -1,6 +1,7 @@
 <%@ page session="false" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url value="/resources/" var="res"></c:url>
+<c:url value="/" var="home"></c:url>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -13,6 +14,7 @@
     <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
+  <link rel="stylesheet" href="${res }css/icon.css" type="text/css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -52,26 +54,28 @@
     </div>
   </nav>
 <div class="map_wrap">
- 	 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+ <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
     <div id="menu_wrap" class="bg_white">
-        <div class="option">
-            <div>
-                <form onsubmit="searchPlaces('keyword'); return false;">
-					나의 위치 : <input type="text" value="" id="keyword" size="15"> 
-					<button type="submit">검색하기</button> 
-                </form>
-				<form onsubmit="searchPlaces('keyword2'); return false;">
-					친구의 위치 : <input type="text" value="" id="keyword2" size="15"> 
-					<button type="submit">검색하기</button> 
- 				</form> 
-            </div>
-        </div>
+		<div class="option">
+			<form class="form-inline" onsubmit="searchPlaces('keyword');  return false;" style="flex-flow: inherit;">
+				<input class="form-control" placeholder="나의 위치는?" type="text" value="" id="keyword" size="15"> 
+				<button type="submit" class="btn btn-primary">검색하기</button>
+			</form>
+	       	<form class="form-inline" onsubmit="searchPlaces('keyword2'); return false;" style="flex-flow: inherit;">
+				<input class="form-control" placeholder="친구의 위치는?" type="text" value="" id="keyword2" size="15"> 
+				<button type="submit" class="btn btn-primary">검색하기</button> 
+			</form> 
+			<div id="addPerson"></div>
+			<button class="btn btn-lg" onclick="addPerson();" aria-label="Plus">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</button>
+		</div>
         <hr>
-        <ul id="placesList"></ul>
+        <ul id="placesList" style="padding:0;font-size:12px;"></ul>
         <div id="pagination"></div>
     </div>
 </div>
-<form action="map/calMid" method="post"> 
+<form action="${home }map/calMid" method="post"> 
   <div class="form-group">
     <label for="myLoc">나의 위치</label>
     <input type="text" class="form-control" id="myLoc" name="myLoc" placeholder="나의 위치는?">
@@ -107,12 +111,12 @@
 	    // 마커를 생성합니다
 	    var marker = new daum.maps.Marker({
 	        position: markerPosition
+// 	        if("1"==${isFindCenter}) //1이면 마커이미지, 오버레이 변경해야함
 	    });
 
 	    // 마커가 지도 위에 표시되도록 설정합니다
 	    marker.setMap(map);
 
-	    
 	    // 장소 검색 객체를 생성합니다
 	    var ps = new daum.maps.services.Places();  
 
@@ -122,6 +126,9 @@
 	    
 	    // 위치 검색이 누구 것인지 판별
 	    var mine = true;
+	    
+	    // 친구 몇명인지 카운트
+	    var cntFs = 1;
 	    
 	    // 키워드로 장소를 검색합니다
 // 	    searchPlaces('keyword');
@@ -205,22 +212,28 @@
 	            // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 	            // LatLngBounds 객체에 좌표를 추가합니다
 	            bounds.extend(placePosition);
-
+				
 	            // 마커와 검색결과 항목에 mouseover 했을때
 	            // 해당 장소에 인포윈도우에 장소명을 표시합니다
 	            // mouseout 했을 때는 인포윈도우를 닫습니다
 	            (function(marker, place) {
 	                daum.maps.event.addListener(marker, 'click', function() {
 	                	closeOverlay();
-	                	displayInfowindow(marker, place);
+	                	if("1"==${isFindCenter})    	displayInfowindow(marker, place);
+	                	else{
+	                		
+	                	}
 	        		});
 	                itemEl.onclick = function(){
 	                	closeOverlay();
-	                	displayInfowindow(marker, place);
 	                	var latlng = marker.getPosition();
-	        	    	if(mine)   	document.getElementById('myLoc').value = latlng;
-	        	    	else		document.getElementById('yourLoc').value = latlng;
-	        	    	panTo(latlng);
+	                	if("1"==${isFindCenter}){
+	                		displayInfowindow(marker, place);
+	                	}else{
+	        	    		if(mine)   	document.getElementById('myLoc').value = latlng;
+	        	    		else		document.getElementById('yourLoc').value = latlng;
+	                	}
+        	    		panTo(latlng);
 	                };
 	            })(marker, places[i]);
 
@@ -369,6 +382,17 @@
 	    function closeOverlay() {
 			if(overlay!=null)       overlay.setMap(null);     
 	    }
+		 
+		function addPerson(){
+			var div = document.getElementById('addPerson');
+			div.innerHTML += '<form class="form-inline"' +
+			'	onsubmit="searchPlaces("keyword2"); return false;"' +
+			'	style="flex-flow: inherit;">' +
+			'	<input class="form-control" placeholder="친구의 위치는?"'+
+			'	type="text" value="" id="keyword2" size="15">'+
+			'	<button type="submit" class="btn btn-primary">검색하기</button>'+ 
+			'	</form>';
+		}
     </script>    
     
   </body>
