@@ -371,19 +371,5 @@
 	    }
     </script>    
     
-    //채팅기능 구현을 위한 firebase(시도중)
-<script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDFCDoNUzXkrbo10o9scE43PVWHpSjuY0k",
-    authDomain: "chat-4d464.firebaseapp.com",
-    databaseURL: "https://chat-4d464.firebaseio.com",
-    projectId: "chat-4d464",
-    storageBucket: "chat-4d464.appspot.com",
-    messagingSenderId: "759372313012"
-  };
-  firebase.initializeApp(config);
-</script>
   </body>
 </html>
