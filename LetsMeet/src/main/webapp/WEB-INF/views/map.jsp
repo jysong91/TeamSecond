@@ -11,7 +11,8 @@
 
     <title>약속장소잡기</title>
     <!-- Bootstrap core CSS -->
-    <link href="${res }css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -24,6 +25,32 @@
 
   </style>
   <body>
+  <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Yahmanaza</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">How about here?</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Come with us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#">Contact us</a>
+          </li>
+        </ul>
+        <form class="form-inline m-0">
+          <input class="form-control mr-2" type="text" placeholder="Search">
+          <button class="btn btn-primary" type="submit">검 색</button>
+        </form>
+      </div>
+    </div>
+  </nav>
 <div class="map_wrap">
  	 <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
     <div id="menu_wrap" class="bg_white">
@@ -182,40 +209,20 @@
 	            // 마커와 검색결과 항목에 mouseover 했을때
 	            // 해당 장소에 인포윈도우에 장소명을 표시합니다
 	            // mouseout 했을 때는 인포윈도우를 닫습니다
-	            (function(marker, title, url, adress, adress_dong, phone, category) {
-// 	                daum.maps.event.addListener(marker, 'mouseover', function() {
-// 	                    displayInfowindow(marker, title);
-// 	                });
-// 	                daum.maps.event.addListener(marker, 'mouseout', function() {
-// 	                    closeOverlay();
-// 	                });
+	            (function(marker, place) {
 	                daum.maps.event.addListener(marker, 'click', function() {
 	                	closeOverlay();
-	                	displayInfowindow(marker, title, url, adress, phone);
-	                	alert(category);
-// 	        	    	var latlng = marker.getPosition();
-// 	        	    	if(mine)   	document.getElementById('myLoc').value = latlng;
-// 	        	    	else		document.getElementById('yourLoc').value = latlng;
-// 	        	    	panTo(latlng);
+	                	displayInfowindow(marker, place);
 	        		});
 	                itemEl.onclick = function(){
 	                	closeOverlay();
-	                	displayInfowindow(marker, title, url, adress, phone);
+	                	displayInfowindow(marker, place);
 	                	var latlng = marker.getPosition();
 	        	    	if(mine)   	document.getElementById('myLoc').value = latlng;
 	        	    	else		document.getElementById('yourLoc').value = latlng;
-// 	                	map.setLevel(3);
 	        	    	panTo(latlng);
 	                };
-// 	                itemEl.onmouseover =  function () {
-// 	                    displayInfowindow(marker, title);
-// 	                };
-// 	                itemEl.onmouseout =  function () {
-// 	                	closeOverlay(); 
-// 	                };
-	            })(marker, places[i].place_name, places[i].place_url,
-	            		places[i].road_address_name, places[i].address_name, 
-	            		places[i].phone, places[i].category_name);
+	            })(marker, places[i]);
 
 	            fragment.appendChild(itemEl);
 	        }
@@ -316,11 +323,13 @@
 	    // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 	    // 인포윈도우에 장소명을 표시합니다
 	    // content바꾸면 커스텀 창 만들수있음
-	    function displayInfowindow(marker, title, url, adress, adress_dong, phone) {
-	    	if("0"==adress)	adress = adress_dong;
+	    function displayInfowindow(marker, place) {
+	    	var address = null;
+	    	if(place.road_address_name)		address = place.road_address_name;
+	    	else							address = place.address_name;
 	        var content = '<div class="wrap">' + 
             '    <div class="info">' + 
-            '        <div class="title">' + title + 
+            '        <div class="title">' + place.place_name + 
             '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
             '        </div>' + 
             '        <div class="body">' + 
@@ -328,23 +337,19 @@
             '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
             '           </div>' + 
             '            <div class="desc">' + 
-            '                <div class="ellipsis">'+adress + 
-            '                <div class="jibun ellipsis">'+phone+' </div>' + 
-            '                <div><a href='+url+' target="_blank" class="link">홈페이지</a></div>' + 
+            '                <div class="ellipsis">'+address + 
+            '                <div class="jibun ellipsis">'+place.phone+' </div>' + 
+            '                <div><a href='+place.place_url+' target="_blank" class="link">홈페이지</a></div>' + 
             '            </div>' + 
             '        </div>' + 
             '    </div>' +    
             '</div>'; 
-// 	        	'<div style="padding:5px;z-index:1;">' + title + '</div>';
 
  			overlay = new daum.maps.CustomOverlay({
 		        content: content,
 		        map: map,
 		        position: marker.getPosition()       
 	   		 });
-
-// 	        infowindow.setContent(content);
-// 	        infowindow.open(map, marker);
 	    }
 
 	     // 검색결과 목록의 자식 Element를 제거하는 함수입니다
