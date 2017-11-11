@@ -369,6 +369,59 @@
 	    function closeOverlay() {
 			if(overlay!=null)       overlay.setMap(null);     
 	    }
+	    var dataArray = new Array("1", "2", "3");
+	    var number = 0;
+	    
+		//반경 1km내의 상업시설들을 검색하는 함수.
+		//존재하는 카테고리별로 모두 검색.(PC방, 당구장, 식당 등)
+	    function searchPlacesFromMid(id) {
+			var keyword = ["PC방", "당구장", "식당"];
+			
+			for(var i=0; i<keyword.length;i++){
+	 	        ps.keywordSearch( keyword[i], makeDataArrayCB,{
+		        	location: new daum.maps.LatLng(${calRst}),
+		        	radius: ${rad}
+	 	        })
+				alert(dataArray[i]);
+			}
+	    }
+	    
+		//검색한 카테고리별 결과값들을 저장하기 위한 콜백함수. 중간지점 주변의 지역들을 검색한 후에 실행된다.
+	    function makeDataArrayCB(data){
+	    	var i = number;
+	    	dataArray[i] = data;
+	    	number++;
+	    	alert(dataArray[i]);
+	    }
+	
+		//컨트롤러에서 중간지점 계산해서 페이지 리로딩 후에 실행되는 함수.
+		//중간지점 바로 위에 "중간지점은 여기입니다"하고 오버레이를 띄워줌.
+	    function displayMidOverlay(position) {
+	        var content = 
+	        '<div class="wrap">' + 
+	        '    <div class="info">' + 
+	        '        <div class="title">' + '중간지점' + 
+	        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+	        '        </div>' + 
+	        '        <div class="body">' + 
+	        '            <div class="img">' +
+	        '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+	        '           </div>' + 
+	        '            <div class="desc">' + 
+	        '                <div class="message1">'+'중간지점입니다. '+' </div>' + 
+	        '                <div class="message2">'+'근처 장소를 추천받으시겠어요?'+' </div>' + 
+	        '                <button type="button" onclick="searchPlacesFromMid()">'+'추천받기'+'</button>' + 
+	        '            </div>' + 
+	        '        </div>' + 
+	        '    </div>' +    
+	        '</div>'; 
+			overlay = new daum.maps.CustomOverlay({
+		        content: content,
+		        map: map,
+		        position: marker.getPosition() 
+	   		 });
+	    }
+		 
     </script>    
     
     //채팅기능 구현을 위한 firebase(시도중)
