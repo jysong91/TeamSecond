@@ -25,6 +25,7 @@ public class MapController {
 		model.addAttribute("calRst","37.566826, 126.9786567"); //서울시청(디폴트)
 		model.addAttribute("rad","5000"); 
 		model.addAttribute("isFindCenter", "0");
+		model.addAttribute("autoOverlay", false);
 		return "map";
 	}
 	@RequestMapping(value = "/calMid")
@@ -34,6 +35,7 @@ public class MapController {
 		model.addAttribute("calRst",pathSrv.calMid(myLoc, yourLoc));
 		model.addAttribute("rad","1000");
 		model.addAttribute("isFindCenter", "1");
+		model.addAttribute("autoOverlay", true);
 		logger.info(pathSrv.calMid(myLoc, yourLoc));
 		return "map";
 	}
