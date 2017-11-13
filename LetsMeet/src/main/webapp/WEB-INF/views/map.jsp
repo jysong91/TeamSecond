@@ -406,27 +406,57 @@
 			
 	    var dataArray = new Array("1", "2", "3");
 	    var number = 0;
-	    
+	    var keyword = ["PC방", "당구장", "식당"];
 		//반경 1km내의 상업시설들을 검색하는 함수.
 		//존재하는 카테고리별로 모두 검색.(PC방, 당구장, 식당 등)
 	    function searchPlacesFromMid(id) {
-			var keyword = ["PC방", "당구장", "식당"];
-			
 			for(var i=0; i<keyword.length;i++){
 	 	        ps.keywordSearch( keyword[i], makeDataArrayCB,{
 		        	location: new daum.maps.LatLng(${calRst}),
 		        	radius: ${rad}
-	 	        })
-				alert(dataArray[i]);
-			}
+	 		}
+		}
 	    }
 	    
-		//검색한 카테고리별 결과값들을 저장하기 위한 콜백함수. 중간지점 주변의 지역들을 검색한 후에 실행된다.
-	    function makeDataArrayCB(data){
-	    	var i = number;
-	    	dataArray[i] = data;
-	    	number++;
-	    	alert(dataArray[i]);
+	    function makeDataArrayCB(data, status){
+	    	//number는 이 콜백함수가 몇 번 실행되었는지 판단하기 위한 변수이다.
+	    	//다른 배열에 데이터를 저장하기 위함.
+	    	number = number+1;
+	    	console.log(number);
+	    	
+	        if (status === daum.maps.services.Status.OK) {
+		    	dataArray[number-1] = data;
+				//정상적으로 검색 완료 시
+				//배열에 장소들을 저장한다.
+				if(number == keyword.length){
+					//검색이 끝까지 완료되었다는 뜻이므로
+					//여기에서 그동안 검색한 배열을 모두 합친 후에
+					//display를 실행해주면 될 것 같다.
+					//새로운 배열을 선언해주고 해보자.
+					var a=0;
+					var allResult = new Array();
+					for(var i=0; i<dataArray.length; i++){
+						for(var j=0; j<dataArray[i].length; j++){
+							allResult[j+a] = dataArray[i][j];
+						}
+						a += dataArray[i].length;
+					}
+					//console.log(allResult);
+					displayPlaces(allResult);
+		            //displayPagination(pagination);
+				}
+				
+
+	        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
+	            alert('주변 검색 결과가 존재하지 않습니다.');
+	            return;
+
+	        } else if (status === daum.maps.services.Status.ERROR) {
+	            alert('주변 검색 중 오류가 발생했습니다.');
+	            return;
+
+	        }
+	    	
 	    }
 	
 		//컨트롤러에서 중간지점 계산해서 페이지 리로딩 후에 실행되는 함수.
