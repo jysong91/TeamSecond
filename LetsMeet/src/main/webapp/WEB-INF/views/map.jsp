@@ -126,6 +126,16 @@
 	    // 키워드로 장소를 검색합니다
 // 	    searchPlaces('keyword');
 	    
+	    //중간지점위커스텀오버레이표시.autoOverlay
+	    if(${autoOverlay}==true){
+	    	//커스텀 오버레이를 표시하는 함수를 여기에서 실행하자
+	    	//(중간지점은 ~~입니다.)
+			//(주변의 약속장소를 추천받으시겠어요?)
+			//(예)
+			//주소로 검색한 결과값? ㄴㄴ 걍 마커만 있음
+	    	displayMidOverlay(marker);
+	    }
+	    
 	    // 키워드 검색을 요청하는 함수입니다
 	    function searchPlaces(id) {
 			var keyword = document.getElementById(id).value;
@@ -156,7 +166,7 @@
 //         		location: ps.keywordSearch( keyword, placesSearchCB);
 //         	});
 	    }
-
+		
 	    // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 	    function placesSearchCB(data, status, pagination) {
 	        if (status === daum.maps.services.Status.OK) {
