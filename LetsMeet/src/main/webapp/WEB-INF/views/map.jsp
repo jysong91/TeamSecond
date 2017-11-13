@@ -229,19 +229,23 @@
 	            (function(marker, place) {
 	                daum.maps.event.addListener(marker, 'click', function() {
 	                	closeOverlay();
+	                	var personLatlng = marker.getPosition();
 	                	if("1"==${isFindCenter})    	displayInfowindow(marker, place);
 	                	else{
-	                		
+	                		displayLoc(marker, place);
+	                		if(mine)   	document.getElementById('myLoc').value = personLatlng;
+	        	    		else		document.getElementById('yourLoc').value = personLatlng;
 	                	}
 	        		});
 	                itemEl.onclick = function(){
 	                	closeOverlay();
-	                	var latlng = marker.getPosition();
+	                	var personLatlng = marker.getPosition();
 	                	if("1"==${isFindCenter}){
 	                		displayInfowindow(marker, place);
 	                	}else{
-	        	    		if(mine)   	document.getElementById('myLoc').value = latlng;
-	        	    		else		document.getElementById('yourLoc').value = latlng;
+	                		displayLoc(marker, place);
+	        	    		if(mine)   	document.getElementById('myLoc').value = personLatlng;
+	        	    		else		document.getElementById('yourLoc').value = personLatlng;
 	                	}
         	    		panTo(latlng);
 	                };
@@ -375,6 +379,16 @@
 	   		 });
 	    }
 
+		// 위치 선택완료
+		function displayLoc(marker, place){
+			var content = '<div class ="label"><span class="left"></span><span class="center">위치선택완료!</span><span class="right"></span></div>';
+			overlay = new daum.maps.CustomOverlay({
+		        content: content,
+		        map: map,
+		        position: marker.getPosition()       
+	   		 });
+		}
+	    
 	     // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 	    function removeAllChildNods(el) {   
 	        while (el.hasChildNodes()) {
@@ -403,7 +417,7 @@
 			'	<button type="submit" class="btn btn-primary">검색하기</button>'+ 
 			'	</form>';
 		}
-			
+		
 	    var dataArray = new Array("1", "2", "3");
 	    var number = 0;
 	    var keyword = ["PC방", "당구장", "식당"];
@@ -414,11 +428,11 @@
 	 	        ps.keywordSearch( keyword[i], makeDataArrayCB,{
 		        	location: new daum.maps.LatLng(${calRst}),
 		        	radius: ${rad}
-	 		}
-		}
+	 			});
+			}
 	    }
 	    
-	    function makeDataArrayCB(data, status){
+	    function makeDataArrayCB(data, status, pagination){
 	    	//number는 이 콜백함수가 몇 번 실행되었는지 판단하기 위한 변수이다.
 	    	//다른 배열에 데이터를 저장하기 위함.
 	    	number = number+1;
@@ -443,7 +457,7 @@
 					}
 					//console.log(allResult);
 					displayPlaces(allResult);
-		            //displayPagination(pagination);
+		            displayPagination(pagination);
 				}
 				
 

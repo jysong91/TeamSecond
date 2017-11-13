@@ -20,8 +20,8 @@ public class MapController {
 	@Autowired
 	public pathService pathSrv;
 	
-	@RequestMapping(value = "/map")
-	public String home(Model model) {
+	@RequestMapping(value = "")
+	public String map(Model model) {
 		model.addAttribute("calRst","37.566826, 126.9786567"); //서울시청(디폴트)
 		model.addAttribute("rad","5000"); 
 		model.addAttribute("isFindCenter", "0");
