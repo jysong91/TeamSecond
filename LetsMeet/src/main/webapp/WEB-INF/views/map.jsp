@@ -392,7 +392,6 @@
 	    function closeOverlay() {
 			if(overlay!=null)       overlay.setMap(null);     
 	    }
-<<<<<<< HEAD
 		 
 		function addPerson(){
 			var div = document.getElementById('addPerson');
@@ -458,7 +457,6 @@
 	   		 });
 	    }
 
-=======
 	    var dataArray = new Array("1", "2", "3");
 	    var number = 0;
 	    
@@ -511,8 +509,6 @@
 		        position: marker.getPosition() 
 	   		 });
 	    }
-		 
->>>>>>> refs/remotes/origin/master
     </script>    
     
   </body>
