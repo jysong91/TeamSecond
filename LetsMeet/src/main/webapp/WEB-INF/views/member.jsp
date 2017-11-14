@@ -76,24 +76,62 @@ $(document).ready(function(){
 	//인증번호 검사
 	$("#authNum").blur(function(){
 		var authNum = $("#authNum").val();
-		$.ajax({
-			data:{authNum:authNum},
-			type:"POST",
-			url:"${home}member/authChkProc",
-			success:function(data){
-				if(data==0){
-					$('#authMsg').html("<p style='color:blue'>인증성공</p>");
-				}else if(data==1){
-					$('#authMsg').html("<p style='color:red'>인증실패</p>");					
+		if(authNum==""){
+			$('#authMsg').html("<p style='color:red'>인증번호를 전송하세요!!</p>");
+		}else{
+			$.ajax({
+				data:{authNum:authNum},
+				type:"POST",
+				url:"${home}member/authChkProc",
+				success:function(data){
+					if(data==0){
+						$('#authMsg').html("<p style='color:blue'>인증 성공했습니다!!</p>");
+					}else if(data==1){
+						$('#authMsg').html("<p style='color:red'>인증 실패했습니다!!</p>");					
+					}
 				}
-			}
-		});
+			});
+		}
+	});
+	//회원가입 클릭 시 무엇이 누락되어 있는지 표시
+	$("#frm").submit(function(){
+		var id = $("#id").val();
+		var pw = $("#pw").val();
+		var email = $("#email").val();
+		if(id=="" && pw=="" && email==""){
+			$("#idMsg").html("<p style='color:red'>아이디를 입력하세요!!</p>");
+			$("#pwMsg").html("<p style='color:red'>비밀번호를 입력하세요!!</p>");
+			$("#emailMsg").html("<p style='color:red'>이메일을 입력하세요!!</p>");
+			return false;
+		}else if(id=="" && pw=="" ){
+			$("#idMsg").html("<p style='color:red'>아이디를 입력하세요!!</p>");
+			$("#pwMsg").html("<p style='color:red'>비밀번호를 입력하세요!!</p>");
+			return false;
+		}else if(id=="" && email=="" ){
+			$("#idMsg").html("<p style='color:red'>아이디를 입력하세요!!</p>");
+			$("#emailMsg").html("<p style='color:red'>이메일을 입력하세요!!</p>");
+			return false;
+		}else if(pw=="" && email==""){
+			$("#pwMsg").html("<p style='color:red'>비밀번호를 입력하세요!!</p>");
+			$("#emailMsg").html("<p style='color:red'>이메일을 입력하세요!!</p>");
+			return false;
+		}else if(id==""){
+			$("#idMsg").html("<p style='color:red'>아이디를 입력하세요!!</p>");
+			return false;
+		}else if(pw==""){
+			$("#pwMsg").html("<p style='color:red'>비밀번호를 입력하세요!!</p>");
+			return false;
+		}else if(email==""){
+			$("#emailMsg").html("<p style='color:red'>이메일을 입력하세요!!</p>");
+			return false;
+		}
+		return true;
 	});
 });
 
 </script>
 <body>
-<form action="${home }member/memberProc" method="post">
+<form id="frm" action="${home }member/memberProc" method="post">
 <table>
 	<tr>
 		<td align='right' height=40 >아이디</td>

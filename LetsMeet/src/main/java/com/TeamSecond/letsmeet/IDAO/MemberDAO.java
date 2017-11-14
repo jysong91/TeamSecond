@@ -1,5 +1,7 @@
 package com.TeamSecond.letsmeet.IDAO;
 
-public interface MemberDAO {
+import com.TeamSecond.letsmeet.DTO.MemberDTO;
 
+public interface MemberDAO {
+	public void memberProc(MemberDTO memberDTO);
 }
