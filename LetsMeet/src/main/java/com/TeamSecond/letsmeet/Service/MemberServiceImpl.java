@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService{
 	private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 	@Autowired
 	MemberDAO memberDAO;
-	
+	//아이디 중복확인
 	@Override
 	public int chkIdProc(String id) {
 		if("hygi".equals(id)){
@@ -30,13 +30,13 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return 0;
 	}
-
+	//인증번호 생성
 	@Override
 	public String authSendProc() {
 		String authNumForm = String.format("%01d", (int)(Math.random()*10));
 		return authNumForm;
 	}
-
+	//인증번호 비교
 	@Override
 	public int authChkProc(String authNum,String authNumSession) {
 		if(authNumSession.equals(authNum)){
@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return 1;
 	}
-
+	//회원가입 실행
 	@Override
 	public void memberProc(MemberDTO memberDTO) {
 		memberDAO.memberProc(memberDTO);

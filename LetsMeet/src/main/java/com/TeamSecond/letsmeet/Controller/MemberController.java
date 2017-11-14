@@ -51,7 +51,7 @@ public class MemberController {
 		String authNumSession = (String) session.getAttribute("authNumSession");
 		return memberService.authChkProc(authNum,authNumSession);
 	}
-	
+	//회원가입 실행
 	@RequestMapping("memberProc")
 	public String memberProc(MemberDTO memberDTO) {
 		memberService.memberProc(memberDTO);
