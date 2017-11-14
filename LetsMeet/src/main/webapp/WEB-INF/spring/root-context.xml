@@ -2,10 +2,28 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean class="org.apache.commons.dbcp.BasicDataSource"
+	id="dataSource"
+	p:driverClassName="oracle.jdbc.OracleDriver"
+	p:url="jdbc:oracle:thin:@121.160.70.118:1521:xe"
+	p:username="second"
+	p:password="sys1234"/>
+	
+	<!-- 마이바티스 빈 설정 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean"
+	id="sqlSessionFactoryBean"
+	p:dataSource-ref="dataSource"
+	p:mapperLocations="/WEB-INF/spring/Mapper/*.xml"/>
+	
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" 
+	id="MemberMapperBean"
+	p:mapperInterface="com.TeamSecond.letsmeet.IDAO.MemberDAO"
+	p:sqlSessionFactory-ref="sqlSessionFactoryBean"/>
 		
 	<context:component-scan base-package="com.TeamSecond.letsmeet.*"></context:component-scan>
 </beans>
