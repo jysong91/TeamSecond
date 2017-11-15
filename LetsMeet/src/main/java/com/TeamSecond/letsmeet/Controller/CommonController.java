@@ -21,6 +21,11 @@ public class CommonController {
 		return "member";
 	}
 	
+	@RequestMapping("place")
+	public String place() {
+		return "place";
+	}
+	
 	@RequestMapping("review")
 	public String review() {
 		return "review";
