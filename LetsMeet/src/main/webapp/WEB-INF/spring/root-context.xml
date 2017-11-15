@@ -24,6 +24,16 @@
 	id="MemberMapperBean"
 	p:mapperInterface="com.TeamSecond.letsmeet.IDAO.MemberDAO"
 	p:sqlSessionFactory-ref="sqlSessionFactoryBean"/>
-		
+	
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" 
+	id="ReviewMapperBean"
+	p:mapperInterface="com.TeamSecond.letsmeet.IDAO.ReivewDAO"
+	p:sqlSessionFactory-ref="sqlSessionFactoryBean"/>
+	
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" 
+	id="PlaceMapperBean"
+	p:mapperInterface="com.TeamSecond.letsmeet.IDAO.PlaceDAO"
+	p:sqlSessionFactory-ref="sqlSessionFactoryBean"/>
+	
 	<context:component-scan base-package="com.TeamSecond.letsmeet.*"></context:component-scan>
 </beans>
