@@ -99,7 +99,9 @@
         <div class="col-md-4 my-3">
           <div class="card">
             <img class="img-fluid" src="https://pingendo.github.io/templates/sections/assets/features_mac.jpg" alt="Card image">
-            <div class="card-body"></div>
+            <div class="card-body">
+            	<h5><b>카드형식</b></h5>
+            </div>
           </div>
         </div>
         <div class="col-md-4 my-3">
