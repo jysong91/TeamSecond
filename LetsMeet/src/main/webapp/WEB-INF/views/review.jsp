@@ -9,7 +9,8 @@
 <script src="${home }resources/js/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var log=false;
+	 	var log=false;
+		
 		$(".typeBtn1").click(function(){
 			log=!log;
 			$(".typeBtn1").css("background-color","yellow");
