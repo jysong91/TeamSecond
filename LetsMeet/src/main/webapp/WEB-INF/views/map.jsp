@@ -23,9 +23,6 @@
     <![endif]-->
     <link href="${res }css/map.css" rel="stylesheet" draggable="auto">
   </head>
-<style>
-
-  </style>
   <body>
   <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
     <div class="container">
@@ -40,10 +37,10 @@
             <a class="nav-link" href="#">How about here?</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Come with us</a>
+            <a class="nav-link text-white" href="#mapSection">지도로 보기</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Contact us</a>
+            <a class="nav-link" href="#listSection">리스트로 보기</a>
           </li>
         </ul>
         <form class="form-inline m-0">
@@ -53,39 +50,79 @@
       </div>
     </div>
   </nav>
-<div class="map_wrap">
+<div class="map_wrap" id="mapSection">
  <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
     <div id="menu_wrap" class="bg_white">
 		<div class="option">
-			<form class="form-inline" onsubmit="searchPlaces('keyword');  return false;" style="flex-flow: inherit;">
-				<input class="form-control" placeholder="나의 위치는?" type="text" value="" id="keyword" size="15"> 
+			<form class="form-inline" onsubmit="searchPlaces('keyword1');  return false;" style="flex-flow: inherit;">
+				<input class="form-control" placeholder="나의 위치는?" type="text" value="" id="keyword1" size="15"> 
 				<button type="submit" class="btn btn-primary">검색하기</button>
 			</form>
 	       	<form class="form-inline" onsubmit="searchPlaces('keyword2'); return false;" style="flex-flow: inherit;">
 				<input class="form-control" placeholder="친구의 위치는?" type="text" value="" id="keyword2" size="15"> 
 				<button type="submit" class="btn btn-primary">검색하기</button> 
 			</form> 
-			<div id="addPerson"></div>
+			<span id="addPerson"></span>
 			<button class="btn btn-lg" onclick="addPerson();" aria-label="Plus">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 			</button>
+<form id="searchMidFrm" action="${home }map/calMid" method="post"> 
+			<input onclick="checkSearchText();" type="button" class="btn btn-primary" value="중간지점 찾기"> 
+		    <input type="hidden" class="form-control" id="ppl1" name="ppl" >
+		    <input type="hidden" class="form-control" id="ppl2" name="ppl" >
+		    <span id="addPerson2"></span>
+</form>
 		</div>
         <hr>
         <ul id="placesList" style="padding:0;font-size:12px;"></ul>
         <div id="pagination"></div>
     </div>
 </div>
-<form action="${home }map/calMid" method="post"> 
-  <div class="form-group">
-    <label for="myLoc">나의 위치</label>
-    <input type="text" class="form-control" id="myLoc" name="myLoc" placeholder="나의 위치는?">
+<hr>
+<div class="py-5 bg-light text-dark" id="listSection">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 my-3">
+          <div class="card">
+            <img class="img-fluid" src="https://pingendo.github.io/templates/sections/assets/features_mac.jpg" alt="Card image">
+            <div class="card-body">
+            	<h5><b>카드형식</b></h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>우리에게 내일은 없어</b></h5>
+          <p class="mt-1"></p>
+        </div>
+        <div class="col-md-4 my-3">
+          <img class="img-fluid d-block mb-4 img-thumbnail" src="https://pingendo.github.io/templates/sections/assets/features_bluetable.jpg">
+          <h5><b>난 오늘만 산다</b></h5>
+          <p class="mt-1"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 my-3">
+          <div class="card">
+            <img class="img-fluid" src="https://pingendo.github.io/templates/sections/assets/features_mac.jpg" alt="Card image">
+            <div class="card-body">
+            	<h5><b>카드형식</b></h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>우리에게 내일은 없어</b></h5>
+          <p class="mt-1"></p>
+        </div>
+        <div class="col-md-4 my-3">
+          <img class="img-fluid d-block mb-4 img-thumbnail" src="https://pingendo.github.io/templates/sections/assets/features_bluetable.jpg">
+          <h5><b>난 오늘만 산다</b></h5>
+          <p class="mt-1"></p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="yourLoc">친구의 위치</label>
-    <input type="text" class="form-control" id="yourLoc" name="yourLoc" placeholder="친구의 위치는?">
-  </div>
-  <button type="submit" class="btn btn-default">제출</button>
-</form>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -111,7 +148,6 @@
 	    // 마커를 생성합니다
 	    var marker = new daum.maps.Marker({
 	        position: markerPosition
-// 	        if("1"==${isFindCenter}) //1이면 마커이미지, 오버레이 변경해야함
 	    });
 
 	    // 마커가 지도 위에 표시되도록 설정합니다
@@ -120,18 +156,14 @@
 	    // 장소 검색 객체를 생성합니다
 	    var ps = new daum.maps.services.Places();  
 
-	    // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다 -> 오버레이로 대체
-// 	    var infowindow = new daum.maps.InfoWindow({zIndex:1});
+	    // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 오버레이
 	    var overlay = null;
 	    
-	    // 위치 검색이 누구 것인지 판별
-	    var mine = true;
+	    // 사람 몇명인지 카운트
+	    var cnt_ppl = 2;
 	    
-	    // 친구 몇명인지 카운트
-	    var cntFs = 1;
-	    
-	    // 키워드로 장소를 검색합니다
-// 	    searchPlaces('keyword');
+	    // 몇번째 사람의 검색인가
+	    var search_ppl = "0";
 	    
 	    //중간지점위커스텀오버레이표시.autoOverlay
 	    if(${autoOverlay}==true){
@@ -143,6 +175,13 @@
 	    	displayMidOverlay(marker);
 	    }
 	    
+// 	    if("1"==${isFindCenter}){
+// 	    	ps.keywordSearch('맛집', placesSearchCB, {
+// 	    		location: new daum.maps.LatLng(${calRst}),
+//  	        	radius: ${rad}
+// 	    	});
+// 	    }
+	    
 	    // 키워드 검색을 요청하는 함수입니다
 	    function searchPlaces(id) {
 			var keyword = document.getElementById(id).value;
@@ -151,50 +190,22 @@
 	            return false;
 	        }
 
-	        // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-	        if("keyword"==id)   	mine = true;      		
-	        else		        	mine = false;
+   			search_ppl=id.substr(7,1);
 	        
-	        //키워드검색(가까운 지하철역으로 검색)
-// 	        ps.keywordSearch( keyword, placesSearchCB, {
-// 	        	category_group_code: 'SW8'
-// 	        }); 
-
 	        ps.keywordSearch( keyword, placesSearchCB);
-	        
-	        //37.53445310867016 이고, 경도는 126.99400349382537 (이태원역)
-// 	        ps.keywordSearch( keyword, placesSearchCB,{
-// 	        	location: new daum.maps.LatLng(${calRst}),
-// 	        	radius: ${rad}
-// 	        });
-	        
-	        //카테고리검색
-//         	ps.categorySearch('SW8', placesSearchCB,{
-//         		location: ps.keywordSearch( keyword, placesSearchCB);
-//         	});
 	    }
 		
 	    // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 	    function placesSearchCB(data, status, pagination) {
 	        if (status === daum.maps.services.Status.OK) {
-
-	            // 정상적으로 검색이 완료됐으면
-	            // 검색 목록과 마커를 표출합니다
 	            displayPlaces(data);
-
-	            // 페이지 번호를 표출합니다
 	            displayPagination(pagination);
-
 	        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
-
 	            alert('검색 결과가 존재하지 않습니다.');
 	            return;
-
 	        } else if (status === daum.maps.services.Status.ERROR) {
-
 	            alert('검색 결과 중 오류가 발생했습니다.');
 	            return;
-
 	        }
 	    }
 
@@ -233,8 +244,7 @@
 	                	if("1"==${isFindCenter})    	displayInfowindow(marker, place);
 	                	else{
 	                		displayLoc(marker, place);
-	                		if(mine)   	document.getElementById('myLoc').value = personLatlng;
-	        	    		else		document.getElementById('yourLoc').value = personLatlng;
+        	    			document.getElementById('ppl'+search_ppl).value = personLatlng;
 	                	}
 	        		});
 	                itemEl.onclick = function(){
@@ -244,10 +254,9 @@
 	                		displayInfowindow(marker, place);
 	                	}else{
 	                		displayLoc(marker, place);
-	        	    		if(mine)   	document.getElementById('myLoc').value = personLatlng;
-	        	    		else		document.getElementById('yourLoc').value = personLatlng;
+	                		document.getElementById('ppl'+search_ppl).value = personLatlng;
 	                	}
-        	    		panTo(latlng);
+        	    		panTo(personLatlng);
 	                };
 	            })(marker, places[i]);
 
@@ -366,7 +375,8 @@
             '            <div class="desc">' + 
             '                <div class="ellipsis">'+address + 
             '                <div class="jibun ellipsis">'+place.phone+' </div>' + 
-            '                <div><a href='+place.place_url+' target="_blank" class="link">홈페이지</a></div>' + 
+            '                <div><a href="${home}place" target="_blank" class="link">홈페이지</a></div>' + 
+//             '                <div><a href='+place.place_url+' target="_blank" class="link">홈페이지</a></div>' + 
             '            </div>' + 
             '        </div>' + 
             '    </div>' +    
@@ -390,7 +400,7 @@
 		}
 	    
 	     // 검색결과 목록의 자식 Element를 제거하는 함수입니다
-	    function removeAllChildNods(el) {   
+	    function removeAllChildNods(el) {  
 	        while (el.hasChildNodes()) {
 	            el.removeChild (el.lastChild);
 	        }
@@ -408,14 +418,29 @@
 	    }
 		 
 		function addPerson(){
+			cnt_ppl++;
 			var div = document.getElementById('addPerson');
+			var div2 = document.getElementById('addPerson2');
+			var tmpArr = new Array();
+			
+			for(var i=0;i<cnt_ppl-2;i++){
+				tmpArr[i] = document.getElementById("keyword"+(i+1));
+			}
+			
 			div.innerHTML += '<form class="form-inline"' +
-			'	onsubmit="searchPlaces("keyword2"); return false;"' +
+			'	onsubmit="searchPlaces(\'keyword'+cnt_ppl+'\'); return false;"' +
 			'	style="flex-flow: inherit;">' +
-			'	<input class="form-control" placeholder="친구의 위치는?"'+
-			'	type="text" value="" id="keyword2" size="15">'+
+			'	<input class="form-control"'+
+			'	type="text" value="" id="keyword'+cnt_ppl+'" size="15">'+
 			'	<button type="submit" class="btn btn-primary">검색하기</button>'+ 
 			'	</form>';
+		
+			div2.innerHTML += '<input type="hidden" class="form-control"'+ 
+			'	id="ppl'+cnt_ppl+'" name="ppl" >';
+			
+			for(var i=0;i<cnt_ppl-2;i++){
+				document.getElementById("keyword"+(i+1)) = tmpArr[i];
+			}
 		}
 		
 	    var dataArray = new Array("1", "2", "3");
@@ -424,6 +449,7 @@
 		//반경 1km내의 상업시설들을 검색하는 함수.
 		//존재하는 카테고리별로 모두 검색.(PC방, 당구장, 식당 등)
 	    function searchPlacesFromMid(id) {
+	    	closeOverlay();
 			for(var i=0; i<keyword.length;i++){
 	 	        ps.keywordSearch( keyword[i], makeDataArrayCB,{
 		        	location: new daum.maps.LatLng(${calRst}),
@@ -457,7 +483,7 @@
 					}
 					//console.log(allResult);
 					displayPlaces(allResult);
-		            displayPagination(pagination);
+					removeWrap();
 				}
 				
 
@@ -500,6 +526,45 @@
 		        position: marker.getPosition() 
 	   		 });
 	    }
+		
+		function removeWrap(){
+			document.getElementById('menu_wrap').innerHTML = 
+				'<a href="${home }map" class="btn btn-primary text-white">다시 검색하기</a>';
+		} 
+		
+		function checkSearchText(){
+			var search_texts = document.getElementsByName('ppl');
+	     	var isOk = true; 
+	     	
+			for(var i=0;i<search_texts.length;i++){
+				var tmp = search_texts[i].value.replace(/\s|　/gi, '');
+		        // 정규식으로 공백, 엔터, 탭, 특수문자 공백 문자를 빈문자로 바꿈
+		        // 입력된 값에 대하여 위 정규식 처리를 하고 뭔가 남아있지 않다면
+		        // 값이 무의미 하다고 판단함.
+		 
+		        if(tmp == ''){
+		            alert((i+1)+'번째 장소가 지정되지 않았습니다.');
+		        	isOk = false;
+		        }
+			}
+			
+			if(isOk)	document.getElementById("searchMidFrm").submit();
+		}
+	$(document).ready(function(){
+		$('a[href^="#"]').on('click', function(event) {
+
+		    var target = $(this.getAttribute('href'));
+
+		    if( target.length ) {
+		        event.preventDefault();
+		        $('html, body').stop().animate({
+		            scrollTop: (target.offset().top-57)
+		        }, 1000);
+		    }
+		    $("li[class='nav-item'] a").attr('class','nav-link');
+		    $(this).addClass('text-white');
+		});
+	});
     </script>    
     
   </body>

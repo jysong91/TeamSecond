@@ -31,7 +31,7 @@
             <a class="nav-link" href="#">Come with us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Contact us</a>
+            <a class="nav-link text-white" href="${home }member">회원가입</a>
           </li>
         </ul>
         <form class="form-inline m-0">
