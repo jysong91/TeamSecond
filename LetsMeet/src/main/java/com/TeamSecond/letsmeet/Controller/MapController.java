@@ -1,7 +1,5 @@
 package com.TeamSecond.letsmeet.Controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +29,14 @@ public class MapController {
 		return "map";
 	}
 	@RequestMapping(value = "/calMid")
-	public String calMid(@RequestParam("ppl") List<String> ppls,
+	public String calMid(@RequestParam("myLoc") String myLoc,
+			@RequestParam("yourLoc") String yourLoc,
 			Model model) {
-		model.addAttribute("calRst",pathSrv.calMid(ppls));
+		model.addAttribute("calRst",pathSrv.calMid(myLoc, yourLoc));
 		model.addAttribute("rad","1000");
 		model.addAttribute("isFindCenter", "1");
 		model.addAttribute("autoOverlay", true);
+		logger.info(pathSrv.calMid(myLoc, yourLoc));
 		return "map";
 	}
 }
