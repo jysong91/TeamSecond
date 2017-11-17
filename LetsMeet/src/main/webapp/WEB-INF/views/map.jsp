@@ -61,7 +61,7 @@
 	       	<form class="form-inline" onsubmit="searchPlaces('keyword2'); return false;" style="flex-flow: inherit;">
 				<input class="form-control" placeholder="친구의 위치는?" type="text" value="" id="keyword2" size="15"> 
 				<button type="submit" class="btn btn-primary">검색하기</button> 
-			</form> 
+			</form>
 			<span id="addPerson"></span>
 			<button class="btn btn-lg" onclick="addPerson();" aria-label="Plus">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -77,11 +77,7 @@
         <ul id="placesList" style="padding:0;font-size:12px;"></ul>
         <div id="pagination"></div>
     </div>
-    <div id="cate_wrap" class="bg_black">
-    	<button type="button" onclick="searchPlacesFromMid('PC방')">PC방</button>
-    	<button type="button" onclick="searchPlacesFromMid('당구장')">당구장</button>
-    	<button type="button" onclick="searchPlacesFromMid('식당')">식당</button>
-    </div>
+    
 </div>
 <hr>
 <div class="py-5 bg-light text-dark" id="listSection">
@@ -146,17 +142,18 @@
 
 	    // 지도를 생성합니다    
 	    var map = new daum.maps.Map(mapContainer, mapOption); 
-
+		
 	 	// 마커가 표시될 위치입니다 
 	    var markerPosition  = new daum.maps.LatLng(${calRst}); 
-
-	    // 마커를 생성합니다
+		
+    	// 마커를 생성합니다
 	    var marker = new daum.maps.Marker({
 	        position: markerPosition
 	    });
 
 	    // 마커가 지도 위에 표시되도록 설정합니다
 	    marker.setMap(map);
+	 	
 
 	    // 장소 검색 객체를 생성합니다
 	    var ps = new daum.maps.services.Places();  
@@ -170,13 +167,8 @@
 	    // 몇번째 사람의 검색인가
 	    var search_ppl = "0";
 	    
-	    //중간지점위커스텀오버레이표시.autoOverlay
+	    //중간지점인지 판단해서 오버레이 띄워줌.
 	    if(${autoOverlay}==true){
-	    	//커스텀 오버레이를 표시하는 함수를 여기에서 실행하자
-	    	//(중간지점은 ~~입니다.)
-			//(주변의 약속장소를 추천받으시겠어요?)
-			//(예)
-			//주소로 검색한 결과값? ㄴㄴ 걍 마커만 있음
 	    	displayMidOverlay(marker);
 	    }
 	    
@@ -194,7 +186,7 @@
 	            alert('키워드를 입력해주세요!');
 	            return false;
 	        }
-
+			circle.setMap(null);
    			search_ppl=id.substr(7,1);
 	        
 	        ps.keywordSearch( keyword, placesSearchCB);
@@ -203,7 +195,7 @@
 	    // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 	    function placesSearchCB(data, status, pagination) {
 	        if (status === daum.maps.services.Status.OK) {
-	            displayPlaces(data);
+	            displayPlaces(data,true);
 	            displayPagination(pagination);
 	        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
 	            alert('검색 결과가 존재하지 않습니다.');
@@ -216,7 +208,7 @@
 	    
 	    function fromMidCB(data, status, pagination) {
 	        if (status === daum.maps.services.Status.OK) {
-	            displayPlaces(data,false);
+	            displayPlaces(data,true);
 	            displayPagination(pagination);
 	        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
 	            alert('검색 결과가 존재하지 않습니다.');
@@ -228,7 +220,7 @@
 	    }
 
 	    // 검색 결과 목록과 마커를 표출하는 함수입니다
-	    function displayPlaces(places) {
+	    function displayPlaces(places, remove) {
 	        var listEl = document.getElementById('placesList'), 
 	        menuEl = document.getElementById('menu_wrap'),
 	        fragment = document.createDocumentFragment(), 
@@ -239,7 +231,9 @@
 	        removeAllChildNods(listEl);
 
 	        // 지도에 표시되고 있는 마커를 제거합니다
-	        removeMarker();
+	        if(remove==true){
+		        removeMarker();
+	        }
 	        
 	        for ( var i=0; i<places.length; i++ ) {
 
@@ -452,7 +446,7 @@
 			'	type="text" value="" id="keyword'+cnt_ppl+'" size="15">'+
 			'	<button type="submit" class="btn btn-primary">검색하기</button>'+ 
 			'	</form>';
-		
+			
 			div2.innerHTML += '<input type="hidden" class="form-control"'+ 
 			'	id="ppl'+cnt_ppl+'" name="ppl" >';
 			
@@ -486,8 +480,8 @@
 	        '           </div>' + 
 	        '            <div class="desc">' + 
 	        '                <div class="message1">'+'중간지점입니다. '+' </div>' + 
-	        '                <div class="message2">'+'근처 장소를 추천받으시겠어요?'+' </div>' + 
-	        '                <button type="button" onclick="searchPlacesFromMid()">'+'추천받기'+'</button>' + 
+	        '                <div class="message2">'+'해당 구역에서 장소를 추천받으시겠어요?'+' </div>' + 
+	        '                <button id="recommend" type="button" onclick="searchPlacesFromMid()">'+'추천받기'+'</button>' + 
 	        '            </div>' + 
 	        '        </div>' + 
 	        '    </div>' +    
@@ -520,13 +514,16 @@
 		        }
 			}
 			
-			if(isOk)	document.getElementById("searchMidFrm").submit();
+			if(isOk){
+				
+				document.getElementById("searchMidFrm").submit();
+			}
 		}
 	$(document).ready(function(){
 		$('a[href^="#"]').on('click', function(event) {
 
 		    var target = $(this.getAttribute('href'));
-
+			
 		    if( target.length ) {
 		        event.preventDefault();
 		        $('html, body').stop().animate({
@@ -538,16 +535,27 @@
 		});
 	});
 	
+	$(document).ready(function(){
+		$("#recommend").on('click', function(event) {
+			$('<div id="cate_wrap" class="bg_black">'+
+			    	'<button type="button" onclick="searchPlacesFromMid(' + "'PC방'" + ')">PC방</button>'+
+			    	'<button type="button" onclick="searchPlacesFromMid(' + "'당구장'" + ')">당구장</button>'+
+			    	'<button type="button" onclick="searchPlacesFromMid(' + "'식당'" + ')">식당</button>'+
+			    '</div>').appendTo("#map");
+		})
+	});
+	
 	var circle = new daum.maps.Circle({
 	    center : new daum.maps.LatLng(${calRst}),  // 원의 중심좌표 입니다 
 	    radius: 1000, // 미터 단위의 원의 반지름입니다 
 	    strokeWeight: 5, // 선의 두께입니다 
 	    strokeColor: '#75B8FA', // 선의 색깔입니다
-	    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 	    strokeStyle: 'dashed', // 선의 스타일 입니다
 	    fillColor: '#CFE7FF', // 채우기 색깔입니다
-	    fillOpacity: 0.7  // 채우기 불투명도 입니다   
+	    fillOpacity: 0.5  // 채우기 불투명도 입니다   
 	}); 
+	
 	
     </script>    
     
