@@ -213,6 +213,19 @@
 	            return;
 	        }
 	    }
+	    
+	    function fromMidCB(data, status, pagination) {
+	        if (status === daum.maps.services.Status.OK) {
+	            displayPlaces(data,false);
+	            displayPagination(pagination);
+	        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
+	            alert('검색 결과가 존재하지 않습니다.');
+	            return;
+	        } else if (status === daum.maps.services.Status.ERROR) {
+	            alert('검색 결과 중 오류가 발생했습니다.');
+	            return;
+	        }
+	    }
 
 	    // 검색 결과 목록과 마커를 표출하는 함수입니다
 	    function displayPlaces(places) {
@@ -452,7 +465,7 @@
 	    function searchPlacesFromMid(keyword) {
 	    	closeOverlay();
 	    	circle.setMap(map);
- 	        ps.keywordSearch( keyword, placesSearchCB,{
+ 	        ps.keywordSearch( keyword, fromMidCB,{
 	        	location: new daum.maps.LatLng(${calRst}),
 	        	radius: ${rad}
 			})
