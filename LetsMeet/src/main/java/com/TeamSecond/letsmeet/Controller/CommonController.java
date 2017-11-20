@@ -30,4 +30,9 @@ public class CommonController {
 	public String review() {
 		return "review";
 	}
+	
+	@RequestMapping("test")
+	public String test() {
+		return "test";
+	}
 }
