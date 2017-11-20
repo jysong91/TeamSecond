@@ -169,7 +169,22 @@
 	    
 	    //중간지점인지 판단해서 오버레이 띄워줌.
 	    if(${autoOverlay}==true){
+	    	// 마커를 생성합니다
+		    var midMarker = new daum.maps.Marker({
+		        position: markerPosition
+		    });
+
+		    // 마커가 지도 위에 표시되도록 설정합니다
+		    midMarker.setMap(map);
 	    	displayMidOverlay(marker);
+	    }else{
+	    	// 마커를 생성합니다
+		    var marker = new daum.maps.Marker({
+		        position: markerPosition
+		    });
+
+		    // 마커가 지도 위에 표시되도록 설정합니다
+		    marker.setMap(map);
 	    }
 	    
 // 	    if("1"==${isFindCenter}){
@@ -540,8 +555,10 @@
 			$('<div id="cate_wrap" class="bg_black">'+
 			    	'<button type="button" onclick="searchPlacesFromMid(' + "'PC방'" + ')">PC방</button>'+
 			    	'<button type="button" onclick="searchPlacesFromMid(' + "'당구장'" + ')">당구장</button>'+
-			    	'<button type="button" onclick="searchPlacesFromMid(' + "'식당'" + ')">식당</button>'+
+			    	'<button type="button" onclick="searchPlacesFromMid(' + "'맛집'" + ')">식당</button>'+
 			    '</div>').appendTo("#map");
+			//$(".option").remove(),
+			//$("#menu_wrap").append("<div id='searchText'><h4>검색 결과입니다.</h4></div>");
 		})
 	});
 	
