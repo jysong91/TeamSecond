@@ -46,8 +46,181 @@
 			$(".typeBtn4").css("background-color","yellow");
 			$("#reviewMemberType").val($(".typeBtn4").val());	
 		});			
+		
+		$( ".serviceStar a" ).mouseenter(function() {
+		     $(this).parent().children("a").removeClass("on");
+		     //prevAll 선택한거보다 이전에 있던 것들은 선택되게한다.
+		     $(this).addClass("on").prevAll("a").addClass("on");
+		     $(this).each(function(item){}); 	
+			 //여기 this는 function(item)의 item을 나타낸다.
+			 if($(this).attr("id")=='1'){
+				 $("#serviceMsg").html("<p>나쁨</p>");
+			 }else if($(this).attr("id")=='2'){
+				 $("#serviceMsg").html("<p>별로</p>");
+			 }else if($(this).attr("id")=='3'){
+				 $("#serviceMsg").html("<p>보통</p>");
+			 }else if($(this).attr("id")=='4'){
+				 $("#serviceMsg").html("<p>좋음</p>");
+			 }else if($(this).attr("id")=='5'){
+				 $("#serviceMsg").html("<p>아주좋음</p>");
+			 }
+					 
+		     if($(this).addClass("on")){
+		    	 $(this).click(function(){
+					$(this).addClass("on").prevAll("a").addClass("on");
+					$(this).each(function(item){}); 	
+					 //여기 this는 function(item)의 item을 나타낸다.   
+					 if($(this).attr("id")=='1'){
+						 $("#serviceMsg").html("<p>나쁨</p>");
+					 }else if($(this).attr("id")=='2'){
+						 $("#serviceMsg").html("<p>별로</p>");
+					 }else if($(this).attr("id")=='3'){
+						 $("#serviceMsg").html("<p>보통</p>");
+					 }else if($(this).attr("id")=='4'){
+						 $("#serviceMsg").html("<p>좋음</p>");
+					 }else if($(this).attr("id")=='5'){
+						 $("#serviceMsg").html("<p>아주좋음</p>");
+					 }
+					 $("#serviceScore").val($(this).attr("id")); 
+					 $( ".serviceStar a").off('mouseleave');
+		    	 });
+			     //마우스를 내리면 별점 초기화
+		    	 $(".serviceStar a").mouseleave(function(){	
+			    	 $(this).parent().children("a").removeClass("on");
+			    	 $("#serviceMsg").html("");
+			     }); 
+			}
+		});
+		//맛
+		$( ".tasteStar a" ).mouseenter(function() {
+		     $(this).parent().children("a").removeClass("on");
+		     //prevAll 선택한거보다 이전에 있던 것들은 선택되게한다.
+		     $(this).addClass("on").prevAll("a").addClass("on");
+		     $(this).each(function(item){}); 	
+			 //여기 this는 function(item)의 item을 나타낸다.
+			 if($(this).attr("id")=='1'){
+				 $("#tasteMsg").html("<p>나쁨</p>");
+			 }else if($(this).attr("id")=='2'){
+				 $("#tasteMsg").html("<p>별로</p>");
+			 }else if($(this).attr("id")=='3'){
+				 $("#tasteMsg").html("<p>보통</p>");
+			 }else if($(this).attr("id")=='4'){
+				 $("#tasteMsg").html("<p>좋음</p>");
+			 }else if($(this).attr("id")=='5'){
+				 $("#tasteMsg").html("<p>아주좋음</p>");
+			 }
+					 
+		     if($(this).addClass("on")){
+		    	 $(this).click(function(){
+					$(this).addClass("on").prevAll("a").addClass("on");
+					$(this).each(function(item){}); 	
+					 //여기 this는 function(item)의 item을 나타낸다.   
+					 if($(this).attr("id")=='1'){
+						 $("#tasteMsg").html("<p>나쁨</p>");
+					 }else if($(this).attr("id")=='2'){
+						 $("#tasteMsg").html("<p>별로</p>");
+					 }else if($(this).attr("id")=='3'){
+						 $("#tasteMsg").html("<p>보통</p>");
+					 }else if($(this).attr("id")=='4'){
+						 $("#tasteMsg").html("<p>좋음</p>");
+					 }else if($(this).attr("id")=='5'){
+						 $("#tasteMsg").html("<p>아주좋음</p>");
+					 }
+					 $("#tasteScore").val($(this).attr("id")); 
+					 $( ".tasteStar a").off('mouseleave');
+		    	 });
+			     //마우스를 내리면 별점 초기화
+		    	 $(".tasteStar a").mouseleave(function(){	
+			    	 $(this).parent().children("a").removeClass("on");
+			    	 $("#tasteMsg").html("");
+			     }); 
+			}
+		});
+		
+		//분위기
+		$( ".moodStar a" ).mouseenter(function() {
+		     $(this).parent().children("a").removeClass("on");
+		     //prevAll 선택한거보다 이전에 있던 것들은 선택되게한다.
+		     $(this).addClass("on").prevAll("a").addClass("on");
+		     $(this).each(function(item){}); 	
+			 //여기 this는 function(item)의 item을 나타낸다.
+			 if($(this).attr("id")=='1'){
+				 $("#moodMsg").html("<p>나쁨</p>");
+			 }else if($(this).attr("id")=='2'){
+				 $("#moodMsg").html("<p>별로</p>");
+			 }else if($(this).attr("id")=='3'){
+				 $("#moodMsg").html("<p>보통</p>");
+			 }else if($(this).attr("id")=='4'){
+				 $("#moodMsg").html("<p>좋음</p>");
+			 }else if($(this).attr("id")=='5'){
+				 $("#moodMsg").html("<p>아주좋음</p>");
+			 }
+					 
+		     if($(this).addClass("on")){
+		    	 $(this).click(function(){
+					$(this).addClass("on").prevAll("a").addClass("on");
+					$(this).each(function(item){}); 	
+					 //여기 this는 function(item)의 item을 나타낸다.   
+					 if($(this).attr("id")=='1'){
+						 $("#moodMsg").html("<p>나쁨</p>");
+					 }else if($(this).attr("id")=='2'){
+						 $("#moodMsg").html("<p>별로</p>");
+					 }else if($(this).attr("id")=='3'){
+						 $("#moodMsg").html("<p>보통</p>");
+					 }else if($(this).attr("id")=='4'){
+						 $("#moodMsg").html("<p>좋음</p>");
+					 }else if($(this).attr("id")=='5'){
+						 $("#moodMsg").html("<p>아주좋음</p>");
+					 }
+					 $("#moodScore").val($(this).attr("id")); 
+					 $( ".moodStar a").off('mouseleave');
+		    	 });
+			     //마우스를 내리면 별점 초기화
+		    	 $(".moodStar a").mouseleave(function(){	
+			    	 $(this).parent().children("a").removeClass("on");
+			    	 $("#moodMsg").html("");
+			     }); 
+			}
+		});
 	});
 </script>
+<style type="text/css">
+.serviceStar {font-size:0; letter-spacing:-4px;}
+.serviceStar a {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+.serviceStar a:first-child {margin-left:0;}
+.serviceStar a.on {color:#777;}
+
+.tasteStar {font-size:0; letter-spacing:-4px;}
+.tasteStar a {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+.tasteStar a:first-child {margin-left:0;}
+.tasteStar a.on {color:#777;}
+
+.moodStar {font-size:0; letter-spacing:-4px;}
+.moodStar a {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+.moodStar a:first-child {margin-left:0;}
+.moodStar a.on {color:#777;}
+</style>
 <body>
 <form id="frm" action="${home }review/reviewProc" method="post">
 <table>
@@ -73,6 +246,48 @@
 		<td><button class="typeBtn3" type="button"  value="가족" style="background-color: white;">가족</td>
 		<td><button class="typeBtn4" type="button"  value="친구들" style="background-color: white;">친구들</td>
 	</tr>
+	
+	<c:set var="scoreNums">1,2,3,4,5</c:set>
+	
+	<tr>
+		<td>서비스</td>
+		<td>
+			<input type="hidden" id="serviceScore" name="serviceScore">
+			<p class="serviceStar">
+				<c:forEach var="scoreNum" items="${scoreNums }">
+					<a href="#" id="${scoreNum }">★</a>
+				</c:forEach>
+			</p>
+		</td>
+		<td><p id="serviceMsg" style="color:blue"></p></td>
+	</tr>
+
+	<tr>
+		<td>맛</td>
+		<td>
+			<input type="hidden" id="tasteScore" name="tasteScore">
+			<p class="tasteStar">
+				<c:forEach var="scoreNum" items="${scoreNums }">
+					<a href="#" id="${scoreNum }">★</a>
+				</c:forEach>
+			</p>
+		</td>
+		<td><p id="tasteMsg" style="color:blue"></p></td>
+	</tr>
+	
+	<tr>
+		<td>분위기</td>
+		<td>
+			<input type="hidden" id="moodScore" name="moodScore">
+			<p class="moodStar">
+				<c:forEach var="scoreNum" items="${scoreNums }">
+					<a href="#" id="${scoreNum }">★</a>
+				</c:forEach>
+			</p>
+		</td>
+		<td><p id="moodMsg" style="color:blue"></p></td>
+	</tr>
+
 	<tr>
 		<td><input type="submit" value="리뷰쓰기" ></td>
 	</tr>

@@ -18,8 +18,12 @@ public class ReviewController {
 	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
 	
 	@RequestMapping("reviewProc")
-	public String reviewProc(@RequestParam("reviewMemberType")String reviewMemberType) {
+	public String reviewProc(@RequestParam("reviewMemberType")String reviewMemberType,@RequestParam("serviceScore")String serviceScore
+			,@RequestParam("tasteScore")String tasteScore,@RequestParam("moodScore")String moodScore) {
 		logger.info(reviewMemberType);
+		logger.info(serviceScore);
+		logger.info(tasteScore);
+		logger.info(moodScore);
 		return "review";
 	}
 	
