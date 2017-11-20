@@ -12,6 +12,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
+  <link rel="stylesheet" href="${res }css/icon.css" type="text/css">
+  <style type="text/css">
+    .modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  	}
+  	.modal-footer {
+      background-color: #f9f9f9;
+  	}
+  	.modal-backdrop{
+    	opacity:0.5 !important;
+	}
+  </style>
+  
 </head>
 
 <body>
@@ -22,25 +38,59 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#">사용설명서</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">How about here?</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Come with us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="${home }member">회원가입</a>
+            <a class="nav-link" href="#">About us</a>
           </li>
         </ul>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
+        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
         <form class="form-inline m-0">
-          <input class="form-control mr-2" type="text" placeholder="Search">
+          <input class="form-control mr-2" type="text" placeholder="장소 바로검색!">
           <button class="btn btn-primary" type="submit">검 색</button>
         </form>
       </div>
     </div>
   </nav>
+  
+    <!-- Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="loginModal">
+    <div class="modal-dialog" role="document">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <h4><span class="glyphicon glyphicon-lock"></span> 로그인</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form">
+            <div class="form-group">
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> 이메일 주소</label>
+              <input type="email" class="form-control" id="usrname" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 패스워드</label>
+              <input type="password" class="form-control" id="psw" placeholder="Enter password">
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="" checked> 아이디 기억하기</label>
+            </div>
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> 로그인</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+<!--           <button type="submit" class="btn btn-danger btn-default mx-auto" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> 취소</button> -->
+          <h6><a href="#">회원가입</a></h6>
+          <h6><a href="#">비밀번호찾기</a></h6>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+	 <!--modal end -->
+	 
   <div class="py-5 text-center opaque-overlay" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/cover_event.jpg&quot;);">
     <div class="container py-5">
       <div class="row">
@@ -58,14 +108,15 @@
       <div class="row">
         <div class="align-self-center p-5 col-md-6">
           <h3 class="mb-4">야만나자가 제안하는 핫 플레이스</h3>
-          <p class="mb-5 w-100 text-left">이번주 가장 많은 추천을 받은 약속장소를 추천해드립니다.</p>
+          <p class="mb-5 w-100 text-left">이번주 가장 많은 추천과 가장 높은 평점을 획득한
+            <br> 약속장소를 추천해드립니다.</p>
           <a class="btn btn-lg btn-outline-light" href="#">바 로 가 기</a>
         </div>
         <div class="col-md-6 p-0">
           <div id="carousel1" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
               <div class="carousel-item">
-                <img src="https://pingendo.github.io/templates/sections/assets/gallery_restaurant_1.jpg" atl="first slide" class="d-block img-fluid w-100">
+                <img src="https://pingendo.github.io/templates/sections/assets/gallery_restaurant_1.jpg" alt="first slide" class="d-block img-fluid w-100">
                 <div class="carousel-caption">
                   <h3>Dining room</h3>
                   <p>Good architecture, better food</p>
@@ -97,19 +148,18 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 my-3">
-          <div class="card">
-            <img class="img-fluid" src="https://pingendo.github.io/templates/sections/assets/features_mac.jpg" alt="Card image">
-            <div class="card-body"></div>
-          </div>
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>각종 놀이 시설</b></h5>
+            <p class="mt-1"></p>
         </div>
         <div class="col-md-4 my-3">
           <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
-          <h5><b>우리에게 내일은 없어</b></h5>
-          <p class="mt-1"></p>
+          <h5><b>주변 맛집 찾아보기</b></h5>
+            <p class="mt-1"></p>
         </div>
         <div class="col-md-4 my-3">
           <img class="img-fluid d-block mb-4 img-thumbnail" src="https://pingendo.github.io/templates/sections/assets/features_bluetable.jpg">
-          <h5><b>난 오늘만 산다</b></h5>
+          <h5><b>이색 데이트 장소</b></h5>
           <p class="mt-1"></p>
         </div>
       </div>
@@ -125,20 +175,16 @@
         <div class="p-4 col-md-3">
           <h2 class="mb-4 text-secondary">Mapsite</h2>
           <ul class="list-unstyled">
-            <a href="#" class="text-white">A</a>bout
-            <br>
-            <a href="#" class="text-white">How about here</a>
-            <br>Come with us
-            <br>
-            <a href="#" class="text-white">Contact us</a>
+            <li><a href="#" class="text-white">About</a></li>
+            <li><a href="#" class="text-white">How about here</a></li>
+            <li><a href="#" class="text-white">Contact us</a></li>
           </ul>
         </div>
         <div class="p-4 col-md-3">
           <h2 class="mb-4">Contact</h2>
           <p>
             <a href="tel:+246 - 542 550 5462" class="text-white"><i class="fa d-inline mr-3 text-secondary fa-phone"></i>+82 010 1234 5678
-              <br>
-            </a>
+              <br> </a>
           </p>
           <p style="opacity: 0.5;">
             <a href="mailto:info@pingendo.com" class="text-white"><i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>Yahmanaza@naver.com</a>
@@ -166,9 +212,9 @@
      <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -31,10 +31,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#">사용설명서</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${home }member">회원가입</a>
+            <a class="nav-link" href="#">About us</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#mapSection">지도로 보기</a>
@@ -43,8 +43,10 @@
             <a class="nav-link" href="#listSection">리스트로 보기</a>
           </li>
         </ul>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
+        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
         <form class="form-inline m-0">
-          <input class="form-control mr-2" type="text" placeholder="Search">
+          <input class="form-control mr-2" type="text" placeholder="장소 바로검색!">
           <button class="btn btn-primary" type="submit">검 색</button>
         </form>
       </div>
@@ -408,13 +410,22 @@
             '            <div class="desc">' + 
             '                <div class="ellipsis">'+address + 
             '                <div class="jibun ellipsis">'+place.phone+' </div>' + 
-            '                <div><a href="${home}place" target="_blank" class="link">홈페이지</a></div>' + 
+//             '                <div><a href="${home}place" target="_blank" class="link">홈페이지</a></div>' + 
 //             '                <div><a href='+place.place_url+' target="_blank" class="link">홈페이지</a></div>' + 
+            '	<form id="frm" action="${home }place" method="post">'+
+		    '    	<input type="hidden" id="placeName" name="placeName" value="'+place.place_name+'">'+
+	        '    	<input type="hidden" id="placeAddr" name="placeAddr" value="'+address+'">'+
+		    '       <input type="hidden" id="outLine" name="outLine" value="한줄정보..">'+
+		    '       <input type="hidden" id="tel" name="tel" value="'+place.phone+'">'+
+		  	'    	<button type="submit" class="btn btn-secondary">상세보기</button>'+
+  	   		'	</form>'+
             '            </div>' + 
             '        </div>' + 
             '    </div>' +    
             '</div>'; 
 
+            
+            
  			overlay = new daum.maps.CustomOverlay({
 		        content: content,
 		        map: map,
