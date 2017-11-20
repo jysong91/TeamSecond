@@ -22,6 +22,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link href="${res }css/map.css" rel="stylesheet" draggable="auto">
+    <link href="${res }css/nav.css" rel="stylesheet" draggable="auto">
   </head>
   <body>
   <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
@@ -53,7 +54,22 @@
     </div>
   </nav>
 <div class="map_wrap" id="mapSection">
- <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+ <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;">
+	 <div id="layer_fixed">
+	    <table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
+		    <tr>
+		       <td style="vertical-align:middle; padding-left: 20px; padding-right: 20px;">
+					<a href="#mapSection">지도로 보기</a>
+		       </td>
+		    </tr>
+		    <tr>
+		        <td style="vertical-align:middle; padding-left: 20px; padding-right: 20px;">
+					<a href="#listSection">리스트로 보기</a>
+		       	</td>
+		    </tr>
+	    </table>
+	    </div>
+	</div>
     <div id="menu_wrap" class="bg_white">
 		<div class="option" id="option">
 			<form class="form-inline" onsubmit="searchPlaces('keyword1');  return false;" style="flex-flow: inherit;">
