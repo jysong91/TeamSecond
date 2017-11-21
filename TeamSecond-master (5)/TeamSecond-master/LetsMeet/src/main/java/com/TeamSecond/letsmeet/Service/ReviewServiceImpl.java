@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.TeamSecond.letsmeet.DTO.PlaceDTO;
 import com.TeamSecond.letsmeet.DTO.ReviewDTO;
 import com.TeamSecond.letsmeet.IDAO.ReviewDAO;
 import com.TeamSecond.letsmeet.IService.ReviewService;

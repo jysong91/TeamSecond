@@ -1,5 +1,7 @@
 package com.TeamSecond.letsmeet.Controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,8 @@ public class ReviewController {
 	ReviewService reviewService;
 	
 	@RequestMapping("reviewProc")
-	public String reviewProc(ReviewDTO reviewDTO, Model model) {
+	public String reviewProc(ReviewDTO reviewDTO) {
 		reviewService.reviewProc(reviewDTO);
-		model.addAttribute("review", reviewDTO);
 		return "place";
 	}
 	
