@@ -22,6 +22,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link href="${res }css/map.css" rel="stylesheet" draggable="auto">
+    <link href="${res }css/nav.css" rel="stylesheet" draggable="auto">
   </head>
   <body>
   <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
@@ -31,10 +32,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#">사용설명서</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${home }member">회원가입</a>
+            <a class="nav-link" href="#">About us</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#mapSection">지도로 보기</a>
@@ -43,17 +44,34 @@
             <a class="nav-link" href="#listSection">리스트로 보기</a>
           </li>
         </ul>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
+        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
         <form class="form-inline m-0">
-          <input class="form-control mr-2" type="text" placeholder="Search">
+          <input class="form-control mr-2" type="text" placeholder="장소 바로검색!">
           <button class="btn btn-primary" type="submit">검 색</button>
         </form>
       </div>
     </div>
   </nav>
 <div class="map_wrap" id="mapSection">
- <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+ <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;">
+	 <div id="layer_fixed">
+	    <table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
+		    <tr>
+		       <td style="vertical-align:middle; padding-left: 20px; padding-right: 20px;">
+					<a href="#mapSection">지도로 보기</a>
+		       </td>
+		    </tr>
+		    <tr>
+		        <td style="vertical-align:middle; padding-left: 20px; padding-right: 20px;">
+					<a href="#listSection">리스트로 보기</a>
+		       	</td>
+		    </tr>
+	    </table>
+	    </div>
+	</div>
     <div id="menu_wrap" class="bg_white">
-		<div class="option">
+		<div class="option" id="option">
 			<form class="form-inline" onsubmit="searchPlaces('keyword1');  return false;" style="flex-flow: inherit;">
 				<input class="form-control" placeholder="나의 위치는?" type="text" value="" id="keyword1" size="15"> 
 				<button type="submit" class="btn btn-primary">검색하기</button>
@@ -168,8 +186,28 @@
 	    var search_ppl = "0";
 	    
 	    //중간지점인지 판단해서 오버레이 띄워줌.
+	    //카테고리 검색 후에도 마커 삭제 메소드에 의해 사라지지 않도록 별도의 이름(midMarker)으로 마커를 생성한다.
+	    //또한 좌측의 검색창을 없애준다.
 	    if(${autoOverlay}==true){
+	    	// 마커를 생성합니다
+		    var midMarker = new daum.maps.Marker({
+		        position: markerPosition
+		    });
+
+		    // 마커가 지도 위에 표시되도록 설정합니다
+		    midMarker.setMap(map);
 	    	displayMidOverlay(marker);
+	    	
+	    	//좌측의 검색창을 없앤다.
+	    	removeWrap();
+	    }else{
+	    	// 마커를 생성합니다
+		    var marker = new daum.maps.Marker({
+		        position: markerPosition
+		    });
+
+		    // 마커가 지도 위에 표시되도록 설정합니다
+		    marker.setMap(map);
 	    }
 	    
 // 	    if("1"==${isFindCenter}){
@@ -201,23 +239,24 @@
 	            alert('검색 결과가 존재하지 않습니다.');
 	            return;
 	        } else if (status === daum.maps.services.Status.ERROR) {
-	            alert('검색 결과 중 오류가 발생했습니다.');
+	            alert('검색 중 오류가 발생했습니다.');
 	            return;
 	        }
 	    }
 	    
-	    function fromMidCB(data, status, pagination) {
+	    //선택한 카테고리별로 검색하는 함수..인데 위의 함수랑 차이가 없어서 안쓰임. 일단 보류
+	    /* function fromMidCB(data, status, pagination) {
 	        if (status === daum.maps.services.Status.OK) {
 	            displayPlaces(data,true);
 	            displayPagination(pagination);
 	        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
-	            alert('검색 결과가 존재하지 않습니다.');
+	            alert('주변 검색 결과가 존재하지 않습니다.');
 	            return;
 	        } else if (status === daum.maps.services.Status.ERROR) {
-	            alert('검색 결과 중 오류가 발생했습니다.');
+	            alert('검색 중 오류가 발생했습니다.');
 	            return;
 	        }
-	    }
+	    } */
 
 	    // 검색 결과 목록과 마커를 표출하는 함수입니다
 	    function displayPlaces(places, remove) {
@@ -387,13 +426,22 @@
             '            <div class="desc">' + 
             '                <div class="ellipsis">'+address + 
             '                <div class="jibun ellipsis">'+place.phone+' </div>' + 
-            '                <div><a href="${home}place" target="_blank" class="link">홈페이지</a></div>' + 
+//             '                <div><a href="${home}place" target="_blank" class="link">홈페이지</a></div>' + 
 //             '                <div><a href='+place.place_url+' target="_blank" class="link">홈페이지</a></div>' + 
+            '	<form id="frm" action="${home }place" method="post">'+
+		    '    	<input type="hidden" id="placeName" name="placeName" value="'+place.place_name+'">'+
+	        '    	<input type="hidden" id="placeAddr" name="placeAddr" value="'+address+'">'+
+		    '       <input type="hidden" id="outLine" name="outLine" value="한줄정보..">'+
+		    '       <input type="hidden" id="tel" name="tel" value="'+place.phone+'">'+
+		  	'    	<button type="submit" class="btn btn-secondary">상세보기</button>'+
+  	   		'	</form>'+
             '            </div>' + 
             '        </div>' + 
             '    </div>' +    
             '</div>'; 
 
+            
+            
  			overlay = new daum.maps.CustomOverlay({
 		        content: content,
 		        map: map,
@@ -459,14 +507,14 @@
 	    function searchPlacesFromMid(keyword) {
 	    	closeOverlay();
 	    	circle.setMap(map);
- 	        ps.keywordSearch( keyword, fromMidCB,{
+ 	        ps.keywordSearch( keyword, placesSearchCB,{
 	        	location: new daum.maps.LatLng(${calRst}),
 	        	radius: ${rad}
 			})
 	    }
 	
 		//컨트롤러에서 중간지점 계산해서 페이지 리로딩 후에 실행되는 함수.
-		//중간지점 바로 위에 "중간지점은 여기입니다"하고 오버레이를 띄워줌.
+		//중간지점 바로 위에 "중간지점은 여기입니다"하고 윈도우를 띄워줌.
 	    function displayMidOverlay(position) {
 	        var content = 
 	        '<div class="wrap">' + 
@@ -494,9 +542,9 @@
 	    }
 		
 		function removeWrap(){
-			document.getElementById('menu_wrap').innerHTML = 
+			document.getElementById('option').innerHTML = 
 				'<a href="${home }map" class="btn btn-primary text-white">다시 검색하기</a>';
-		} 
+		}
 		
 		function checkSearchText(){
 			var search_texts = document.getElementsByName('ppl');
@@ -535,15 +583,33 @@
 		});
 	});
 	
+	//카테고리별 검색에 사용할 배열
+	var categories = ["PC방", "당구장", "맛집", "카페", "주점"];
+	
+	//카테고리를 버튼화
+	function buttonation(categories){
+		var button = "";
+		for(var i=0; i<categories.length; i++){
+			button += '<button class="category" type="button" onclick="searchPlacesFromMid(\'' + 
+						categories[i] + '\')">' + categories[i] + '</button>'
+		}
+		return button;
+	}
+	
+	//중간지점 지정 후 "추천받기" 누르면 버튼 메뉴 표시
 	$(document).ready(function(){
 		$("#recommend").on('click', function(event) {
-			$('<div id="cate_wrap" class="bg_black">'+
-			    	'<button type="button" onclick="searchPlacesFromMid(' + "'PC방'" + ')">PC방</button>'+
-			    	'<button type="button" onclick="searchPlacesFromMid(' + "'당구장'" + ')">당구장</button>'+
-			    	'<button type="button" onclick="searchPlacesFromMid(' + "'식당'" + ')">식당</button>'+
-			    '</div>').appendTo("#map");
+			$('<div id="cate_wrap" class="bg_black">'+ 
+				buttonation(categories) +
+			    '</div>').appendTo("#map"),
+		    $(".category").on('click', function(event) {
+				$("#cateinfo").remove(),
+		    	$("#option").prepend("<div id='cateinfo'><b><h5>"+$(this).text()+"</h5></b> 검색 결과입니다.<br></div>")
+			})
 		})
 	});
+	
+		
 	
 	var circle = new daum.maps.Circle({
 	    center : new daum.maps.LatLng(${calRst}),  // 원의 중심좌표 입니다 

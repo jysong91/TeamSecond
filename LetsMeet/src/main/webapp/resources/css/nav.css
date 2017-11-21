@@ -1,0 +1,28 @@
+/* for placeList */
+.map_wrap, .map_warp *{margin:0;font-size:12px;}
+#layer_fixed
+        {
+            height:80px;
+            width:130px;
+            color: #555;
+            margin: auto;
+            font-size:15px;
+            position:fixed;
+            z-index:999;	
+            top:10%;
+            left:90%;
+            -webkit-box-shadow: 0 1px 2px 0 #777;
+            box-shadow: 0 1px 2px 0 #777;
+            background-color:#ccc;
+        }
+#layer_fixed a
+        {
+            height:30px;
+            width:150px;
+            color: #555;
+            font-size:14px;
+            z-index:999;	
+            -webkit-box-shadow: 0 1px 2px 0 #777;
+            box-shadow: 0 1px 2px 0 #777;
+            background-color:#ccc;
+        }
