@@ -5,6 +5,15 @@ public class PlaceDTO {
 	private String placeAddr;
 	private String outLine;
 	private String tel;
+	private String placeWriteDate;
+	
+	
+	public String getPlaceWriteDate() {
+		return placeWriteDate;
+	}
+	public void setPlaceWriteDate(String placeWriteDate) {
+		this.placeWriteDate = placeWriteDate;
+	}
 	public String getPlaceName() {
 		return placeName;
 	}

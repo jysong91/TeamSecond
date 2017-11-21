@@ -27,7 +27,7 @@
 	
 	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" 
 	id="ReviewMapperBean"
-	p:mapperInterface="com.TeamSecond.letsmeet.IDAO.ReivewDAO"
+	p:mapperInterface="com.TeamSecond.letsmeet.IDAO.ReviewDAO"
 	p:sqlSessionFactory-ref="sqlSessionFactoryBean"/>
 	
 	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" 

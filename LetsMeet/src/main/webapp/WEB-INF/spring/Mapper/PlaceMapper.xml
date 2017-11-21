@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.TeamSecond.letsmeet.IDAO.PlaceDAO">
+	
 	<insert id="placeInsert" parameterType="com.TeamSecond.letsmeet.DTO.PlaceDTO">
-		insert into place (placeName, placeAddr, outLine, tel) values (#{placeName}, #{placeAddr}, #{outLine}, #{tel})
+		insert into place (placeName, placeAddr, outLine, tel, placeWriteDate) values (#{placeName}, #{placeAddr}, #{outLine}, #{tel}, sysdate)
 	</insert>
+	
+	<select id="selectReview" parameterType="String" resultType="com.TeamSecond.letsmeet.DTO.ReviewDTO">
+		SELECT * FROM 
+		(SELECT *
+		FROM review 
+		ORDER BY writeDate desc) 
+		where placeName = #{placeName}
+	</select>
 </mapper>

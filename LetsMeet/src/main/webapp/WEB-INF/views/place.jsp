@@ -65,7 +65,7 @@
             <div class="form-group"> <label for="InputEmail1">찾아가는 길</label>
               <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email"> </div>
             <div class="form-group"> <label for="InputEmail1">리뷰보기</label>
-              <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email"> </div>
+              <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email" value="${selectReview.reviewContents }"> </div>
             <div class="form-group"> <label for="InputEmail1">콜럼은 다른 이미지</label>
               <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email"> </div>
             <button type="submit" class="btn btn-secondary">다음</button>

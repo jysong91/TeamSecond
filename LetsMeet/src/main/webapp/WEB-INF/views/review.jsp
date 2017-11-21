@@ -182,6 +182,12 @@
 			     }); 
 			}
 		});
+		
+		$("#frm").submit(function(data){
+			if(data==0){
+				history.back();
+			}
+		});
 	});
 </script>
 <style type="text/css">

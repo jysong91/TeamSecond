@@ -8,6 +8,35 @@ public class ReviewDTO {
 	private String reviewContents;
 	private int reviewAppraisal;
 	private String reviewMemberType;
+	private int serviceScore;
+	private int tasteScore;
+	private int 	moodScore;
+    private String writeDate;
+	
+	public String getWriteDate() {
+		return writeDate;
+	}
+	public void setWriteDate(String writeDate) {
+		this.writeDate = writeDate;
+	}
+	public int getServiceScore() {
+		return serviceScore;
+	}
+	public void setServiceScore(int serviceScore) {
+		this.serviceScore = serviceScore;
+	}
+	public int getTasteScore() {
+		return tasteScore;
+	}
+	public void setTasteScore(int tasteScore) {
+		this.tasteScore = tasteScore;
+	}
+	public int getMoodScore() {
+		return moodScore;
+	}
+	public void setMoodScore(int moodScore) {
+		this.moodScore = moodScore;
+	}
 	public String getPlaceName() {
 		return placeName;
 	}
