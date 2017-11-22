@@ -63,8 +63,8 @@
         <div class="modal-body" style="padding:40px 50px;">
           <form role="form">
             <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-user"></span> 이메일 주소</label>
-              <input type="email" class="form-control" id="usrname" placeholder="Enter email">
+              <label for="id"><span class="glyphicon glyphicon-eye-open"></span> 아이디</label>
+              <input type="text" class="form-control" id="id" name="id" placeholder="Enter id">
             </div>
             <div class="form-group">
               <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 패스워드</label>
