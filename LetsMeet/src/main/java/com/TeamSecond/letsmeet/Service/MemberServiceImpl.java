@@ -16,13 +16,13 @@ import com.TeamSecond.letsmeet.IService.MemberService;
 @Service
 public class MemberServiceImpl implements MemberService{
 	
-	final String AUTHMSGTRUE = "ÀÎÁõ¹øÈ£ ÀÏÄ¡";
-	final String AUTHMSGFALSE = "ÀÎÁõ¹øÈ£ ºÒÀÏÄ¡";
+	final String AUTHMSGTRUE = "ì¸ì¦ë²ˆí˜¸ ì¼ì¹˜";
+	final String AUTHMSGFALSE = "ì¸ì¦ë²ˆí˜¸ ë¶ˆì¼ì¹˜";
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 	@Autowired
 	MemberDAO memberDAO;
-	//¾ÆÀÌµğ Áßº¹È®ÀÎ
+	//ì•„ì´ë”” ì¤‘ë³µí™•ì¸
 	@Override
 	public int chkIdProc(String id) {
 		if("hygi".equals(id)){
@@ -30,13 +30,13 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return 0;
 	}
-	//ÀÎÁõ¹øÈ£ »ı¼º
+	//ì¸ì¦ë²ˆí˜¸ ìƒì„±
 	@Override
 	public String authSendProc() {
 		String authNumForm = String.format("%01d", (int)(Math.random()*10));
 		return authNumForm;
 	}
-	//ÀÎÁõ¹øÈ£ ºñ±³
+	//ì¸ì¦ë²ˆí˜¸ ë¹„êµ
 	@Override
 	public int authChkProc(String authNum,String authNumSession) {
 		if(authNumSession.equals(authNum)){
@@ -44,9 +44,15 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return 1;
 	}
-	//È¸¿ø°¡ÀÔ ½ÇÇà
+	//íšŒì›ê°€ì… ì‹¤í–‰
 	@Override
 	public void memberProc(MemberDTO memberDTO) {
 		memberDAO.memberProc(memberDTO);
+	}
+	
+	//ë¡œê·¸ì¸ ì‹¤í–‰
+	@Override
+	public int loginProc(MemberDTO memberDTO) {
+		return memberDAO.loginProc(memberDTO);
 	}
 }
