@@ -28,33 +28,43 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
-	//¾ÆÀÌµğ Áßº¹Ã¼Å©
+	//ì•„ì´ë”” ì¤‘ë³µì²´í¬
 	@RequestMapping("idChkProc")
 	public @ResponseBody int idChkProc(@RequestParam("id")String id) {
 		return memberService.chkIdProc(id);
 	}
 	
-	//ÀÎÁõ¹øÈ£ »ı¼º
+	//ì¸ì¦ë²ˆí˜¸ ìƒì„±
 	@RequestMapping("authSendProc")
 	public @ResponseBody String authSendProc(@RequestParam("email")String email,HttpSession session) {
-		//¼¼¼Ç°ªÀ» ÀúÀåÇÑ´Ù
+		//ì„¸ì…˜ê°’ì„ ì €ì¥í•œë‹¤
 		session.setAttribute("authNumSession", memberService.authSendProc());
-		//¸®ÅÏ°ªÀ» memberService.authSendProc()À¸·Î ¾ÈÇÑ ÀÌÀ¯´Â ÀÌ¹Ì ¼¼¼Ç°ªÀúÀåÇÒ ‹š ¸Ş¼Òµå¸¦ ÇÑ¹ø ½ÇÇà Çß±â ¶§¹®¿¡
-		//¸®ÅÏ°ªÀ¸·Î memberService.authSendProc()À¸·ÎÇÏ¸é ¸Ş¼Òµå¸¦ 2¹ø ½ÇÇà½ÃÅ²°Å³ª ´Ù¸§¾ø±â ¶§¹®¿¡ °ªÀÌ Æ²·ÁÁø´Ù
+		//ë¦¬í„´ê°’ì„ memberService.authSendProc()ìœ¼ë¡œ ì•ˆí•œ ì´ìœ ëŠ” ì´ë¯¸ ì„¸ì…˜ê°’ì €ì¥í•  Â‹Âš ë©”ì†Œë“œë¥¼ í•œë²ˆ ì‹¤í–‰ í–ˆê¸° ë•Œë¬¸ì—
+		//ë¦¬í„´ê°’ìœ¼ë¡œ memberService.authSendProc()ìœ¼ë¡œí•˜ë©´ ë©”ì†Œë“œë¥¼ 2ë²ˆ ì‹¤í–‰ì‹œí‚¨ê±°ë‚˜ ë‹¤ë¦„ì—†ê¸° ë•Œë¬¸ì— ê°’ì´ í‹€ë ¤ì§„ë‹¤
 		String authNumSession = (String) session.getAttribute("authNumSession");
 		return authNumSession;
 	}
 	
-	//ÀÎÁõ¹øÈ£ ºñ±³
+	//ì¸ì¦ë²ˆí˜¸ ë¹„êµ
 	@RequestMapping("authChkProc")
 	public @ResponseBody int authChkProc(@RequestParam("authNum")String authNum, HttpSession session) {
 		String authNumSession = (String) session.getAttribute("authNumSession");
 		return memberService.authChkProc(authNum,authNumSession);
 	}
-	//È¸¿ø°¡ÀÔ ½ÇÇà
+	//íšŒì›ê°€ì… ì‹¤í–‰
 	@RequestMapping("memberProc")
 	public String memberProc(MemberDTO memberDTO) {
 		memberService.memberProc(memberDTO);
+		return "main";
+	}
+	//ë¡œê·¸ì¸ ì‹¤í–‰
+	@RequestMapping("loginProc")
+	public String loginProc(MemberDTO memberDTO,Model model,HttpSession session,HttpServletRequest request) {
+		if(memberService.loginProc(memberDTO)==1){	
+			model.addAttribute("msg","ë¡œê·¸ì¸ ì„±ê³µ");
+			return "main";
+		}
+		model.addAttribute("msg","ë¡œê·¸ì¸ ì‹¤íŒ¨");
 		return "main";
 	}
 }
