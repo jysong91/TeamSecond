@@ -59,7 +59,7 @@ public class MemberController {
 	}
 	//로그인 실행
 	@RequestMapping("loginProc")
-	public String loginProc(MemberDTO memberDTO,Model model,HttpSession session,HttpServletRequest request) {
+	public String loginProc(MemberDTO memberDTO,Model model) {
 		if(memberService.loginProc(memberDTO)==1){	
 			model.addAttribute("msg","로그인 성공");
 			return "main";
