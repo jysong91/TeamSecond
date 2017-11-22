@@ -7,12 +7,14 @@ import javax.servlet.http.HttpSession;
 import com.TeamSecond.letsmeet.DTO.MemberDTO;
 
 public interface MemberService {
-	//¾ÆÀÌµğ Áßº¹È®ÀÎ
+	//ì•„ì´ë”” ì¤‘ë³µí™•ì¸
 	public int chkIdProc(String id);
-	//ÀÎÁõ¹øÈ£ »ı¼º
+	//ì¸ì¦ë²ˆí˜¸ ìƒì„±
 	public String authSendProc();
-	//ÀÎÁõ¹øÈ£ ºñ±³
+	//ì¸ì¦ë²ˆí˜¸ ë¹„êµ
 	public int authChkProc(String authNum, String authNumSession);
-	//È¸¿ø°¡ÀÔ ½ÇÇà
+	//íšŒì›ê°€ì… ì‹¤í–‰
 	public void memberProc(MemberDTO memberDTO);
+	//ë¡œê·¸ì¸ ì‹¤í–‰
+	public int loginProc(MemberDTO memberDTO);
 }
