@@ -25,8 +25,13 @@ public class ReviewController {
 	ReviewService reviewService;
 	
 	@RequestMapping("reviewProc")
-	public String reviewProc(ReviewDTO reviewDTO) {
+	public String reviewProc(ReviewDTO reviewDTO,@RequestParam("placeName")String placeName,Model model) {
 		reviewService.reviewProc(reviewDTO);
+		model.addAttribute("selectReview", reviewService.selectReview(placeName));
+		model.addAttribute("placeName", reviewService.reviewPlace(placeName).getPlaceName());
+		model.addAttribute("placeAddr", reviewService.reviewPlace(placeName).getPlaceAddr());
+		model.addAttribute("tel", reviewService.reviewPlace(placeName).getTel());
+		model.addAttribute("outLine", reviewService.reviewPlace(placeName).getOutLine());
 		return "place";
 	}
 	

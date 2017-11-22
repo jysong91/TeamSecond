@@ -34,7 +34,10 @@ public class CommonController {
 		placeService.placeInsert(placeDTO);
 		//리뷰 한개 가져오기
 		model.addAttribute("selectReview", placeService.selectReview(placeDTO.getPlaceName()));
-		model.addAttribute("placeDTO", placeDTO);
+		model.addAttribute("placeName",  placeDTO.getPlaceName());
+		model.addAttribute("placeAddr",  placeDTO.getPlaceAddr());
+		model.addAttribute("tel",  placeDTO.getTel());
+		model.addAttribute("outLine",  placeDTO.getOutLine());
 		return "place";
 	}
 	

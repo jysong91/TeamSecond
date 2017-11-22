@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.TeamSecond.letsmeet.IDAO.ReviewDAO">
-
-	
 	<insert id="reviewInsert" parameterType="com.TeamSecond.letsmeet.DTO.ReviewDTO">
 		insert into review (reviewNo,placeName,id,reviewTitle,reviewContents,reviewAppraisal,reviewMemberType,serviceScore,tasteScore,moodScore,writeDate)
 		values ((select NVL(MAX(reviewNo),0)+1 FROM review),#{placeName},#{id},#{reviewTitle},#{reviewContents},#{reviewAppraisal},#{reviewMemberType},#{serviceScore},#{tasteScore},#{moodScore},sysdate)
 	</insert>
 	
+	<!-- 리뷰쓰고 돌아올 때 이전페이지값을 DB에서 가져오기 -->
+	<select id="reviewPlace" parameterType="String" resultType="com.TeamSecond.letsmeet.DTO.PlaceDTO">
+			SELECT * FROM 
+		(SELECT placeName,placeAddr,outLine,tel,to_char(writeDate,'yyyy/mm/dd hh24:mi:ss')writeDate
+		FROM place
+		ORDER BY writeDate desc) 
+		where placeName=#{placeName} and ROWNUM =1
+	</select>
+	
+	<select id="selectReview" parameterType="String" resultType="com.TeamSecond.letsmeet.DTO.ReviewDTO">
+		SELECT reviewContents FROM 
+		(SELECT placeName,reviewContents,to_char(writeDate,'yyyy/mm/dd hh24:mi:ss')writeDate
+		FROM review 
+		ORDER BY writeDate desc) 
+		where placeName=#{placeName} and ROWNUM =1
+	</select>
 </mapper>

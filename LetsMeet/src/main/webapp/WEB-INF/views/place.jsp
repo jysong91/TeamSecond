@@ -71,11 +71,8 @@
             <button type="submit" class="btn btn-secondary">다음</button>
             <button type="submit" class="btn btn-secondary">이전</button>
             <br>
-            <form id="frm" action="${home }place/placeInsert" method="post">
+            <form id="frm" action="${home }review" method="post">
 	            <input type="hidden" id="placeName" name="placeName" value="${placeName }">
-	            <input type="hidden" id="placeAddr" name="placeAddr" value="${placeAddr }">
-	            <input type="hidden" id="outLine" name="outLine" value="${outLine }">
-	            <input type="hidden" id="tel" name="tel" value="${tel }">
        	    <button type="submit" class="btn btn-secondary">리뷰작성</button>
             </form>
         </div>

@@ -26,6 +26,7 @@ public class PlaceController {
 	public String placeInsert(PlaceDTO placeDTO,Model model) {
 		placeService.placeInsert(placeDTO);
 		model.addAttribute("placeName", placeDTO.getPlaceName());
+		
 		return "review";
 	}
 	

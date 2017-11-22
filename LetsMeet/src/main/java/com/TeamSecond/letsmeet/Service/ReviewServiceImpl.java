@@ -16,8 +16,20 @@ public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	ReviewDAO reviewDAO;
 	
+	//리뷰저장
 	@Override
 	public void reviewProc(ReviewDTO reviewDTO) {
 		reviewDAO.reviewInsert(reviewDTO);
+	}
+	
+	//리뷰쓰고 돌아올 때 이전페이지값을 DB에서 가져오기
+	@Override
+	public PlaceDTO reviewPlace(String placeName) {
+		return reviewDAO.reviewPlace(placeName);
+	}
+
+	@Override
+	public ReviewDTO selectReview(String placeName) {
+		return reviewDAO.selectReview(placeName);
 	}
 }
