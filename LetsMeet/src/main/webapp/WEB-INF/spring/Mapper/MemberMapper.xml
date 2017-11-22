@@ -4,4 +4,8 @@
 	<insert id="memberProc" parameterType="com.TeamSecond.letsmeet.DTO.MemberDTO">
 		insert into member (id,pw,email) values(#{id},#{pw},#{email})
 	</insert>
+	
+	<select id="loginProc" parameterType="com.TeamSecond.letsmeet.DTO.MemberDTO" resultType="int">
+		select count(*) from member where id=#{id} and pw=#{pw}
+	</select>
 </mapper>
