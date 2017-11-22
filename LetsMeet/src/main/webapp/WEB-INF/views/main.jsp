@@ -5,7 +5,15 @@
 <c:url  var="res" value="/resources/" />
 <!DOCTYPE html>
 <html>
-
+<script src="${home }resources/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var msg = "${msg}";
+	if(msg!=""){
+		alert(msg);
+	}
+});
+</script>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
