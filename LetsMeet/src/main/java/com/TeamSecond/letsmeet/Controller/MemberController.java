@@ -61,10 +61,10 @@ public class MemberController {
 	@RequestMapping("loginProc")
 	public String loginProc(MemberDTO memberDTO,Model model) {
 		if(memberService.loginProc(memberDTO)==1){	
-			model.addAttribute("msg","로그인 성공");
+			model.addAttribute("loginMsg","로그인 성공");
 			return "main";
 		}
-		model.addAttribute("msg","로그인 실패");
+		model.addAttribute("loginMsg","로그인 실패");
 		return "main";
 	}
 }

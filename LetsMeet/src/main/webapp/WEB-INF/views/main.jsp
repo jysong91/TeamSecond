@@ -8,9 +8,9 @@
 <script src="${home }resources/js/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	var msg = "${msg}";
-	if(msg!=""){
-		alert(msg);
+	var loginMsg = "${loginMsg}";
+	if(loginMsg!=""){
+		alert(loginMsg);
 	}
 });
 </script>
