@@ -23,6 +23,7 @@ import com.TeamSecond.letsmeet.IService.MemberService;
 
 @Controller
 @RequestMapping("member")
+@SessionAttributes("loginId")
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
@@ -62,9 +63,11 @@ public class MemberController {
 	public String loginProc(MemberDTO memberDTO,Model model) {
 		if(memberService.loginProc(memberDTO)==1){	
 			model.addAttribute("loginMsg","로그인 성공");
+			model.addAttribute("loginId", memberDTO.getId());
 			return "main";
 		}
 		model.addAttribute("loginMsg","로그인 실패");
 		return "main";
 	}
+	
 }

@@ -23,20 +23,22 @@ public class MapController {
 	public pathService pathSrv;
 	
 	@RequestMapping(value = "")
-	public String map(Model model) {
-		model.addAttribute("calRst","37.566826, 126.9786567"); //¼­¿ï½ÃÃ»(µðÆúÆ®)
+	public String map(Model model,@RequestParam("id")String id) {
+		model.addAttribute("calRst","37.566826, 126.9786567"); //ï¿½ï¿½ï¿½ï¿½ï¿½Ã»(ï¿½ï¿½ï¿½ï¿½Æ®)
 		model.addAttribute("rad","5000"); 
 		model.addAttribute("isFindCenter", "0");
 		model.addAttribute("autoOverlay", false);
+		model.addAttribute("loginId", id);
 		return "map";
 	}
 	@RequestMapping(value = "/calMid")
 	public String calMid(@RequestParam("ppl") List<String> ppl,
-			Model model) {
+			Model model,@RequestParam("id")String id) {
 		model.addAttribute("calRst",pathSrv.calMid(ppl));
 		model.addAttribute("rad","1000");
 		model.addAttribute("isFindCenter", "1");
 		model.addAttribute("autoOverlay", true);
+		model.addAttribute("loginId", id);
 		return "map";
 	}
 }

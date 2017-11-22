@@ -4,6 +4,13 @@
 <c:url value="/" var="home"></c:url>
 <!DOCTYPE html>
 <html lang="ko">
+<script src="${home }resources/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var login = "${loginId}";
+	alert(login);
+});
+</script>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,8 +51,8 @@
             <a class="nav-link" href="#listSection">리스트로 보기</a>
           </li>
         </ul>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
-        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
+      	<a class="btn navbar-btn ml-2 text-white btn-secondary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
         <form class="form-inline m-0">
           <input class="form-control mr-2" type="text" placeholder="장소 바로검색!">
           <button class="btn btn-primary" type="submit">검 색</button>

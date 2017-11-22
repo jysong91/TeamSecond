@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page session="false" %>
 <c:url  var="home" value="/" />
 <c:url  var="res" value="/resources/" />
 <head>
@@ -40,8 +39,15 @@
             <a class="nav-link" href="#">About us</a>
           </li>
         </ul>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
-        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
+        <c:choose>
+        	<c:when test="${null eq loginId }">
+        		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
+      		    <a class="btn navbar-btn ml-2 text-white btn-secondary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
+        	</c:when>
+        	<c:when test="${null ne loginId }">
+        		<form action="${home }member/logout"><button type="submit" class="logOutbtn" >로그아웃</button></form>
+        	</c:when>
+        </c:choose>
         <form class="form-inline m-0">
           <input class="form-control mr-2" type="text" placeholder="장소 바로검색!">
           <button class="btn btn-primary" type="submit">검 색</button>
@@ -67,13 +73,13 @@
               <input type="text" class="form-control" id="id" name="id" placeholder="Enter id">
             </div>
             <div class="form-group">
-              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 패스워드</label>
+              <label for="pw"><span class="glyphicon glyphicon-eye-open"></span> 패스워드</label>
               <input type="password" class="form-control" id="pw" name="pw" placeholder="Enter password">
             </div>
             <div class="checkbox">
               <label><input type="checkbox" value="" checked> 아이디 기억하기</label>
             </div>
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> 로그인</button>
+              <button type="submit" id="loginBtn" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> 로그인</button>
           </form>
         </div>
         <div class="modal-footer">

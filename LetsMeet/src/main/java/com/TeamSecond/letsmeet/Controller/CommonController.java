@@ -30,9 +30,9 @@ public class CommonController {
 	
 	@RequestMapping("place")
 	public String place(PlaceDTO placeDTO, Model model) {
-		//Àå¼Ò »ó¼¼º¸±â Å¬¸¯ ½Ã ÇØ´ç¾ÆÀÌµğor¾ÆÀÌÇÇ¹øÈ£¿¡ Ãß°¡µÈ´Ù
+		//ì¥ì†Œ ìƒì„¸ë³´ê¸° í´ë¦­ ì‹œ í•´ë‹¹ì•„ì´ë””orì•„ì´í”¼ë²ˆí˜¸ì— ì¶”ê°€ëœë‹¤
 		placeService.placeInsert(placeDTO);
-		//¸®ºä ÇÑ°³ °¡Á®¿À±â
+		//ë¦¬ë·° í•œê°œ ê°€ì ¸ì˜¤ê¸°
 		model.addAttribute("selectReview", placeService.selectReview(placeDTO.getPlaceName()));
 		model.addAttribute("placeName",  placeDTO.getPlaceName());
 		model.addAttribute("placeAddr",  placeDTO.getPlaceAddr());
