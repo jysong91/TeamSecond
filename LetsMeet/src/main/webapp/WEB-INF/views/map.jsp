@@ -2,15 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url value="/resources/" var="res"></c:url>
 <c:url value="/" var="home"></c:url>
+
 <!DOCTYPE html>
 <html lang="ko">
-<script src="${home }resources/js/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	var login = "${loginId}";
-	alert(login);
-});
-</script>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
