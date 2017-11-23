@@ -79,7 +79,7 @@
             <div class="checkbox">
               <label><input type="checkbox" value="" checked> 아이디 기억하기</label>
             </div>
-              <button type="submit" id="loginBtn" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> 로그인</button>
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> 로그인</button>
           </form>
         </div>
         <div class="modal-footer">

@@ -52,7 +52,8 @@ public class MemberServiceImpl implements MemberService{
 	
 	//로그인 실행
 	@Override
-	public int loginProc(MemberDTO memberDTO) {
+	public int loginProc(MemberDTO memberDTO,Map<String, String>map) {
+		map.put("loginId", memberDTO.getId());
 		return memberDAO.loginProc(memberDTO);
 	}
 }

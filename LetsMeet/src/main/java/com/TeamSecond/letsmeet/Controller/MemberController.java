@@ -17,17 +17,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.TeamSecond.letsmeet.DTO.MemberDTO;
 import com.TeamSecond.letsmeet.IService.MemberService;
 
 @Controller
 @RequestMapping("member")
-@SessionAttributes("loginId")
+@SessionAttributes("session")
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	@Autowired
 	MemberService memberService;
+	
+	@ModelAttribute("session")
+	public Map<String, Object> getSessionInfo(){
+		Map<String, Object> map =
+				new HashMap<String, Object>();
+		return map;
+	}
 	
 	//아이디 중복체크
 	@RequestMapping("idChkProc")
@@ -60,14 +68,20 @@ public class MemberController {
 	}
 	//로그인 실행
 	@RequestMapping("loginProc")
-	public String loginProc(MemberDTO memberDTO,Model model) {
-		if(memberService.loginProc(memberDTO)==1){	
+	public String loginProc(MemberDTO memberDTO,Model model,@ModelAttribute("session")Map<String, String>map) {
+		if(memberService.loginProc(memberDTO,map)==1){	
 			model.addAttribute("loginMsg","로그인 성공");
-			model.addAttribute("loginId", memberDTO.getId());
+			model.addAttribute("loginId", map.get("loginId"));
 			return "main";
 		}
 		model.addAttribute("loginMsg","로그인 실패");
 		return "main";
 	}
 	
+	//로그아웃
+	@RequestMapping("logout")
+	public String logout(Model model,SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
+		return "main";
+	}
 }

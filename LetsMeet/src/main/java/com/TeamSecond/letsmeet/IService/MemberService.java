@@ -16,5 +16,5 @@ public interface MemberService {
 	//회원가입 실행
 	public void memberProc(MemberDTO memberDTO);
 	//로그인 실행
-	public int loginProc(MemberDTO memberDTO);
+	public int loginProc(MemberDTO memberDTO,Map<String, String>map);
 }
