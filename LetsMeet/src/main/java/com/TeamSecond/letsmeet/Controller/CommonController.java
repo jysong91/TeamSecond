@@ -30,9 +30,9 @@ public class CommonController {
 	
 	@RequestMapping("place")
 	public String place(PlaceDTO placeDTO, Model model) {
-		//장소 상세보기 클릭 시 해당아이디or아이피번호에 추가된다
+		//�옣�냼 �긽�꽭蹂닿린 �겢由� �떆 �빐�떦�븘�씠�뵒or�븘�씠�뵾踰덊샇�뿉 異붽��맂�떎
 		placeService.placeInsert(placeDTO);
-		//리뷰 한개 가져오기
+		//由щ럭 �븳媛� 媛��졇�삤湲�
 		model.addAttribute("selectReview", placeService.selectReview(placeDTO.getPlaceName()));
 		model.addAttribute("placeName",  placeDTO.getPlaceName());
 		model.addAttribute("placeAddr",  placeDTO.getPlaceAddr());
@@ -50,5 +50,9 @@ public class CommonController {
 	@RequestMapping("test")
 	public String test() {
 		return "test";
+	}
+	@RequestMapping("about")
+	public String about() {
+		return "about";
 	}
 }

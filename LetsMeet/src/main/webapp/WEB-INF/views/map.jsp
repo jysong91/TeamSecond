@@ -26,17 +26,17 @@
     <link href="${res }css/nav.css" rel="stylesheet" draggable="auto">
   </head>
   <body>
-  <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
+    <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
     <div class="container">
       <a class="navbar-brand" href="${home }">Yahmanaza</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          <li class="nav-item mx-2">
             <a class="nav-link" href="#">사용설명서</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About us</a>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="${home }about">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#mapSection">지도로 보기</a>
@@ -45,15 +45,58 @@
             <a class="nav-link" href="#listSection">리스트로 보기</a>
           </li>
         </ul>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
-      	<a class="btn navbar-btn ml-2 text-white btn-secondary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
+        <c:choose>
+        	<c:when test="${null eq loginId }">
+        		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
+      		    <a class="btn navbar-btn ml-2 text-white btn-primary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
+        	</c:when>
+        	<c:when test="${null ne loginId }">
+        		<form action="${home }member/logout"><button type="submit" class="logOutbtn" >로그아웃</button></form>
+        	</c:when>
+        </c:choose>
         <form class="form-inline m-0">
-          <input class="form-control mr-2" type="text" placeholder="장소 바로검색!">
+          <input class="form-control mr-2 mx-2" type="text" placeholder="장소 바로검색!">
           <button class="btn btn-primary" type="submit">검 색</button>
         </form>
       </div>
     </div>
   </nav>
+  
+    <!-- Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="loginModal">
+    <div class="modal-dialog" role="document">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <h4><span class="glyphicon glyphicon-lock"></span> 로그인</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form" action="${home }member/loginProc">
+            <div class="form-group">
+              <label for="id"><span class="glyphicon glyphicon-eye-open"></span> 아이디</label>
+              <input type="text" class="form-control" id="id" name="id" placeholder="Enter id">
+            </div>
+            <div class="form-group">
+              <label for="pw"><span class="glyphicon glyphicon-eye-open"></span> 패스워드</label>
+              <input type="password" class="form-control" id="pw" name="pw" placeholder="Enter password">
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="" checked> 아이디 기억하기</label>
+            </div>
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> 로그인</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+<!--           <button type="submit" class="btn btn-danger btn-default mx-auto" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> 취소</button> -->
+          <h6><a href="#">회원가입</a></h6>
+          <h6><a href="#">비밀번호찾기</a></h6>
+        </div>
+      </div>
+    </div>
+   </div>
+
 <div class="map_wrap" id="mapSection">
  <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;">
 	 <div id="layer_fixed">
@@ -99,46 +142,131 @@
     
 </div>
 <hr>
-<div class="py-5 bg-light text-dark" id="listSection">
+  <div id="listSection" class="py-4" style='background-image: url(${res}img/background/about_bg.jpg);'>
     <div class="container">
       <div class="row">
-        <div class="col-md-4 my-3">
-          <div class="card">
-            <img class="img-fluid" src="https://pingendo.github.io/templates/sections/assets/features_mac.jpg" alt="Card image">
-            <div class="card-body">
-            	<h5><b>카드형식</b></h5>
-            </div>
-          </div>
+        <div class="col-md-12">
+          <h1 class="text-center text-white display-4">리 스 트 로 보 기</h1>
         </div>
-        <div class="col-md-4 my-3">
-          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
-          <h5><b>우리에게 내일은 없어</b></h5>
-          <p class="mt-1"></p>
-        </div>
-        <div class="col-md-4 my-3">
-          <img class="img-fluid d-block mb-4 img-thumbnail" src="https://pingendo.github.io/templates/sections/assets/features_bluetable.jpg">
-          <h5><b>난 오늘만 산다</b></h5>
-          <p class="mt-1"></p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-light text-dark py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="text-primary text-left display-4">숙박업소</h3>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4 my-3">
-          <div class="card">
-            <img class="img-fluid" src="https://pingendo.github.io/templates/sections/assets/features_mac.jpg" alt="Card image">
-            <div class="card-body">
-            	<h5><b>카드형식</b></h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 my-3">
+        <div class="col-md-3 my-3">
           <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
-          <h5><b>우리에게 내일은 없어</b></h5>
-          <p class="mt-1"></p>
+          <h5><b>숙박업소1</b>
+            <br> </h5>
         </div>
-        <div class="col-md-4 my-3">
-          <img class="img-fluid d-block mb-4 img-thumbnail" src="https://pingendo.github.io/templates/sections/assets/features_bluetable.jpg">
-          <h5><b>난 오늘만 산다</b></h5>
-          <p class="mt-1"></p>
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>숙박업소2</b> </h5>
+        </div>
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>숙박업소2</b> </h5>
+        </div>
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>숙박업소2</b> </h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="text-primary text-left display-4">편의시설</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>편의시설1</b> </h5>
+        </div>
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>편의시설2</b> </h5>
+        </div>
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>편의시설3</b> </h5>
+        </div>
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>편의시설4</b> </h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="text-primary text-left display-4">추천음식점</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>추천음식점1</b> </h5>
+        </div>
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>추천음식점2</b> </h5>
+        </div>
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>추천음식점3</b> </h5>
+        </div>
+        <div class="col-md-3 my-3">
+          <img class="img-fluid d-block mb-4" src="https://pingendo.github.io/templates/sections/assets/features_strawberry.jpg">
+          <h5><b>추천음식점4</b> </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-white bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4 text-secondary">Team S2cond</h2>
+          <p class="text-primary">A company for whatever you may need, from website prototyping to publishing</p>
+        </div>
+        <div class="p-4 col-md-3 text-primary">
+          <h2 class="mb-4 text-secondary">Mapsite</h2>
+          <ul class="list-unstyled text-primary">About&nbsp;
+            <br>
+            <a href="#" class="text-primary">How about here</a>
+            <br>Come with us
+            <br>
+            <a href="#" class="text-primary">Contact us</a>
+          </ul>
+        </div>
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4 text-secondary">Contact</h2>
+          <p>
+            <a href="tel:+246 - 542 550 5462" class="text-primary"><i class="fa d-inline mr-3 text-secondary fa-phone"></i>+82 010 1234 5678
+              <br> </a>
+          </p>
+          <p style="opacity: 0.5;">
+            <a href="mailto:info@pingendo.com" class="text-primary"><i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>Yahmanaza@naver.com</a>
+          </p>
+          <p>
+            <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-primary" target="_blank"><i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 YG Jonglo, Seoul</a>
+          </p>
+        </div>
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4 text-secondary">Subscribe</h2>
+          <form>
+            <fieldset class="form-group text-white"> <label for="exampleInputEmail1" class="text-primary">Get our newsletter</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"> </fieldset>
+            <button type="submit" class="btn btn-outline-secondary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <p class="text-center text-secondary">© Copyright 2017 Yahmanaza - All rights reserved. </p>
         </div>
       </div>
     </div>

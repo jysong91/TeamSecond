@@ -1,0 +1,107 @@
+.table  {border-collapse:collapse;border-spacing:0;width:1100px;padding-top:30px;}
+.table td{font-family:Arial, sans-serif;font-size:14px;padding:9px 7px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.table th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:9px 7px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+.table {text-align:center;}
+.table {vertical-align:top;}
+.img{
+	height:90px;
+	width:60px;
+}
+#basket{
+	padding-right:800px;
+} 
+
+// 위내용은 css
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="${home }">Yahmanaza</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="${home }about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">How about here?</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Come with us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="${home }member">회원가입</a>
+          </li>
+        </ul>
+        <form class="form-inline m-0">
+          <input class="form-control mr-2" type="text" placeholder="Search">
+          <button class="btn btn-primary" type="submit">검 색</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <br>
+  <br>
+  <br>
+  <h1 id="c_title" class="display-1 pi-draggable text-center">Title</h1><hr/>
+</body>
+<body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th colspan="2" style="text-align:center;">장소정보</th>
+        <th style="text-align:center;">위치</th>
+        <th style="text-align:center;">선택</th>
+      </tr>
+      <tr>
+        <td rowspan="2">
+          <img src="&lt;%=book.getImg() %&gt;" class="img"> </td>
+        <td rowspan="2">
+          <br>
+          <br> </td>
+        <td rowspan="2">
+          <br>
+          <br> </td>
+        <td>
+          <button type="button" class="btn btn-default" onclick="">상세정보보기</button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button type="button" class="btn btn-default" onclick="">삭제</button>
+        </td>
+      </tr>
+      <input type="hidden" name="bookNo" value="<%=book.getBookNo()%>"> </tbody>
+  </table>
+  <br>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th colspan="2" style="text-align:center;"> </th>
+        <th style="text-align:center;">
+          <button type="button" class="btn btn-default" onclick="window.location='/bookStore/book/bookList.jsp'"></button>
+        </th>
+        <th style="text-align:center;">
+          <input type="submit" id="allSell" class="btn btn-default" value="리뷰쓰러가기"> </th>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <br> </body>
+
+</html>

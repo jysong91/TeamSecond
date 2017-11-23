@@ -28,28 +28,28 @@
 </head>
   <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Yahmanaza</a>
+      <a class="navbar-brand" href="${home }">Yahmanaza</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          <li class="nav-item mx-2">
             <a class="nav-link" href="#">사용설명서</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About us</a>
+          <li class="nav-item mx-2">
+            <a class="nav-link" href="${home }about">About</a>
           </li>
         </ul>
         <c:choose>
         	<c:when test="${null eq loginId }">
         		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
-      		    <a class="btn navbar-btn ml-2 text-white btn-secondary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
+      		    <a class="btn navbar-btn ml-2 text-white btn-primary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
         	</c:when>
         	<c:when test="${null ne loginId }">
         		<form action="${home }member/logout"><button type="submit" class="logOutbtn" >로그아웃</button></form>
         	</c:when>
         </c:choose>
         <form class="form-inline m-0">
-          <input class="form-control mr-2" type="text" placeholder="장소 바로검색!">
+          <input class="form-control mr-2 mx-2" type="text" placeholder="장소 바로검색!">
           <button class="btn btn-primary" type="submit">검 색</button>
         </form>
       </div>

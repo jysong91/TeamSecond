@@ -26,7 +26,7 @@
             <a class="nav-link" href="#">사용설명서</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About us</a>
+            <a class="nav-link" href="${home }about">About</a>
           </li>
         </ul>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>

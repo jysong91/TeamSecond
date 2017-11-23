@@ -48,7 +48,7 @@ $(document).ready(function(){
           <h1 class="display-3 mb-4"><b><b>야만나자가 전하는 색다른 경험</b></b>
           </h1>
           <p class="lead mb-5">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세&nbsp; </p>
-          <a href="${home }map?id=${loginId}" class="btn btn-lg mx-1 btn-secondary">시 작 하 기</a>
+          <a href="${home }map" class="btn btn-lg mx-1 btn-secondary">시 작 하 기</a>
         </div>
       </div>
     </div>
