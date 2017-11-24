@@ -16,13 +16,13 @@ public class ReviewServiceImpl implements ReviewService{
 	@Autowired
 	ReviewDAO reviewDAO;
 	
-	//¸®ºäÀúÀå
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void reviewProc(ReviewDTO reviewDTO) {
 		reviewDAO.reviewInsert(reviewDTO);
 	}
 	
-	//¸®ºä¾²°í µ¹¾Æ¿Ã ¶§ ÀÌÀüÆäÀÌÁö°ªÀ» DB¿¡¼­ °¡Á®¿À±â
+	//ï¿½ï¿½ï¿½ä¾²ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public PlaceDTO reviewPlace(String placeName) {
 		return reviewDAO.reviewPlace(placeName);
@@ -31,5 +31,10 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public ReviewDTO selectReview(String placeName) {
 		return reviewDAO.selectReview(placeName);
+	}
+	
+	@Override
+	public String selectAppraisal(String placeName) {
+		return reviewDAO.selectAppraisal(placeName);
 	}
 }

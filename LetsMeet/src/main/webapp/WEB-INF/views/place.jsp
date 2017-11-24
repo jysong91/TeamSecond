@@ -7,7 +7,29 @@
     <title>리뷰쓰기</title>
 <c:url  var="home" value="/" />
 <script src="${home }resources/js/jquery.min.js"></script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	var appraisal ="${selectAppraisal}";
+	$("#reviewAppraisalStar a").each(function(item){
+		if(appraisal==$(this).attr("id")){
+			$(this).addClass("on").prevAll("a").addClass("on");
+		}
+	}); 
+});
+</script>
+<style type="text/css">
+#reviewAppraisalStar {font-size:0; letter-spacing:-4px;}
+#reviewAppraisalStar a {
+    font-size:22px;
+    letter-spacing:0;
+    display:inline-block;
+    margin-left:5px;
+    color:#ccc;
+    text-decoration:none;
+}
+#reviewAppraisalStar a:first-child {margin-left:0;}
+#reviewAppraisalStar a.on {color:#777;}
+</style>
 <body>
 <head>
   <meta charset="utf-8">
@@ -26,7 +48,7 @@
             <a class="nav-link" href="#">사용설명서</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${home }about">About</a>
+            <a class="nav-link" href="#">About us</a>
           </li>
         </ul>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
@@ -60,8 +82,17 @@
         <div class="col-md-6">
           <h1>${placeName }</h1>
           <p>${outLine }</p>
+          	<c:set var="scoreNums">1,2,3,4,5</c:set>
             <div class="form-group"> <label for="InputName">메 뉴 판</label>
-              <input type="text" class="form-control" id="InputName" placeholder="Your name"> </div>
+            	<div>
+				<input type="hidden" id="reviewAppraisal" name="reviewAppraisal">
+				<p class="reviewAll" id="reviewAppraisalStar">
+					<c:forEach var="scoreNum" items="${scoreNums }">
+						<a href="#" id="${scoreNum }">★</a>
+					</c:forEach>
+				</p>
+			</div>
+              <input type="text" class="form-control" id="InputName" placeholder="Your name" value="${selectAppraisal}"> </div>
             <div class="form-group"> <label for="InputEmail1">찾아가는 길</label>
               <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email"> </div>
             <div class="form-group"> <label for="InputEmail1">리뷰보기</label>

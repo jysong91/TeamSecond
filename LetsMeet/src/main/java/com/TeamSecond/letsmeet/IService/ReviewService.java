@@ -6,9 +6,10 @@ import com.TeamSecond.letsmeet.DTO.PlaceDTO;
 import com.TeamSecond.letsmeet.DTO.ReviewDTO;
 
 public interface ReviewService {
-	//¸®ºäÀúÀå
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void reviewProc(ReviewDTO reviewDTO);
-	//¸®ºä¾²°í µ¹¾Æ¿Ã ¶§ ÀÌÀüÆäÀÌÁö°ªÀ» DB¿¡¼­ °¡Á®¿À±â
+	//ï¿½ï¿½ï¿½ä¾²ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public PlaceDTO reviewPlace(String placeName);
 	public ReviewDTO selectReview(String placeName);
+	public String selectAppraisal(String placeName);
 }

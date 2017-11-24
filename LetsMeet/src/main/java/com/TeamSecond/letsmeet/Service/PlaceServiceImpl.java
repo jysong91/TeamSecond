@@ -24,4 +24,8 @@ public class PlaceServiceImpl implements PlaceService{
 		return placeDAO.selectReview(placeName);
 	}
 
+	@Override
+	public String selectAppraisal(String placeName) {
+		return placeDAO.selectAppraisal(placeName);
+	}
 }
