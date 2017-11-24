@@ -13,4 +13,8 @@
 		ORDER BY writeDate desc) 
 		where placeName=#{placeName} and ROWNUM =1
 	</select>
+	
+	<select id="selectAppraisal" parameterType="String" resultType="String">
+		select round(avg(reviewAppraisal),0) from review where placeName = #{placeName}
+	</select>
 </mapper>

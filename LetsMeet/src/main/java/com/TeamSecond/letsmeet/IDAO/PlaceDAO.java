@@ -8,4 +8,5 @@ import com.TeamSecond.letsmeet.DTO.ReviewDTO;
 public interface PlaceDAO {
 	public void placeInsert(PlaceDTO placeDTO);
 	public ReviewDTO selectReview(String placeName);
+	public String selectAppraisal(String placeName);
 }

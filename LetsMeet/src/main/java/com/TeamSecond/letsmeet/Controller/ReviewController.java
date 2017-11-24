@@ -27,7 +27,10 @@ public class ReviewController {
 	@RequestMapping("reviewProc")
 	public String reviewProc(ReviewDTO reviewDTO,@RequestParam("placeName")String placeName,Model model) {
 		reviewService.reviewProc(reviewDTO);
+		//리뷰 한개 가져오기
 		model.addAttribute("selectReview", reviewService.selectReview(placeName));
+		//별점가져오기
+		model.addAttribute("selectAppraisal", reviewService.selectAppraisal(placeName));
 		model.addAttribute("placeName", reviewService.reviewPlace(placeName).getPlaceName());
 		model.addAttribute("placeAddr", reviewService.reviewPlace(placeName).getPlaceAddr());
 		model.addAttribute("tel", reviewService.reviewPlace(placeName).getTel());
