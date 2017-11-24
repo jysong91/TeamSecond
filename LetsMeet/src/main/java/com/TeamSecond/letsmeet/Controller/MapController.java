@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.TeamSecond.letsmeet.DTO.MapDTO;
 import com.TeamSecond.letsmeet.IService.pathService;
 
 
@@ -24,7 +26,7 @@ public class MapController {
 	
 	@RequestMapping(value = "")
 	public String map(Model model) {
-		model.addAttribute("calRst","37.566826, 126.9786567"); //�����û(����Ʈ)
+		model.addAttribute("calRst","37.566826, 126.9786567"); //占쏙옙占쏙옙占시�(占쏙옙占쏙옙트)
 		model.addAttribute("rad","5000"); 
 		model.addAttribute("isFindCenter", "0");
 		model.addAttribute("autoOverlay", false);
@@ -38,5 +40,16 @@ public class MapController {
 		model.addAttribute("isFindCenter", "1");
 		model.addAttribute("autoOverlay", true);
 		return "map";
+	}
+	
+	@RequestMapping(value = "/calMid2")
+	public @ResponseBody MapDTO calMid2(@RequestParam("ppl") List<String> ppl) {
+		MapDTO map = new MapDTO();
+		map.setCalRst(pathSrv.calMid(ppl));
+		map.setRad("1000");
+		map.setIsFindCenter("1");
+		map.setAutoOverlay(true);
+		
+		return map;
 	}
 }

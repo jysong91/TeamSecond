@@ -280,13 +280,15 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9e9cc6e5624472d000d642a90d7a51ab&libraries=services"></script>
     <script type="text/javascript">
 	    var markers = [];
-	
+		
+	    var userMarkers = [];
+	    
 	    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	        mapOption = {
 	            center: new daum.maps.LatLng(${calRst}), // 지도의 중심좌표
 	            level: 3 // 지도의 확대 레벨
-	        };  
-
+	        };
+	    
 	    // 지도를 생성합니다    
 	    var map = new daum.maps.Map(mapContainer, mapOption); 
 		
@@ -297,7 +299,7 @@
 	    var marker = new daum.maps.Marker({
 	        position: markerPosition
 	    });
-
+		
 	    // 마커가 지도 위에 표시되도록 설정합니다
 	    marker.setMap(map);
 	 	
@@ -314,10 +316,21 @@
 	    // 몇번째 사람의 검색인가
 	    var search_ppl = "0";
 	    
+	    var circle = new daum.maps.Circle({
+		    center : new daum.maps.LatLng(${calRst}),  // 원의 중심좌표 입니다 
+		    radius: 1000, // 미터 단위의 원의 반지름입니다 
+		    strokeWeight: 5, // 선의 두께입니다 
+		    strokeColor: '#75B8FA', // 선의 색깔입니다
+		    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		    strokeStyle: 'dashed', // 선의 스타일 입니다
+		    fillColor: '#CFE7FF', // 채우기 색깔입니다
+		    fillOpacity: 0.5  // 채우기 불투명도 입니다   
+		});
+	    
 	    //중간지점인지 판단해서 오버레이 띄워줌.
 	    //카테고리 검색 후에도 마커 삭제 메소드에 의해 사라지지 않도록 별도의 이름(midMarker)으로 마커를 생성한다.
 	    //또한 좌측의 검색창을 없애준다.
-	    if(${autoOverlay}==true){
+	    /* if(${autoOverlay}==true){
 	    	// 마커를 생성합니다
 		    var midMarker = new daum.maps.Marker({
 		        position: markerPosition
@@ -337,7 +350,7 @@
 
 		    // 마커가 지도 위에 표시되도록 설정합니다
 		    marker.setMap(map);
-	    }
+	    } */
 	    
 // 	    if("1"==${isFindCenter}){
 // 	    	ps.keywordSearch('맛집', placesSearchCB, {
@@ -425,6 +438,7 @@
 	                	else{
 	                		displayLoc(marker, place);
         	    			document.getElementById('ppl'+search_ppl).value = personLatlng;
+        	    			userMarkers[search_ppl-1] = marker;
 	                	}
 	        		});
 	                itemEl.onclick = function(){
@@ -435,6 +449,7 @@
 	                	}else{
 	                		displayLoc(marker, place);
 	                		document.getElementById('ppl'+search_ppl).value = personLatlng;
+	                		userMarkers[search_ppl-1] = marker;
 	                	}
         	    		panTo(personLatlng);
 	                };
@@ -500,7 +515,7 @@
 	    function removeMarker() {
 	        for ( var i = 0; i < markers.length; i++ ) {
 	            markers[i].setMap(null);
-	        }   
+	        }
 	        markers = [];
 	        marker.setMap(null);
 	    }
@@ -641,7 +656,7 @@
 	        	radius: ${rad}
 			})
 	    }
-	
+		
 		//컨트롤러에서 중간지점 계산해서 페이지 리로딩 후에 실행되는 함수.
 		//중간지점 바로 위에 "중간지점은 여기입니다"하고 윈도우를 띄워줌.
 	    function displayMidOverlay(position) {
@@ -666,7 +681,7 @@
 			overlay = new daum.maps.CustomOverlay({
 		        content: content,
 		        map: map,
-		        position: marker.getPosition() 
+		        position: position.getPosition() 
 	   		 });
 	    }
 		
@@ -678,22 +693,60 @@
 		function checkSearchText(){
 			var search_texts = document.getElementsByName('ppl');
 	     	var isOk = true; 
+	     	var ppl = [];
 	     	
 			for(var i=0;i<search_texts.length;i++){
 				var tmp = search_texts[i].value.replace(/\s|　/gi, '');
 		        // 정규식으로 공백, 엔터, 탭, 특수문자 공백 문자를 빈문자로 바꿈
 		        // 입력된 값에 대하여 위 정규식 처리를 하고 뭔가 남아있지 않다면
 		        // 값이 무의미 하다고 판단함.
-		 
+		 		
 		        if(tmp == ''){
 		            alert((i+1)+'번째 장소가 지정되지 않았습니다.');
 		        	isOk = false;
 		        }
+		        ppl.push(search_texts[i].value);
 			}
 			
 			if(isOk){
-				
-				document.getElementById("searchMidFrm").submit();
+				//이 부분에 ajax를 입력.
+				$.ajaxSettings.traditional = true; //ajax가 배열을 전송할 수 있게 함
+				$.ajax({
+			        data : {ppl:ppl},
+			        type : "POST",
+			        url : "${home }map/calMid2",
+			        datatype : "json",
+			        success : function(data) {
+			            removeMarker();
+			            closeOverlay();
+			            
+			            var pos = data.calRst.split(', ');
+			            var x = Number(pos[0]);
+			            var y = Number(pos[1]);
+			            
+			          	
+			            markerPosition  = new daum.maps.LatLng(x, y);
+			            var midMarker = new daum.maps.Marker({
+					        position: markerPosition
+					    });
+						
+			            //지도의 중심 좌표 재설정
+			            map.setCenter(markerPosition);
+			            circleOn();
+			            
+					    // 마커가 지도 위에 표시되도록 설정합니다
+					    midMarker.setMap(map);
+				    	displayMidOverlay(midMarker);
+				    	
+				    	//좌측의 검색창을 없앤다.
+				    	removeWrap();
+				    	
+			    	    for(var i=0; i<userMarkers.length; i++){
+			    	    	userMarkers[i].setMap(map);
+			    	    }
+			        } 
+			    });
+				//document.getElementById("searchMidFrm").submit();
 			}
 		}
 	$(document).ready(function(){
@@ -737,19 +790,6 @@
 			})
 		})
 	});
-	
-		
-	
-	var circle = new daum.maps.Circle({
-	    center : new daum.maps.LatLng(${calRst}),  // 원의 중심좌표 입니다 
-	    radius: 1000, // 미터 단위의 원의 반지름입니다 
-	    strokeWeight: 5, // 선의 두께입니다 
-	    strokeColor: '#75B8FA', // 선의 색깔입니다
-	    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	    strokeStyle: 'dashed', // 선의 스타일 입니다
-	    fillColor: '#CFE7FF', // 채우기 색깔입니다
-	    fillOpacity: 0.5  // 채우기 불투명도 입니다   
-	}); 
 	
 	
     </script>    
