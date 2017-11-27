@@ -492,7 +492,7 @@
 	    // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 	    function addMarker(position, idx, title) {
 	        var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-	            imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
+	        	imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
 	            imgOptions =  {
 	                spriteSize : new daum.maps.Size(36, 691), // 스프라이트 이미지의 크기
 	                spriteOrigin : new daum.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
@@ -650,10 +650,10 @@
 		//반경 1km내의 상업시설들을 검색하는 함수. 해당하는 카테고리명으로 검색함
 	    function searchPlacesFromMid(keyword) {
 	    	closeOverlay();
-	    	circle.setMap(map);
+	    	//circle.setMap(map);
  	        ps.keywordSearch( keyword, placesSearchCB,{
-	        	location: new daum.maps.LatLng(${calRst}),
-	        	radius: ${rad}
+	        	location: markerPosition,
+	        	radius: 1000
 			})
 	    }
 		
@@ -673,7 +673,7 @@
 	        '            <div class="desc">' + 
 	        '                <div class="message1">'+'중간지점입니다. '+' </div>' + 
 	        '                <div class="message2">'+'해당 구역에서 장소를 추천받으시겠어요?'+' </div>' + 
-	        '                <button id="recommend" type="button" onclick="searchPlacesFromMid()">'+'추천받기'+'</button>' + 
+	        '                <button id="recommend" type="button">'+'추천받기'+'</button>' + 
 	        '            </div>' + 
 	        '        </div>' + 
 	        '    </div>' +    
@@ -683,6 +683,7 @@
 		        map: map,
 		        position: position.getPosition() 
 	   		 });
+			showCategory();
 	    }
 		
 		function removeWrap(){
@@ -732,10 +733,15 @@
 						
 			            //지도의 중심 좌표 재설정
 			            map.setCenter(markerPosition);
-			            circleOn();
 			            
 					    // 마커가 지도 위에 표시되도록 설정합니다
 					    midMarker.setMap(map);
+					    
+					    //지도 위에 원을 표시하도록 설정
+					    circle.setPosition(markerPosition);
+					    circle.setMap(map);
+					    
+					    //중간지점 위에 오버레이 표시
 				    	displayMidOverlay(midMarker);
 				    	
 				    	//좌측의 검색창을 없앤다.
@@ -779,17 +785,20 @@
 	}
 	
 	//중간지점 지정 후 "추천받기" 누르면 버튼 메뉴 표시
-	$(document).ready(function(){
-		$("#recommend").on('click', function(event) {
-			$('<div id="cate_wrap" class="bg_black">'+ 
-				buttonation(categories) +
-			    '</div>').appendTo("#map"),
-		    $(".category").on('click', function(event) {
-				$("#cateinfo").remove(),
-		    	$("#option").prepend("<div id='cateinfo'><b><h5>"+$(this).text()+"</h5></b> 검색 결과입니다.<br></div>")
+	function showCategory(){
+		$(document).ready(function(){
+			$("#recommend").on('click', function(event) {
+				$('<div id="cate_wrap" class="bg_black">'+ 
+					buttonation(categories) +
+				    '</div>').appendTo("#map"),
+			    $(".category").on('click', function(event) {
+					$("#cateinfo").remove(),
+			    	$("#option").prepend("<div id='cateinfo'><b><h5>"+$(this).text()+"</h5></b> 검색 결과입니다.<br></div>")
+				})
 			})
 		})
-	});
+	}
+	
 	
 	
     </script>    
