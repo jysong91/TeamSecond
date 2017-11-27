@@ -283,6 +283,8 @@
 		
 	    var userMarkers = [];
 	    
+	    var isFindCenter = "0";
+	    
 	    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	        mapOption = {
 	            center: new daum.maps.LatLng(${calRst}), // 지도의 중심좌표
@@ -431,20 +433,22 @@
 	            // 해당 장소에 인포윈도우에 장소명을 표시합니다
 	            // mouseout 했을 때는 인포윈도우를 닫습니다
 	            (function(marker, place) {
-	                daum.maps.event.addListener(marker, 'click', function() {
+	                //마커에 적용될 함수
+	            	daum.maps.event.addListener(marker, 'click', function() {
 	                	closeOverlay();
 	                	var personLatlng = marker.getPosition();
-	                	if("1"==${isFindCenter})    	displayInfowindow(marker, place);
+	                	if("1"==isFindCenter)    	displayInfowindow(marker, place);
 	                	else{
 	                		displayLoc(marker, place);
         	    			document.getElementById('ppl'+search_ppl).value = personLatlng;
         	    			userMarkers[search_ppl-1] = marker;
 	                	}
 	        		});
+	                //목록에 적용될 함수
 	                itemEl.onclick = function(){
 	                	closeOverlay();
 	                	var personLatlng = marker.getPosition();
-	                	if("1"==${isFindCenter}){
+	                	if("1"==isFindCenter){
 	                		displayInfowindow(marker, place);
 	                	}else{
 	                		displayLoc(marker, place);
@@ -721,6 +725,8 @@
 			        success : function(data) {
 			            removeMarker();
 			            closeOverlay();
+			            
+			            isFindCenter = "1";
 			            
 			            var pos = data.calRst.split(', ');
 			            var x = Number(pos[0]);

@@ -50,7 +50,7 @@ public class MapController {
 		MapDTO map = new MapDTO();
 		map.setCalRst(pathSrv.calMid(ppl));
 		map.setRad("1000");
-		map.setIsFindCenter("1");
+		map.setIsFindCenter("0");
 		map.setAutoOverlay(true);
 		
 		return map;
