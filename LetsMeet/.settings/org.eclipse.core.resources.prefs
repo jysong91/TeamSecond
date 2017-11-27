@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/TeamSecond/letsmeet/Controller/CommonController.java=UTF-8
 encoding//src/main/java/com/TeamSecond/letsmeet/Controller/MapController.java=UTF-8
+encoding//src/main/java/com/TeamSecond/letsmeet/Controller/MemberController.java=UTF-8
+encoding//src/main/java/com/TeamSecond/letsmeet/Controller/MypageController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/test.jsp=UTF-8

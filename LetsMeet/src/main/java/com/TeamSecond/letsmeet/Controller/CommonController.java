@@ -49,6 +49,16 @@ public class CommonController {
 		return "review";
 	}
 	
+	@RequestMapping("mypage")
+	public String mypage() {
+		return "mypage";
+	}
+	
+	@RequestMapping("bestPlace")
+	public String bestPlace() {
+		return "bestPlace";
+	}
+	
 	@RequestMapping("test")
 	public String test() {
 		return "test";

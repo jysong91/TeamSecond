@@ -69,12 +69,12 @@
         <div class="modal-body" style="padding:40px 50px;">
           <form role="form" action="${home }member/loginProc">
             <div class="form-group">
-              <label for="id"><span class="glyphicon glyphicon-eye-open"></span> 아이디</label>
-              <input type="text" class="form-control" id="id" name="id" placeholder="Enter id">
+              <label for="id1"><span class="glyphicon glyphicon-eye-open"></span> 아이디</label>
+              <input type="text" class="form-control" id="id1" name="id" placeholder="Enter id">
             </div>
             <div class="form-group">
-              <label for="pw"><span class="glyphicon glyphicon-eye-open"></span> 패스워드</label>
-              <input type="password" class="form-control" id="pw" name="pw" placeholder="Enter password">
+              <label for="pw1"><span class="glyphicon glyphicon-eye-open"></span> 패스워드</label>
+              <input type="password" class="form-control" id="pw1" name="pw" placeholder="Enter password">
             </div>
             <div class="checkbox">
               <label><input type="checkbox" value="" checked> 아이디 기억하기</label>
