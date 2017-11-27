@@ -281,14 +281,14 @@
 #moodStar a.on {color:#777;}
 </style>
 <body>
-
+<c:import url="/top"/>
 <form id="frm" action="${home }review/reviewProc" method="post">
 <table>
 	<tr>
 		<th><input type="text" id="placeName" name="placeName" value="${placeName }"></th>
 	</tr>
 	<tr>
-		<td><input type="text" id="id" name="id" value="${sessionScope.loginId}"></td>
+		<td><input type="text" id="id" name="id" value="${loginId}"></td>
 	</tr>
 	<tr>
 		<th>리뷰제목</th>

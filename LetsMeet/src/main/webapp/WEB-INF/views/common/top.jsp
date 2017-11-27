@@ -46,6 +46,7 @@
         	</c:when>
         	<c:when test="${null ne loginId }">
         		<form action="${home }member/logout"><button type="submit" class="logOutbtn" >로그아웃</button></form>
+        		<form action="${home }myPage" method="post"><button type="submit" class="myPagebtn" >마이페이지</button></form>
         	</c:when>
         </c:choose>
         <form class="form-inline m-0">

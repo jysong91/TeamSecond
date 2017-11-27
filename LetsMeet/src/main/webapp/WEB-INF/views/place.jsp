@@ -51,8 +51,15 @@ $(document).ready(function(){
             <a class="nav-link" href="#">About us</a>
           </li>
         </ul>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
-        <a class="btn navbar-btn ml-2 text-white btn-secondary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
+        <c:choose>
+        	<c:when test="${null eq loginId }">
+        		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
+      		    <a class="btn navbar-btn ml-2 text-white btn-primary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
+        	</c:when>
+        	<c:when test="${null ne loginId }">
+        		<form action="${home }member/logout"><button type="submit" class="logOutbtn" >로그아웃</button></form>
+        	</c:when>
+        </c:choose>
         <form class="form-inline m-0">
           <input class="form-control mr-2" type="text" placeholder="장소 바로검색!">
           <button class="btn btn-primary" type="submit">검 색</button>

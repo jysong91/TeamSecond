@@ -3,7 +3,7 @@
 <mapper namespace="com.TeamSecond.letsmeet.IDAO.PlaceDAO">
 	
 	<insert id="placeInsert" parameterType="com.TeamSecond.letsmeet.DTO.PlaceDTO">
-		insert into place (placeName, placeAddr, outLine, tel, writeDate) values (#{placeName}, #{placeAddr}, #{outLine}, #{tel}, sysdate)
+		insert into place (placeName, placeAddr, outLine, tel, writeDate, id) values (#{placeName}, #{placeAddr}, #{outLine}, #{tel}, sysdate, #{id})
 	</insert>
 	
 	<select id="selectReview" parameterType="String" resultType="com.TeamSecond.letsmeet.DTO.ReviewDTO">
