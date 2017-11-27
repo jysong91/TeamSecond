@@ -38,7 +38,7 @@ $(document).ready(function(){
 </head>
 
 <body>
-  <%@ include file="common/top.jsp" %>
+  <c:import url="/top"/>
 	 <!--modal end -->
 	 
   <div class="py-5 text-center opaque-overlay" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/cover_event.jpg&quot;);">
