@@ -43,7 +43,7 @@ $(document).ready(function(){
 </head>
 
 <body>
-  <%@ include file="common/top.jsp" %>
+  <c:import url="/top"/>
 	 <!--modal end -->
 	 
   <div class="text-center opaque-overlay py-0" style='background-image: url(${res}img/background/768892-city-light-wallpaper.jpg);'>

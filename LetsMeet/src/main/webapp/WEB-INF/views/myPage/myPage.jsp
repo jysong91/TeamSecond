@@ -1,44 +1,18 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url  var="home" value="/" />
-<c:url  var="res" value="/resources/" />
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<script src="${home }resources/js/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	var loginMsg = "${loginMsg}";
-	if(loginMsg!=""){
-		alert(loginMsg);
-	}
-});
-</script>
+<c:url var="/" value="/" />
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
-  <link rel="stylesheet" href="${res }css/icon.css" type="text/css">
-  <style type="text/css">
-	.mylink:hover{
-	  cursor: pointer;
-	  background-color : #87ceeb;
-	  -webkit-transition: all 500ms ease;
-	  -moz-transition: all 500ms ease;
-	  -ms-transition: all 500ms ease;
-	  -o-transition: all 500ms ease;
-	  transition: all 500ms ease;
-	}
-  </style>
-  
-</head>
+  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>
 
 <body>
-  <%@ include file="common/top.jsp" %>
-	 <!--modal end -->
-
-  <div class="py-4" style='background-image: url(${res}img/background/about_bg.jpg);'>
+<c:import url="/top"/>
+  <div class="py-4" style="background-image: url(&quot;background/the_wait_nightlife_night_view_bokeh_atmosphere_window_glass_non-1186147.jpg&quot;);">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -50,7 +24,7 @@ $(document).ready(function(){
   <div class="bg-light py-3">
     <div class="container">
       <div class="row">
-        <div class="py-5 col-md-6 mylink" onclick="goto('c_memberInfo')">
+        <div class="py-5 col-md-6">
           <div class="row">
             <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-address-card"></i></div>
             <div class="col-8">
@@ -59,27 +33,27 @@ $(document).ready(function(){
             </div>
           </div>
         </div>
-        <div class="py-5 col-md-6 mylink" onclick="goto('myReview')">
+        <div class="py-5 col-md-6">
           <div class="row">
             <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-align-justify"></i></div>
             <div class="col-8">
-              <h5 class="mb-3 text-primary"><b>내가 작성한 리뷰</b></h5>
+              <h5 class="mb-3 text-primary"><a href="${home }review/selectMyReviewPlaceNameAll"><b>내가 작성한 리뷰</b></a></h5>
               <p class="my-1">내가 직접 작성한 리뷰를 볼 수 있습니다.</p>
             </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="py-5 col-md-6 mylink" onclick="goto('q_n_a')">
+        <div class="py-5 col-md-6">
           <div class="row">
             <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-comments-o"></i></div>
             <div class="col-8">
-              <h5 class="mb-3 text-primary"><b>1대1 QnA</b></h5>
+              <h5 class="mb-3 text-primary"><a href="${home }member/myPageQnA"><b>1대1 QnA</b></a></h5>
               <p class="my-1">문의사항, 건의사항 등을 개발자에게 전달합니다.</p>
             </div>
           </div>
         </div>
-        <div class="py-5 col-md-6 mylink " onclick="goto('wishlist')">
+        <div class="py-5 col-md-6">
           <div class="row">
             <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-heart"></i></div>
             <div class="col-8">
@@ -137,17 +111,9 @@ $(document).ready(function(){
       </div>
     </div>
   </div>
-     <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
-  function goto(page){
-	  location.href=${home}+"mypage/"+page;
-  }
-  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </body>
 
 </html>

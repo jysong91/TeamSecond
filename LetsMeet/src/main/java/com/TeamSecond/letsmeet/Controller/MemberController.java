@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,9 +32,9 @@ public class MemberController {
 	MemberService memberService;
 	
 	@ModelAttribute("session")
-	public Map<String, Object> getSessionInfo(){
-		Map<String, Object> map =
-				new HashMap<String, Object>();
+	public Map<String, String> getSessionInfo(){
+		Map<String, String> map =
+				new HashMap<String, String>();
 		return map;
 	}
 	
@@ -74,5 +75,11 @@ public class MemberController {
 	public String logout(Model model,SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
 		return "main";
+	}
+	
+	@RequestMapping("{forPath}")
+	public String forPath(Model model,@PathVariable("forPath")String forPath,@ModelAttribute("session")Map<String, String>map) {
+		model.addAttribute("loginId", map.get("loginId"));
+		return "myPage/"+forPath;
 	}
 }

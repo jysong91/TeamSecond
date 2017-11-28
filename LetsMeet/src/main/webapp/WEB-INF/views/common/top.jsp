@@ -3,7 +3,7 @@
 <c:url  var="home" value="/" />
 <c:url  var="res" value="/resources/" />
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
@@ -46,6 +46,7 @@
         	</c:when>
         	<c:when test="${null ne loginId }">
         		<form action="${home }member/logout"><button type="submit" class="logOutbtn" >로그아웃</button></form>
+        		<form action="${home }myPage" method="post"><button type="submit" class="myPagebtn" >마이페이지</button></form>
         	</c:when>
         </c:choose>
         <form class="form-inline m-0">

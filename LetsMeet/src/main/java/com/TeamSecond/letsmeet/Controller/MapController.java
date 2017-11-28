@@ -1,15 +1,18 @@
 package com.TeamSecond.letsmeet.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.TeamSecond.letsmeet.DTO.MapDTO;
 import com.TeamSecond.letsmeet.IService.pathService;
@@ -17,6 +20,7 @@ import com.TeamSecond.letsmeet.IService.pathService;
 
 @Controller
 @RequestMapping("map")
+@SessionAttributes("session")
 public class MapController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
@@ -35,7 +39,6 @@ public class MapController {
 	@RequestMapping(value = "/calMid")
 	public String calMid(@RequestParam("ppl") List<String> ppl,
 			Model model) {
-		model.addAttribute("calRst",pathSrv.calMid(ppl));
 		model.addAttribute("rad","1000");
 		model.addAttribute("isFindCenter", "1");
 		model.addAttribute("autoOverlay", true);
@@ -47,7 +50,7 @@ public class MapController {
 		MapDTO map = new MapDTO();
 		map.setCalRst(pathSrv.calMid(ppl));
 		map.setRad("1000");
-		map.setIsFindCenter("1");
+		map.setIsFindCenter("0");
 		map.setAutoOverlay(true);
 		
 		return map;

@@ -283,6 +283,8 @@
 		
 	    var userMarkers = [];
 	    
+	    var isFindCenter = "0";
+	    
 	    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	        mapOption = {
 	            center: new daum.maps.LatLng(${calRst}), // 지도의 중심좌표
@@ -431,20 +433,23 @@
 	            // 해당 장소에 인포윈도우에 장소명을 표시합니다
 	            // mouseout 했을 때는 인포윈도우를 닫습니다
 	            (function(marker, place) {
-	                daum.maps.event.addListener(marker, 'click', function() {
+	                //마커에 적용될 이벤트
+	            	daum.maps.event.addListener(marker, 'click', function(){
 	                	closeOverlay();
 	                	var personLatlng = marker.getPosition();
-	                	if("1"==${isFindCenter})    	displayInfowindow(marker, place);
-	                	else{
+	                	if("1"==isFindCenter){
+	                		displayInfowindow(marker, place);
+	                	}else{
 	                		displayLoc(marker, place);
-        	    			document.getElementById('ppl'+search_ppl).value = personLatlng;
-        	    			userMarkers[search_ppl-1] = marker;
+	                		document.getElementById('ppl'+search_ppl).value = personLatlng;
+	                		userMarkers[search_ppl-1] = marker;
 	                	}
-	        		});
+	                });
+	                //목록에 적용될 이벤트
 	                itemEl.onclick = function(){
 	                	closeOverlay();
 	                	var personLatlng = marker.getPosition();
-	                	if("1"==${isFindCenter}){
+	                	if("1"==isFindCenter){
 	                		displayInfowindow(marker, place);
 	                	}else{
 	                		displayLoc(marker, place);
@@ -463,6 +468,19 @@
 	        menuEl.scrollTop = 0;
 	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 	        map.setBounds(bounds);
+	    }
+	    
+	    //클릭 이벤트핸들러를 통합시켜주려고 만든 함수인데 제대로 작동안함.
+	    function markerClick(marker, place){
+	    	closeOverlay();
+        	var personLatlng = marker.getPosition();
+        	if("1"==isFindCenter)    	displayInfowindow(marker, place);
+        	else{
+        		displayLoc(marker, place);
+    			document.getElementById('ppl'+search_ppl).value = personLatlng;
+    			userMarkers[search_ppl-1] = marker;
+        	}
+        	panTo(personLatlng);
 	    }
 
 	    // 검색결과 항목을 Element로 반환하는 함수입니다
@@ -492,7 +510,7 @@
 	    // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 	    function addMarker(position, idx, title) {
 	        var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-	            imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
+	        	imageSize = new daum.maps.Size(36, 37),  // 마커 이미지의 크기
 	            imgOptions =  {
 	                spriteSize : new daum.maps.Size(36, 691), // 스프라이트 이미지의 크기
 	                spriteOrigin : new daum.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
@@ -572,11 +590,12 @@
             '                <div class="jibun ellipsis">'+place.phone+' </div>' + 
 //             '                <div><a href="${home}place" target="_blank" class="link">홈페이지</a></div>' + 
 //             '                <div><a href='+place.place_url+' target="_blank" class="link">홈페이지</a></div>' + 
-            '	<form id="frm" action="${home }place" method="post">'+
+            '	<form id="frm" action="${home }place/place" method="post">'+
 		    '    	<input type="hidden" id="placeName" name="placeName" value="'+place.place_name+'">'+
 	        '    	<input type="hidden" id="placeAddr" name="placeAddr" value="'+address+'">'+
 		    '       <input type="hidden" id="outLine" name="outLine" value="한줄정보..">'+
 		    '       <input type="hidden" id="tel" name="tel" value="'+place.phone+'">'+
+		    '       <input type="hidden" id="id" name="id" value="${loginId}">'+
 		  	'    	<button type="submit" class="btn btn-secondary">상세보기</button>'+
   	   		'	</form>'+
             '            </div>' + 
@@ -650,10 +669,10 @@
 		//반경 1km내의 상업시설들을 검색하는 함수. 해당하는 카테고리명으로 검색함
 	    function searchPlacesFromMid(keyword) {
 	    	closeOverlay();
-	    	circle.setMap(map);
+	    	//circle.setMap(map);
  	        ps.keywordSearch( keyword, placesSearchCB,{
-	        	location: new daum.maps.LatLng(${calRst}),
-	        	radius: ${rad}
+	        	location: markerPosition,
+	        	radius: 1000
 			})
 	    }
 		
@@ -673,7 +692,7 @@
 	        '            <div class="desc">' + 
 	        '                <div class="message1">'+'중간지점입니다. '+' </div>' + 
 	        '                <div class="message2">'+'해당 구역에서 장소를 추천받으시겠어요?'+' </div>' + 
-	        '                <button id="recommend" type="button" onclick="searchPlacesFromMid()">'+'추천받기'+'</button>' + 
+	        '                <button id="recommend" type="button">'+'추천받기'+'</button>' + 
 	        '            </div>' + 
 	        '        </div>' + 
 	        '    </div>' +    
@@ -683,6 +702,7 @@
 		        map: map,
 		        position: position.getPosition() 
 	   		 });
+			showCategory();
 	    }
 		
 		function removeWrap(){
@@ -720,10 +740,11 @@
 			            removeMarker();
 			            closeOverlay();
 			            
+			            isFindCenter = "1";
+			            
 			            var pos = data.calRst.split(', ');
 			            var x = Number(pos[0]);
 			            var y = Number(pos[1]);
-			            
 			          	
 			            markerPosition  = new daum.maps.LatLng(x, y);
 			            var midMarker = new daum.maps.Marker({
@@ -732,19 +753,34 @@
 						
 			            //지도의 중심 좌표 재설정
 			            map.setCenter(markerPosition);
-			            circleOn();
 			            
 					    // 마커가 지도 위에 표시되도록 설정합니다
 					    midMarker.setMap(map);
+					    
+					    //지도 위에 원을 표시하도록 설정
+					    circle.setPosition(markerPosition);
+					    circle.setMap(map);
+					    
+					    //중간지점 위에 오버레이 표시
 				    	displayMidOverlay(midMarker);
 				    	
 				    	//좌측의 검색창을 없앤다.
 				    	removeWrap();
 				    	
 			    	    for(var i=0; i<userMarkers.length; i++){
+			    	    	var linePath = [markerPosition, userMarkers[i].getPosition()]
+			    	    	var polyline = new daum.maps.Polyline({
+			    	    	    path: linePath, // 선을 구성하는 좌표배열 입니다
+			    	    	    strokeWeight: 5, // 선의 두께 입니다
+			    	    	    strokeColor: '#FFAE00', // 선의 색깔입니다
+			    	    	    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+			    	    	    strokeStyle: 'solid' // 선의 스타일입니다
+			    	    	});
+			    	    	polyline.setMap(map);
+			    	    	daum.maps.event.removeListener(userMarkers[i], 'click');
 			    	    	userMarkers[i].setMap(map);
 			    	    }
-			        } 
+			        }
 			    });
 				//document.getElementById("searchMidFrm").submit();
 			}
@@ -779,17 +815,20 @@
 	}
 	
 	//중간지점 지정 후 "추천받기" 누르면 버튼 메뉴 표시
-	$(document).ready(function(){
-		$("#recommend").on('click', function(event) {
-			$('<div id="cate_wrap" class="bg_black">'+ 
-				buttonation(categories) +
-			    '</div>').appendTo("#map"),
-		    $(".category").on('click', function(event) {
-				$("#cateinfo").remove(),
-		    	$("#option").prepend("<div id='cateinfo'><b><h5>"+$(this).text()+"</h5></b> 검색 결과입니다.<br></div>")
+	function showCategory(){
+		$(document).ready(function(){
+			$("#recommend").on('click', function(event) {
+				$('<div id="cate_wrap" class="bg_black">'+ 
+					buttonation(categories) +
+				    '</div>').appendTo("#map"),
+			    $(".category").on('click', function(event) {
+					$("#cateinfo").remove(),
+			    	$("#option").prepend("<div id='cateinfo'><b><h5>"+$(this).text()+"</h5></b> 검색 결과입니다.<br></div>")
+				})
 			})
 		})
-	});
+	}
+	
 	
 	
     </script>    
