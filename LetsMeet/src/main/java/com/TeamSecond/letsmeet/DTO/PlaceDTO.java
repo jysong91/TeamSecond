@@ -1,13 +1,19 @@
 package com.TeamSecond.letsmeet.DTO;
 
 public class PlaceDTO {
+	private String id;
 	private String placeName;
 	private String placeAddr;
 	private String outLine;
 	private String tel;
 	private String placeWriteDate;
 	
-	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getPlaceWriteDate() {
 		return placeWriteDate;
 	}

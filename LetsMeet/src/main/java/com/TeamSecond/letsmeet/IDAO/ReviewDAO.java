@@ -12,4 +12,5 @@ public interface ReviewDAO {
 	public PlaceDTO reviewPlace(String placeName);
 	public ReviewDTO selectReview(String placeName);
 	public String selectAppraisal(String placeName);
+	public List<PlaceDTO> selectMyReviewPlaceNameAll(String id);
 }
