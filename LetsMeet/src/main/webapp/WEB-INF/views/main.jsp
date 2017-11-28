@@ -4,7 +4,7 @@
 <c:url  var="res" value="/resources/" />
 <!DOCTYPE html>
 <html>
-<script src="${home }resources/js/jquery.min.js"></script>
+<script src="${res}js/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	var loginMsg = "${loginMsg}";

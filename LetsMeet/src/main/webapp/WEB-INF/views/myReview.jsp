@@ -45,55 +45,84 @@ $(document).ready(function(){
   <%@ include file="common/top.jsp" %>
 	 <!--modal end -->
 
-  <div class="py-4" style='background-image: url(${res}img/background/about_bg.jpg);'>
+  <div class="text-center bg-light py-4" style='background-image: url(${res}img/background/about_bg.jpg);'>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="text-center display-4 text-white">마 이 페 이 지</h1>
+          <h1 class="text-white">내가 작성한 리뷰</h1>
+          <p class="lead text-white">연인, 친구, 가족과의 소중한 시간. 야만나자가 함께 합니다.</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="bg-light py-3">
+  <div class="py-5 text-center">
     <div class="container">
       <div class="row">
-        <div class="py-5 col-md-6 mylink" onclick="goto('c_memberInfo')">
-          <div class="row">
-            <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-address-card"></i></div>
-            <div class="col-8">
-              <h5 class="mb-3 text-primary"><b>회원 정보 수정</b></h5>
-              <p class="my-1">나의 회원 정보 및 개인 정보를 수정합니다.</p>
-            </div>
-          </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_1.jpg"> </a>
         </div>
-        <div class="py-5 col-md-6 mylink" onclick="goto('myReview')">
-          <div class="row">
-            <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-align-justify"></i></div>
-            <div class="col-8">
-              <h5 class="mb-3 text-primary"><b>내가 작성한 리뷰</b></h5>
-              <p class="my-1">내가 직접 작성한 리뷰를 볼 수 있습니다.</p>
-            </div>
-          </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_5.jpg"> </a>
+        </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_3.jpg"> </a>
+        </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_4.jpg"> </a>
         </div>
       </div>
       <div class="row">
-        <div class="py-5 col-md-6 mylink" onclick="goto('q_n_a')">
-          <div class="row">
-            <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-comments-o"></i></div>
-            <div class="col-8">
-              <h5 class="mb-3 text-primary"><b>1대1 QnA</b></h5>
-              <p class="my-1">문의사항, 건의사항 등을 개발자에게 전달합니다.</p>
-            </div>
-          </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_6.jpg"> </a>
         </div>
-        <div class="py-5 col-md-6 mylink" onclick="goto('wishlist')">
-          <div class="row">
-            <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-heart"></i></div>
-            <div class="col-8">
-              <h5 class="mb-3 text-primary"><b>나의 위시 리스트</b></h5>
-              <p class="my-1">내가 찜해두었던 장소를 확인할 수 있습니다.</p>
-            </div>
-          </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_7.jpg"> </a>
+        </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_8.jpg"> </a>
+        </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_9.jpg"> </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_10.jpg"> </a>
+        </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_11.jpg"> </a>
+        </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_12.jpg"> </a>
+        </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#">
+            <img class="d-block img-fluid" src="https://pingendo.github.io/templates/sections/assets/gallery_13.jpg"> </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-6 p-1">
+          <a href="#"></a>
+        </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#"></a>
+        </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#"></a>
+        </div>
+        <div class="col-md-3 col-6 p-1">
+          <a href="#"></a>
         </div>
       </div>
     </div>

@@ -21,4 +21,13 @@ public class MypageController {
 	public String wishlist() {
 		return "wishlist";
 	}
+	
+	@RequestMapping("q_n_a")
+	public String q_n_a() {
+		return "q_n_a";
+	}
+	@RequestMapping("myReview")
+	public String myReview() {
+		return "myReview";
+	}
 }

@@ -1,4 +1,4 @@
-<%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url  var="home" value="/" />
 <c:url  var="res" value="/resources/" />
@@ -138,7 +138,7 @@ $(document).ready(function(){
 
 </script>
 <body>
-<%--   <%@ include file="common/top.jsp" %> --%>
+  <%@ include file="common/top.jsp" %>
   <body>
   <div class="container">
   <br>
@@ -161,9 +161,12 @@ $(document).ready(function(){
           <p id="pwOkMsg"></p></div>
         <div class="form-group"> <label for="email">Email</label>
           <div class="input-group">
-            <input type="text" class="form-control" id="email" placeholder="이메일 주소를 입력하세요"> <span class="input-group-btn">
-                  <button class="btn btn-success" id="authSendBtn">인증번호 확인</button>
-                </span> <p id="emailMsg"></p></div>
+            <input type="text" class="form-control" id="email" placeholder="이메일 주소를 입력하세요">
+             <span class="input-group-btn">
+               <button class="btn btn-success" id="authSendBtn">인증번호 확인</button>
+             </span> 
+          </div>
+          <p id="emailMsg"></p>
        </div>
        
           <div class="form-group"> <label for="authNum">인증번호</label>

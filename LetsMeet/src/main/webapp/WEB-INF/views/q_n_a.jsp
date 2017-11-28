@@ -45,54 +45,33 @@ $(document).ready(function(){
   <%@ include file="common/top.jsp" %>
 	 <!--modal end -->
 
-  <div class="py-4" style='background-image: url(${res}img/background/about_bg.jpg);'>
+  <div class="text-center bg-light py-4" style='background-image: url(${res}img/background/about_bg.jpg);'>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="text-center display-4 text-white">마 이 페 이 지</h1>
+          <h1 class="text-white">1대1 문의하기</h1>
+          <p class="lead text-white">문의사항, 건의사항 등을 개발자에게 전달합니다.</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="bg-light py-3">
+  <div class="py-5" >
     <div class="container">
       <div class="row">
-        <div class="py-5 col-md-6 mylink" onclick="goto('c_memberInfo')">
-          <div class="row">
-            <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-address-card"></i></div>
-            <div class="col-8">
-              <h5 class="mb-3 text-primary"><b>회원 정보 수정</b></h5>
-              <p class="my-1">나의 회원 정보 및 개인 정보를 수정합니다.</p>
-            </div>
-          </div>
+        <div class="align-self-center col-md-6 text-white">
+          <h1 class="text-center text-md-left display-3 text-primary">무슨 문제라도...?</h1>
+          <p class="lead text-nowrap text-primary">문의사항이나 건의사항을 남겨주시면 신속하게 처리해드립니다.</p>
         </div>
-        <div class="py-5 col-md-6 mylink" onclick="goto('myReview')">
-          <div class="row">
-            <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-align-justify"></i></div>
-            <div class="col-8">
-              <h5 class="mb-3 text-primary"><b>내가 작성한 리뷰</b></h5>
-              <p class="my-1">내가 직접 작성한 리뷰를 볼 수 있습니다.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="py-5 col-md-6 mylink" onclick="goto('q_n_a')">
-          <div class="row">
-            <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-comments-o"></i></div>
-            <div class="col-8">
-              <h5 class="mb-3 text-primary"><b>1대1 QnA</b></h5>
-              <p class="my-1">문의사항, 건의사항 등을 개발자에게 전달합니다.</p>
-            </div>
-          </div>
-        </div>
-        <div class="py-5 col-md-6 mylink" onclick="goto('wishlist')">
-          <div class="row">
-            <div class="text-center col-4"><i class="d-block mx-auto fa fa-5x fa-heart"></i></div>
-            <div class="col-8">
-              <h5 class="mb-3 text-primary"><b>나의 위시 리스트</b></h5>
-              <p class="my-1">내가 찜해두었던 장소를 확인할 수 있습니다.</p>
-            </div>
+        <div class="col-md-6" id="book">
+          <div class="col-md-12">
+            <form>
+              <div class="form-group"> <label for="InputName" class="text-primary">사용자 이름</label>
+                <input type="text" class="form-control" id="InputName" placeholder="이름을 입력해주세요"> </div>
+              <div class="form-group"> <label for="InputEmail1" class="text-primary">이메일 주소</label>
+                <input type="email" class="form-control" id="InputEmail1" placeholder="이메일을 입력해주세요"> </div>
+              <div class="form-group"> <label for="Textarea" class="text-primary">문의사항</label> <textarea class="form-control" id="Textarea" rows="3" placeholder="내용을 작성해주세요"></textarea> </div>
+              <button type="submit" class="btn btn-secondary">보 내 기</button>
+            </form>
           </div>
         </div>
       </div>

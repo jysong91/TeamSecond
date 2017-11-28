@@ -1,14 +1,28 @@
-<%@ page session="false" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-  <meta charset="UTF-8">
-    <title>리뷰쓰기</title>
 <c:url  var="home" value="/" />
+<c:url  var="res" value="/resources/" />
 <c:set var="scoreNums" >1,2,3,4,5</c:set>
-<script src="${home }resources/js/jquery.min.js"></script>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
+  <link rel="stylesheet" href="${res }css/icon.css" type="text/css">
+  <title>리뷰 대응페이지</title>
+  <script src="${res}js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var loginMsg = "${loginMsg}";
+	if(loginMsg!=""){
+		alert(loginMsg);
+	}
+});
+</script>
 <script type="text/javascript">
 	$(document).ready(function(){	
 		
@@ -227,143 +241,122 @@
 		});
 	});
 </script>
-<style type="text/css">
-/* 평가 */
-#reviewAppraisalStar {font-size:0; letter-spacing:-4px;}
-#reviewAppraisalStar a {
-    font-size:22px;
-    letter-spacing:0;
-    display:inline-block;
-    margin-left:5px;
-    color:#ccc;
-    text-decoration:none;
-}
-#reviewAppraisalStar a:first-child {margin-left:0;}
-#reviewAppraisalStar a.on {color:#777;}
-
-/* 서비스 */
-#serviceStar {font-size:0; letter-spacing:-4px;}
-#serviceStar a {
-    font-size:22px;
-    letter-spacing:0;
-    display:inline-block;
-    margin-left:5px;
-    color:#ccc;
-    text-decoration:none;
-}
-#serviceStar a:first-child {margin-left:0;}
-#serviceStar a.on {color:#777;}
-
-/* 맛 */
-#tasteStar {font-size:0; letter-spacing:-4px;}
-#tasteStar a {
-    font-size:22px;
-    letter-spacing:0;
-    display:inline-block;
-    margin-left:5px;
-    color:#ccc;
-    text-decoration:none;
-}
-#tasteStar a:first-child {margin-left:0;}
-#tasteStar a.on {color:#777;}
-
-/* 분위기 */
-#moodStar {font-size:0; letter-spacing:-4px;}
-#moodStar a {
-    font-size:22px;
-    letter-spacing:0;
-    display:inline-block;
-    margin-left:5px;
-    color:#ccc;
-    text-decoration:none;
-}
-#moodStar a:first-child {margin-left:0;}
-#moodStar a.on {color:#777;}
-</style>
+  <style type="text/css">
+    .modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  	}
+  	.modal-footer {
+      background-color: #f9f9f9;
+  	}
+  	.modal-backdrop{
+    	opacity:0.5 !important;
+	}
+	.peopleCarouselImg img {
+	  width: auto;
+	  height: 400px;
+	  max-height: 400px;
+	}
+  </style>
+</head>
 <body>
-
-<form id="frm" action="${home }review/reviewProc" method="post">
-<table>
-	<tr>
-		<th><input type="text" id="placeName" name="placeName" value="${placeName }"></th>
-	</tr>
-	<tr>
-		<td><input type="text" id="id" name="id" value="${sessionScope.loginId}"></td>
-	</tr>
-	<tr>
-		<th>리뷰제목</th>
-		<td><input class="reviewAll" type="text" id="reviewTitle" name="reviewTitle"></td>
-		<td><p class="reviewMsg" id="reviewTitleMsg"></p>
-		</td>
-	</tr>
-	<tr>
-		<th>리뷰내용</th>
-		<td><textarea class="reviewAll" id="reviewContents" name="reviewContents"></textarea></td>
-	</tr>
-	<tr>
-		<th>여행자 타입</th>
-		<td><input type="hidden" id="reviewMemberType" name="reviewMemberType"></td>
-		<td><button class="reviewAll" id="typeBtn1" type="button"  value="나홀로 여행" style="background-color: white;">나홀로 여행</td>
-		<td><button class="reviewAll" id="typeBtn2" type="button"  value="커플" style="background-color: white;">커플</td>
-		<td><button class="reviewAll" id="typeBtn3" type="button"  value="가족" style="background-color: white;">가족</td>
-		<td><button class="reviewAll" id="typeBtn4" type="button"  value="친구들" style="background-color: white;">친구들</td>
-	</tr>
-		
-		<tr>
-			<td>전반적인 평가</td>
-			<td>
-				<input type="hidden" id="reviewAppraisal" name="reviewAppraisal">
-				<p class="reviewAll" id="reviewAppraisalStar">
-					<c:forEach var="scoreNum" items="${scoreNums }">
-						<a href="#" id="${scoreNum }">★</a>
-					</c:forEach>
-				</p>
-			</td>
-			<td><p id="reviewAppraisalMsg" style="color:blue" ></p></td>
-		</tr>
-	<tr>
-		<td>서비스</td>
-		<td>
-			<input type="hidden" id="serviceScore" name="serviceScore">
-			<p class="reviewAll" id="serviceStar">
-				<c:forEach var="scoreNum" items="${scoreNums }">
-					<a href="#" id="${scoreNum }">★</a>
-				</c:forEach>
-			</p>
-		</td>
-		<td><p id="serviceMsg" style="color:blue"></p></td>
-	</tr>
-
-	<tr>
-		<td>맛</td>
-		<td>
-			<input type="hidden" id="tasteScore" name="tasteScore">
-			<p class="reviewAll" id="tasteStar">
-				<c:forEach var="scoreNum" items="${scoreNums }">
-					<a href="#" id="${scoreNum }">★</a>
-				</c:forEach>
-			</p>
-		</td>
-		<td><p id="tasteMsg" style="color:blue"></p></td>
-	</tr>
-	
-	<tr>
-		<td>분위기</td>
-		<td>
-			<input type="hidden" id="moodScore" name="moodScore">
-			<p class="reviewAll" id="moodStar">
-				<c:forEach var="scoreNum" items="${scoreNums }">
-					<a href="#" id="${scoreNum }">★</a>
-				</c:forEach>
-			</p>
-		</td>
-		<td><p id="moodMsg" style="color:blue" ></p></td>
-	</tr>
-
-	<tr>
-		<td><input type="submit" value="리뷰쓰기" ></td>
-	</tr>
-</table>
-</form>
+  <%@ include file="common/top.jsp" %>
+	 <!--modal end -->
+	 
+  <div class="container">
+  <div class="bg-faded p-4 my-4">
+  <!-- Navigation -->
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <h1 class="my-4">리뷰페이지(하나를 클릭했을때 넘어오는페이지)</h1>
+      </div>
+      <!-- /.col-lg-3 -->
+      <div class="col-lg-9">
+        <div class="card mt-4">
+          <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+          <div class="card-body">
+            <h3 class="card-title">업소이름</h3>
+            <p class="card-text">대략적인설명</p> <span class="text-warning">★ ★ ★ ★ ☆</span>4.0 stars(별점이필요할까요?) </div>
+        </div>
+        <!-- /.card -->
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header"> 리뷰들 </div>
+          <div class="card-body">
+            <p>댓글내용</p>
+            <small class="text-muted">날짜</small>
+            <hr>
+            <p>댓글내용2</p>
+            <small class="text-muted">날짜</small>
+            <hr>
+            <p>댓글내용3</p>
+            <small class="text-muted">날짜</small>
+            <hr>
+            <a href="#" class="btn btn-success">Leave a Review</a>
+          </div>
+          </div>
+          </div>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col-lg-9 -->
+    </div>
+  </div>
+  <div class="text-white bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4 text-secondary">Team S2cond</h2>
+          <p class="text-primary">A company for whatever you may need, from website prototyping to publishing</p>
+        </div>
+        <div class="p-4 col-md-3 text-primary">
+          <h2 class="mb-4 text-secondary">Mapsite</h2>
+          <ul class="list-unstyled text-primary">About&nbsp;
+            <br>
+            <a href="#" class="text-primary">How about here</a>
+            <br>Come with us
+            <br>
+            <a href="#" class="text-primary">Contact us</a>
+          </ul>
+        </div>
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4 text-secondary">Contact</h2>
+          <p>
+            <a href="tel:+246 - 542 550 5462" class="text-primary"><i class="fa d-inline mr-3 text-secondary fa-phone"></i>+82 010 1234 5678
+              <br> </a>
+          </p>
+          <p style="opacity: 0.5;">
+            <a href="mailto:info@pingendo.com" class="text-primary"><i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>Yahmanaza@naver.com</a>
+          </p>
+          <p>
+            <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-primary" target="_blank"><i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 YG Jonglo, Seoul</a>
+          </p>
+        </div>
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4 text-secondary">Subscribe</h2>
+          <form>
+            <fieldset class="form-group text-white"> <label for="exampleInputEmail1" class="text-primary">Get our newsletter</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"> </fieldset>
+            <button type="submit" class="btn btn-outline-secondary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <p class="text-center text-secondary">© Copyright 2017 Yahmanaza - All rights reserved. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+     <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 </body>
+
 </html>
