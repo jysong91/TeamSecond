@@ -26,4 +26,18 @@
 	<select id="selectAppraisal" parameterType="String" resultType="String">
 		select round(avg(reviewAppraisal),0) from review where placeName = #{placeName}
 	</select>
+	
+	<select id="selectMyReviewPlaceNameAll" parameterType="String" resultType="com.TeamSecond.letsmeet.DTO.PlaceDTO">
+	select placeName, placeAddr, outLine, tel, writeDate, rownum, id from (
+		select p.placeName, p.placeAddr, p.outLine, p.tel, to_char(r.writeDate, 'yyyy/mm/dd hh24:mi.ss')writeDate, r.id from review r  
+		left join place p
+		on p.placeName=r.placeName
+		order by writeDate desc
+	)
+	where id=#{id} and rownum<![CDATA[ < ]]>6
+	</select>
+
+	<select id="reviewExampleProc" parameterType="map" resultType="com.TeamSecond.letsmeet.DTO.ReviewDTO">
+		select * from review where placeName=#{placeName} and id=#{id}
+	</select>
 </mapper>

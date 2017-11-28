@@ -29,11 +29,11 @@ public class CommonController {
 	@RequestMapping("member")
 	public String member() {
 		return "member";
-	}
-	
+	}	
 	@RequestMapping("review")
-	public String review(PlaceDTO placeDTO, Model model) {
+	public String review(PlaceDTO placeDTO, Model model,@ModelAttribute("session")Map<String, String>map) {
 		model.addAttribute("placeName", placeDTO.getPlaceName());
+		model.addAttribute("loginId", map.get("loginId"));
 		return "review";
 	}
 	
