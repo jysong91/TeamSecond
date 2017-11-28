@@ -61,6 +61,7 @@
 		//전반적인 평가
 		$( "#reviewAppraisalStar a" ).mouseenter(function() {
 		     $(this).parent().children("a").removeClass("on");
+		     //addClass는 선택한 곳
 		     //prevAll 선택한거보다 이전에 있던 것들은 선택되게한다.
 		     $(this).addClass("on").prevAll("a").addClass("on");
 			 $.each(array, function(index, item){		

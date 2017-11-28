@@ -52,5 +52,11 @@ public class ReviewController {
 		model.addAttribute("loginId", map.get("loginId"));
 		return "myPage/myPageReview";
 	}
-	
+	//해당장소 이미지에 마우스를 올리면 해당장소에 적은 리뷰보이기
+	@RequestMapping("reviewExampleProc")
+	public @ResponseBody ReviewDTO reviewExampleProc(Model model,@RequestParam("placeName")String placeName,@ModelAttribute("session")Map<String, String>map) {
+		String id= map.get("loginId");
+		logger.info(placeName);
+		return reviewService.reviewExampleProc(placeName, id);
+	}
 }

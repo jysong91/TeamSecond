@@ -1,6 +1,8 @@
 package com.TeamSecond.letsmeet.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +43,13 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public List<PlaceDTO> selectMyReviewPlaceNameAll(String id) {
 		return reviewDAO.selectMyReviewPlaceNameAll(id);
+	}
+
+	@Override
+	public ReviewDTO reviewExampleProc(String placeName, String id) {
+		Map<String, String> reviewMap = new HashMap<String, String>();
+		reviewMap.put("placeName", placeName);
+		reviewMap.put("id", id);
+		return reviewDAO.reviewExampleProc(reviewMap);
 	}
 }

@@ -37,4 +37,7 @@
 	where id=#{id} and rownum<![CDATA[ < ]]>6
 	</select>
 
+	<select id="reviewExampleProc" parameterType="map" resultType="com.TeamSecond.letsmeet.DTO.ReviewDTO">
+		select * from review where placeName=#{placeName} and id=#{id}
+	</select>
 </mapper>
