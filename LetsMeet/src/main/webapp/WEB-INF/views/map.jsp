@@ -433,18 +433,19 @@
 	            // 해당 장소에 인포윈도우에 장소명을 표시합니다
 	            // mouseout 했을 때는 인포윈도우를 닫습니다
 	            (function(marker, place) {
-	                //마커에 적용될 함수
-	            	daum.maps.event.addListener(marker, 'click', function() {
+	                //마커에 적용될 이벤트
+	            	daum.maps.event.addListener(marker, 'click', function(){
 	                	closeOverlay();
 	                	var personLatlng = marker.getPosition();
-	                	if("1"==isFindCenter)    	displayInfowindow(marker, place);
-	                	else{
+	                	if("1"==isFindCenter){
+	                		displayInfowindow(marker, place);
+	                	}else{
 	                		displayLoc(marker, place);
-        	    			document.getElementById('ppl'+search_ppl).value = personLatlng;
-        	    			userMarkers[search_ppl-1] = marker;
+	                		document.getElementById('ppl'+search_ppl).value = personLatlng;
+	                		userMarkers[search_ppl-1] = marker;
 	                	}
-	        		});
-	                //목록에 적용될 함수
+	                });
+	                //목록에 적용될 이벤트
 	                itemEl.onclick = function(){
 	                	closeOverlay();
 	                	var personLatlng = marker.getPosition();
@@ -467,6 +468,19 @@
 	        menuEl.scrollTop = 0;
 	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
 	        map.setBounds(bounds);
+	    }
+	    
+	    //클릭 이벤트핸들러를 통합시켜주려고 만든 함수인데 제대로 작동안함.
+	    function markerClick(marker, place){
+	    	closeOverlay();
+        	var personLatlng = marker.getPosition();
+        	if("1"==isFindCenter)    	displayInfowindow(marker, place);
+        	else{
+        		displayLoc(marker, place);
+    			document.getElementById('ppl'+search_ppl).value = personLatlng;
+    			userMarkers[search_ppl-1] = marker;
+        	}
+        	panTo(personLatlng);
 	    }
 
 	    // 검색결과 항목을 Element로 반환하는 함수입니다
@@ -731,7 +745,6 @@
 			            var pos = data.calRst.split(', ');
 			            var x = Number(pos[0]);
 			            var y = Number(pos[1]);
-			            
 			          	
 			            markerPosition  = new daum.maps.LatLng(x, y);
 			            var midMarker = new daum.maps.Marker({
@@ -755,6 +768,7 @@
 				    	removeWrap();
 				    	
 			    	    for(var i=0; i<userMarkers.length; i++){
+			    	    	daum.maps.event.removeListener(userMarkers[i], 'click', );
 			    	    	userMarkers[i].setMap(map);
 			    	    }
 			        } 
