@@ -90,7 +90,6 @@ $(document).ready(function(){
           <h1>${placeName }</h1>
           <p>${outLine }</p>
           	<c:set var="scoreNums">1,2,3,4,5</c:set>
-            <div class="form-group"> <label for="InputName">메 뉴 판</label>
             	<div>
 				<input type="hidden" id="reviewAppraisal" name="reviewAppraisal">
 				<p class="reviewAll" id="reviewAppraisalStar">
@@ -98,8 +97,10 @@ $(document).ready(function(){
 						<a href="#" id="${scoreNum }">★</a>
 					</c:forEach>
 				</p>
-			</div>
-              <input type="text" class="form-control" id="InputName" placeholder="Your name" value="${selectAppraisal}"> </div>
+				</div>
+            <div class="form-group"> <label for="InputName">메 뉴 판</label>
+              <input type="text" class="form-control" id="InputName" placeholder="Your name" value="${selectAppraisal}"> 
+            </div>
             <div class="form-group"> <label for="InputEmail1">찾아가는 길</label>
               <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email"> </div>
             <div class="form-group"> <label for="InputEmail1">리뷰보기</label>

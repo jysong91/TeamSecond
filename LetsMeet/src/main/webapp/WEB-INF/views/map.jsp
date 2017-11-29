@@ -590,7 +590,7 @@
             '                <div class="jibun ellipsis">'+place.phone+' </div>' + 
 //             '                <div><a href="${home}place" target="_blank" class="link">홈페이지</a></div>' + 
 //             '                <div><a href='+place.place_url+' target="_blank" class="link">홈페이지</a></div>' + 
-            '	<form id="frm" action="${home }place/place" method="post">'+
+            '	<form id="frm" action="${home }place/" method="post">'+
 		    '    	<input type="hidden" id="placeName" name="placeName" value="'+place.place_name+'">'+
 	        '    	<input type="hidden" id="placeAddr" name="placeAddr" value="'+address+'">'+
 		    '       <input type="hidden" id="outLine" name="outLine" value="한줄정보..">'+
@@ -602,8 +602,6 @@
             '        </div>' + 
             '    </div>' +    
             '</div>'; 
-
-            
             
  			overlay = new daum.maps.CustomOverlay({
 		        content: content,

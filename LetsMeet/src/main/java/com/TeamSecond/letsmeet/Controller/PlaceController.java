@@ -20,7 +20,7 @@ public class PlaceController {
 	@Autowired
 	PlaceService placeService;
 	
-	@RequestMapping("place")
+	@RequestMapping("/")
 	public String place(PlaceDTO placeDTO, Model model) {
 		placeService.placeInsert(placeDTO);
 		model.addAttribute("selectReview", placeService.selectReview(placeDTO.getPlaceName()));

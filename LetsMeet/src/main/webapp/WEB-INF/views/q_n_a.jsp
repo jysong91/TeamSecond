@@ -20,24 +20,6 @@ $(document).ready(function(){
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
   <link rel="stylesheet" href="${res }css/icon.css" type="text/css">
-  <style type="text/css">
-    .modal-header, h4, .close {
-      background-color: #5cb85c;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  	}
-  	.modal-footer {
-      background-color: #f9f9f9;
-  	}
-  	.modal-backdrop{
-    	opacity:0.5 !important;
-	}
-	.mylink:hover{
-	  cursor: pointer;
-	  background-color : #87ceeb;
-	}
-  </style>
   
 </head>
 
