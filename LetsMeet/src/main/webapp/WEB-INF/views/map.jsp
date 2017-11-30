@@ -645,7 +645,7 @@
 			var tmpArr = new Array();
 			
 			for(var i=0;i<cnt_ppl-2;i++){
-				tmpArr[i] = document.getElementById("keyword"+(i+1));
+				tmpArr[i] = document.getElementById("keyword"+(i+1)).innerHTML;
 			}
 			
 			div.innerHTML += '<form class="form-inline"' +
@@ -660,7 +660,7 @@
 			'	id="ppl'+cnt_ppl+'" name="ppl" >';
 			
 			for(var i=0;i<cnt_ppl-2;i++){
-				document.getElementById("keyword"+(i+1)) = tmpArr[i];
+				document.getElementById("keyword"+(i+1)).innerHTML = tmpArr[i];
 			}
 		}
 		

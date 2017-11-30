@@ -21,25 +21,12 @@ $(document).ready(function(){
   <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
   <link rel="stylesheet" href="${res }css/icon.css" type="text/css">
   <style type="text/css">
-    .modal-header, h4, .close {
-      background-color: #5cb85c;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  	}
-  	.modal-footer {
-      background-color: #f9f9f9;
-  	}
-  	.modal-backdrop{
-    	opacity:0.5 !important;
-	}
 	.peopleCarouselImg img {
 	  width: auto;
 	  height: 400px;
 	  max-height: 400px;
 	}
   </style>
-  
 </head>
 
 <body>
