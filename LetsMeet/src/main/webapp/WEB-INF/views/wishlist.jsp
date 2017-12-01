@@ -21,18 +21,6 @@ $(document).ready(function(){
   <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css">
   <link rel="stylesheet" href="${res }css/icon.css" type="text/css">
   <style type="text/css">
-    .modal-header, h4, .close {
-      background-color: #5cb85c;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  	}
-  	.modal-footer {
-      background-color: #f9f9f9;
-  	}
-  	.modal-backdrop{
-    	opacity:0.5 !important;
-	}
 	.table  {border-collapse:collapse;border-spacing:0;width:1100px;padding-top:30px;}
 	.table td{font-family:Arial, sans-serif;font-size:14px;padding:9px 7px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
 	.table th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:9px 7px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
@@ -50,7 +38,7 @@ $(document).ready(function(){
 </head>
 
 <body>
-  <%@ include file="common/top.jsp" %>
+  <c:import url="/top"/>
 	 <!--modal end -->
   <br>
   <br>
@@ -103,7 +91,7 @@ $(document).ready(function(){
      <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 </body>

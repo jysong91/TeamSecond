@@ -47,9 +47,19 @@ public class CommonController {
 		return "bestPlace";
 	}
 	
+	@RequestMapping("about")
+	public String about() {
+		return "about";
+	}
+	
 	@RequestMapping("top")
 	public String top() {
 		return "common/top";
+	}
+
+	@RequestMapping("login")
+	public String login() {
+		return "login";
 	}
 	
 	@RequestMapping("myPage")

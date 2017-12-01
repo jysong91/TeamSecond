@@ -16,7 +16,7 @@
   <title>리뷰 대응페이지</title>
 </head>
 <body>
-  <%@ include file="common/top.jsp" %>
+  <c:import url="/top"/>
 	 <!--modal end -->
 	 
  <div class="text-center bg-light py-4" style='background-image: url(${res}img/background/about_bg.jpg);'>
@@ -51,10 +51,10 @@
            		<textarea class="form-control py-0" id="reviewContents" name="reviewContents" rows="3" placeholder="리뷰 내용을 입력하세요"></textarea>
             <div class="form-group"> <label for="reviewMemberType" class="my-2">▶ 고 객 유 형</label>
             <input type="hidden" id="reviewMemberType" name="reviewMemberType">
-              <button type="button" class="btn btn-primary" id="typeBtn1" value="나홀로">나홀로</button>
-              <button type="button" class="btn btn-primary" id="typeBtn2" value="커플">커플</button>
-              <button type="button" class="btn btn-primary" id="typeBtn3" value="가족">가족</button>
-              <button type="button" class="btn btn-primary" id="typeBtn4" value="친구들">친구들</button>
+              <button type="button" class="memberType btn btn-primary" id="typeBtn1" value="나홀로">나홀로</button>
+              <button type="button" class="memberType btn btn-primary" id="typeBtn2" value="커플">커플</button>
+              <button type="button" class="memberType btn btn-primary" id="typeBtn3" value="가족">가족</button>
+              <button type="button" class="memberType btn btn-primary" id="typeBtn4" value="친구들">친구들</button>
             </div>
             <div class="form-group m-0"> <label for="reviewAppraisal" class="my-2">▶ 상 세 평 가</label>
             </div>
@@ -144,7 +144,7 @@
      <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
   <script src="${res }js/jquery.rateyo.min.js"></script> //http://rateyo.fundoocode.ninja/#
@@ -156,6 +156,11 @@ $(document).ready(function(){
 	if(loginMsg!=""){
 		alert(loginMsg);
 	}
+	
+	$(".memberType").on("click", function(){
+		$("#reviewMemberType").val($(this).val());
+		alert($("#reviewMemberType").val());
+	});
 	
 	$(".star").rateYo({
 	    rating: 5,
