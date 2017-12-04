@@ -61,10 +61,12 @@ public class MemberController {
 		return "main";
 	}
 	@RequestMapping("loginProc")
-	public String loginProc(MemberDTO memberDTO,Model model,@ModelAttribute("session")Map<String, String>map) {
+	public String loginProc(MemberDTO memberDTO,Model model,@ModelAttribute("session")Map<String, String>map,
+			HttpSession session) {
 		if(memberService.loginProc(memberDTO,map)==1){	
 			model.addAttribute("loginMsg","로그인메세지");
 			model.addAttribute("loginId", map.get("loginId"));
+			session.setAttribute("loginId", map.get("loginId"));
 			return "main";
 		}
 		model.addAttribute("loginMsg","로그인메세지");
@@ -72,9 +74,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("logout")
-	public String logout(Model model,SessionStatus sessionStatus) {
+	public String logout(Model model,SessionStatus sessionStatus, HttpSession session) {
 		sessionStatus.setComplete();
-		return "main";
+		session.setAttribute("loginId", null);
+		return "redirect:/";
 	}
 	
 	@RequestMapping("{forPath}")

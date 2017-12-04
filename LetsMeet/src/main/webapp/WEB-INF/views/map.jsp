@@ -1,4 +1,4 @@
-<%@ page session="false" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page session="true" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url value="/resources/" var="res"></c:url>
 <c:url value="/" var="home"></c:url>

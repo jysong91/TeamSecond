@@ -24,7 +24,11 @@
     	opacity:0.5 !important;
 	}
   </style>
-  
+  <script type="text/javascript">
+  	$(document).ready(function(){
+  		alert('${loginId}');
+  	});
+  </script>
 </head>
   <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
     <div class="container">
@@ -45,8 +49,8 @@
       		    <a class="btn navbar-btn ml-2 text-white btn-primary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
         	</c:when>
         	<c:when test="${null ne loginId }">
-        		<form action="${home }member/logout"><button type="submit" class="logOutbtn" >로그아웃</button></form>
-        		<form action="${home }myPage" method="post"><button type="submit" class="myPagebtn" >마이페이지</button></form>
+        		<form action="${home }member/logout"><button type="submit" class="btn btn-primary" >로그아웃</button></form>
+        		<form action="${home }myPage" method="post"><button type="submit" class="btn navbar-btn ml-2 text-white btn-primary" >마이페이지</button></form>
         	</c:when>
         </c:choose>
         <form class="form-inline m-0">
@@ -68,7 +72,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-          <form role="form" action="${home }member/loginProc">
+          <form role="form" action="${home }member/loginProc" method="post">
             <div class="form-group">
               <label for="id1"><span class="glyphicon glyphicon-eye-open"></span> 아이디</label>
               <input type="text" class="form-control" id="id1" name="id" placeholder="Enter id">

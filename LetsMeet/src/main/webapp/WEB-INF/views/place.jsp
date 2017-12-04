@@ -80,10 +80,9 @@ $(document).ready(function(){
               <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email" value="${selectReview.reviewContents }"> </div>
             <div class="form-group"> <label for="InputEmail1">콜럼은 다른 이미지</label>
               <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email"> </div>
+            <form id="frm" action="${home }review" method="post">
             <button type="submit" class="btn btn-secondary">다음</button>
             <button type="submit" class="btn btn-secondary">이전</button>
-            <br>
-            <form id="frm" action="${home }review" method="post">
 	            <input type="hidden" id="placeName" name="placeName" value="${placeName }">
        	    <button type="submit" class="btn btn-secondary">리뷰작성</button>
             </form>
