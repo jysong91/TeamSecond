@@ -21,7 +21,7 @@ $(document).ready(function(){
 #reviewAppraisalStar {font-size:0; letter-spacing:-4px;}
 #reviewAppraisalStar a {
     font-size:22px;
-    letter-spacing:0;
+    letter-spacing:0; 
     display:inline-block;
     margin-left:5px;
     color:#ccc;

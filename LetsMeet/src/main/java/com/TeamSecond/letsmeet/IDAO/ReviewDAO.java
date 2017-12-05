@@ -15,5 +15,5 @@ public interface ReviewDAO {
 	public String selectAppraisal(String placeName);
 	public List<PlaceDTO> selectMyReviewPlaceNameAll(String id);
 	public ReviewDTO reviewExampleProc(Map<String, String>map);
-	public List<ReviewDTO> bestAppraisalPlace();
+	public List<ReviewDTO> bestAppraisalPlace(); 
 }

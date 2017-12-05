@@ -19,7 +19,7 @@ import com.TeamSecond.letsmeet.IService.PlaceService;
 @SessionAttributes("session")
 public class CommonController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(CommonController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CommonController.class); 
 	
 	@RequestMapping(value = "/")
 	public String home() {

@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	MemberDAO memberDAO;
 	//아이디 중복확인
-	@Override
+	@Override 
 	public int chkIdProc(String id) {
 		String memberId = memberDAO.memberId(id);
 		if(memberId.equals(id)){

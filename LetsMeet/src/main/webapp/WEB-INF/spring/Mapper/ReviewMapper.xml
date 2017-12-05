@@ -16,7 +16,7 @@
 	</select>
 	
 	<select id="selectReview" parameterType="String" resultType="com.TeamSecond.letsmeet.DTO.ReviewDTO">
-		SELECT reviewContents FROM 
+		SELECT reviewContents FROM  
 		(SELECT placeName,reviewContents,to_char(writeDate,'yyyy/mm/dd hh24:mi:ss')writeDate
 		FROM review 
 		ORDER BY writeDate desc) 

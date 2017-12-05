@@ -26,7 +26,7 @@ public class ReviewServiceImpl implements ReviewService{
 	
 	//해당리뷰 장소가져오기
 	@Override
-	public PlaceDTO reviewPlace(String placeName) {
+	public PlaceDTO reviewPlace(String placeName) { 
 		return reviewDAO.reviewPlace(placeName);
 	}
 	//해당 장소 리뷰가져오기

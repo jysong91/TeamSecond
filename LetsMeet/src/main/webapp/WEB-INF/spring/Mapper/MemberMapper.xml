@@ -13,4 +13,4 @@
 	<select id="loginProc" parameterType="com.TeamSecond.letsmeet.DTO.MemberDTO" resultType="int">
 		select count(*) from member where id=#{id} and pw=#{pw}
 	</select>
-</mapper>
+</mapper> 

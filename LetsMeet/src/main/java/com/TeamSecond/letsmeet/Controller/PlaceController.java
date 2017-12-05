@@ -21,7 +21,7 @@ public class PlaceController {
 	@Autowired
 	PlaceService placeService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/") 
 	public String place(PlaceDTO placeDTO, Model model) {
 		//장소 상세보기 클릭 시 해당아이디or아이피번호에 추가된다
 		placeService.placeInsert(placeDTO);

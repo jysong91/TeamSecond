@@ -20,5 +20,5 @@ public interface ReviewService {
 	//최신장소 이미지에 마우스를 올리면 리뷴 상세내용 띄우기
 	public ReviewDTO reviewExampleProc(String placeName, String id);
 	//일주일간 전반적인 평균 평가가 좋은 장소 7개
-	public List<ReviewDTO> bestAppraisalPlace();
+	public List<ReviewDTO> bestAppraisalPlace(); 
 }

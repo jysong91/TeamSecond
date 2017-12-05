@@ -12,3 +12,4 @@ public interface PlaceService {
 	public PlaceDTO placeForm(PlaceDTO placeDTO);
 	public PlaceDTO appraisalPlace(PlaceDTO placeDTO);
 }
+ 

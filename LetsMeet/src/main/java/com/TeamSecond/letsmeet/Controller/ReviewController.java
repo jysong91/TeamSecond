@@ -24,7 +24,7 @@ import com.TeamSecond.letsmeet.IService.ReviewService;
 @RequestMapping("review")
 @SessionAttributes("session")
 public class ReviewController {
-	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReviewController.class); 
 	
 	@Autowired
 	ReviewService reviewService;

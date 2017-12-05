@@ -20,7 +20,7 @@ public class PlaceServiceImpl implements PlaceService{
 	public void placeInsert(PlaceDTO placeDTO) {
 		placeDAO.placeInsert(placeDTO);
 	}
-
+ 
 	@Override
 	public List<ReviewDTO> selectReview(String placeName) {
 		return placeDAO.selectReview(placeName);
