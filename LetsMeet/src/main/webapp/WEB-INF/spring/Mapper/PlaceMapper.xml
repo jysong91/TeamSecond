@@ -7,11 +7,11 @@
 	</insert>
 	
 	<select id="selectReview" parameterType="String" resultType="com.TeamSecond.letsmeet.DTO.ReviewDTO">
-		SELECT reviewContents FROM 
-		(SELECT placeName,reviewContents,to_char(writeDate,'yyyy/mm/dd hh24:mi:ss')writeDate
+		SELECT id, reviewTitle, reviewContents FROM 
+		(SELECT placeName, id, reviewTitle,reviewContents,to_char(writeDate,'yyyy/mm/dd hh24:mi:ss')writeDate
 		FROM review 
 		ORDER BY writeDate desc) 
-		where placeName=#{placeName} and ROWNUM =1
+		where placeName=#{placeName} and ROWNUM <![CDATA[ < ]]> 7
 	</select>
 	
 	<select id="selectAppraisal" parameterType="String" resultType="String">
@@ -25,7 +25,7 @@
 	
 	<select id="appraisalPlace" parameterType="String" resultType="com.TeamSecond.letsmeet.DTO.PlaceDTO">
 		select distinct placeName,placeAddr,tel,outLine, id from place 
-		where placeName=#{placeName} and ROWNUM =1
+		where placeName=#{placeName} and ROWNUM =1 
 	</select>
 
 </mapper>

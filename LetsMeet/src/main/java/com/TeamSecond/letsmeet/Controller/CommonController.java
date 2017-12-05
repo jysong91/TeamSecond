@@ -41,12 +41,6 @@ public class CommonController {
 	public String mypage() {
 		return "mypage";
 	}
-	
-	@RequestMapping("bestPlace")
-	public String bestPlace() {
-		return "bestPlace";
-	}
-	
 	@RequestMapping("about")
 	public String about() {
 		return "about";

@@ -77,12 +77,13 @@ $(document).ready(function(){
             <div class="form-group"> <label for="InputEmail1">찾아가는 길</label>
               <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email"> </div>
             <div class="form-group"> <label for="InputEmail1">리뷰보기</label>
-              <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email" value="${selectReview.reviewContents }"> </div>
+              <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email"> </div>
             <div class="form-group"> <label for="InputEmail1">콜럼은 다른 이미지</label>
               <input type="email" class="form-control" id="InputEmail1" placeholder="Enter email"> </div>
-            <form id="frm" action="${home }review" method="post">
             <button type="submit" class="btn btn-secondary">다음</button>
             <button type="submit" class="btn btn-secondary">이전</button>
+            <br>
+            <form id="frm" action="${home }review" method="post">
 	            <input type="hidden" id="placeName" name="placeName" value="${placeDTO.placeName }">
        	    <button type="submit" class="btn btn-secondary">리뷰작성</button>
             </form>
@@ -164,66 +165,24 @@ $(document).ready(function(){
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="text-primary text-left display-4">추 천 리 뷰</h3>
+          <h3 class="text-primary text-left display-4">최 근 리 뷰</h3>
         </div>
       </div>
       <div class="row text-center">
         <div class="col-md-12">
           <div class="row text-left mt-5">
+          <c:forEach var="selectReview" items="${selectReviews }">
             <div class="col-md-4 my-3">
               <div class="row mb-3">
                 <div class="text-center col-2"><i class="d-block mx-auto fa fa-3x fa-mars"></i></div>
                 <div class="align-self-center col-10">
-                  <h5 class="text-secondary"><b>마이쪙</b></h5>
+                
+                  <h5 class="text-secondary"><b>${selectReview.reviewTitle }</b></h5><b>${selectReview.id }</b>
                 </div>
               </div>
-              <p>Based on fluid design principles. Works with screen resolution. &nbsp;In-app chat panel 24/7 active. The support you need, right there.</p>
+              <p>${selectReview.reviewContents }</p> 
             </div>
-            <div class="col-md-4 my-3">
-              <div class="row mb-3">
-                <div class="text-center col-2"><i class="d-block mx-auto fa fa-3x fa-venus"></i></div>
-                <div class="align-self-center col-10">
-                  <h5 class="text-secondary"><b>강추</b></h5>
-                </div>
-              </div>
-              <p>Help us spreading the word. Tell your friends with just one-click.&nbsp;Work simultaneously on different panels with the switcher</p>
-            </div>
-            <div class="col-md-4 my-3">
-              <div class="row mb-3">
-                <div class="text-center col-2"><i class="d-block mx-auto fa fa-3x fa-neuter"></i></div>
-                <div class="align-self-center col-10">
-                  <h5 class="text-secondary"><b>별로에요</b></h5>
-                </div>
-              </div>
-              <p>You are working with plain HTML and SASS files on your computer, so extending and integrating Javascript is a breeze.</p>
-            </div>
-            <div class="col-md-4 my-3">
-              <div class="row mb-3">
-                <div class="text-center col-2"><i class="d-block mx-auto fa fa-3x fa-mars-stroke"></i></div>
-                <div class="align-self-center col-10">
-                  <h5 class="text-secondary"><b>For anyone</b></h5>
-                </div>
-              </div>
-              <p>Based on fluid design principles. Works with screen resolution.&nbsp;Choose settings depending on the criteria you value the most.</p>
-            </div>
-            <div class="col-md-4 my-3">
-              <div class="row mb-3">
-                <div class="text-center col-2"><i class="d-block mx-auto fa fa-3x fa-mars-double"></i></div>
-                <div class="align-self-center col-10">
-                  <h5 class="text-secondary"><b>좋았습니다</b></h5>
-                </div>
-              </div>
-              <p>In-app chat panel 24/7 active. The support you need, right there. Pingendo enhance the battery duration and the quality of your life.&nbsp;</p>
-            </div>
-            <div class="col-md-4 my-3">
-              <div class="row mb-3">
-                <div class="text-center col-2"><i class="d-block mx-auto fa fa-3x fa-genderless"></i></div>
-                <div class="align-self-center col-10">
-                  <h5 class="text-secondary"><b>실화냐?</b></h5>
-                </div>
-              </div>
-              <p>Help us spreading the word. Tell your friends with just one-click.&nbsp;Work simultaneously on different panels. Share the work with teammates.</p>
-            </div>
+            </c:forEach>
           </div>
         </div>
       </div>

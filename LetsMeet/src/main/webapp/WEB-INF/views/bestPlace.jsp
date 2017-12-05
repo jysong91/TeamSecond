@@ -4,7 +4,6 @@
 <c:url  var="res" value="/resources/" />
 <!DOCTYPE html>
 <html>
-<script src="${home }resources/js/jquery.min.js"></script>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -81,12 +80,12 @@
   <div class="py-0">
     <div class="container">
     <c:forEach var="appraisalPlaces" items="${appraisalPlace }">
+    		<input type="hidden" id="placeName" name="placeName" value="${appraisalPlaces.placeName }">
 		      <div class="row mb-5">
 		        <div class="col-md-7">
 		          <h2 class="text-primary">
 		          <a href="${home }place/appraisalPlace?placeName=${appraisalPlaces.placeName }">${appraisalPlaces.placeName }</a></h2>
-		          <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-		            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		          <p class="appraisalPlacesData"></p>
 		        </div>
 		        <div class="col-md-5 align-self-center">
 		          <img class="img-fluid d-block w-100 img-thumbnail" src="background/34ad1f724fdd84d76bb3424e068175aa.jpg"> </div>
@@ -145,9 +144,23 @@
      <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  <script src="${home }resources/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var placeName = $("#placeName").val();
+	$.ajax({
+		url:'${home}place/bestAppraisalPlaceData',
+		data:{placeName:placeName},
+		type:'POST',
+		success:function(data){
+			$(".appraisalPlacesData").html("tel : "+data.tel+ "<br/>" + " 개요 : " + data.outLine);
+		}
+	});
+});
+</script>
 </body>
 
 </html>

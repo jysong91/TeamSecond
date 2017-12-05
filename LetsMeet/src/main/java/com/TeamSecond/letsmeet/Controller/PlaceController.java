@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.TeamSecond.letsmeet.DTO.PlaceDTO;
@@ -24,8 +25,8 @@ public class PlaceController {
 	public String place(PlaceDTO placeDTO, Model model) {
 		//장소 상세보기 클릭 시 해당아이디or아이피번호에 추가된다
 		placeService.placeInsert(placeDTO);
-		//리뷰 한개 가져오기
-		model.addAttribute("selectReview", placeService.selectReview(placeDTO.getPlaceName()));
+		//최근 리뷰 6개 가져오기
+		model.addAttribute("selectReviews", placeService.selectReview(placeDTO.getPlaceName()));
 		//별점 가져오기
 		model.addAttribute("selectAppraisal", placeService.selectAppraisal(placeDTO.getPlaceName()));
 		model.addAttribute("placeDTO", placeDTO);
@@ -38,15 +39,20 @@ public class PlaceController {
 	//최근 리뷰 이미지 클릭 시 장소 이동
 	@RequestMapping("placeForm")
 	public String placeForm(PlaceDTO placeDTO, Model model) {
-		//리뷰 한개 가져오기
-		model.addAttribute("selectReview", placeService.selectReview(placeDTO.getPlaceName()));
+		//최근 리뷰 6개 가져오기
+		model.addAttribute("selectReviews", placeService.selectReview(placeDTO.getPlaceName()));
 		//별점 가져오기
 		model.addAttribute("selectAppraisal", placeService.selectAppraisal(placeDTO.getPlaceName()));
 		//장소 가져와서 바로 place.jsp에 보내기
 		model.addAttribute("placeDTO", placeService.placeForm(placeDTO));
 		return "place";
 	}
-	
+	//
+	@RequestMapping("bestAppraisalPlaceData")
+	public @ResponseBody PlaceDTO bestAppraisalPlaceData(PlaceDTO placeDTO, Model model) {
+		return placeService.appraisalPlace(placeDTO);
+	}
+	 
 	//일주일간 평점높은 장소 클릭 시 장소정보 가져온 뒤 장소데이터 저장
 	@RequestMapping("appraisalPlace")
 	public String appraisalPlace(PlaceDTO placeDTO, Model model) {
@@ -72,12 +78,14 @@ public class PlaceController {
 		
 		//장소넣기
 		placeService.placeInsert(placeDTO);
-		//리뷰 한개 가져오기
-		model.addAttribute("selectReview", placeService.selectReview(placeDTO.getPlaceName()));
+		//리뷰 6개 가져오기
+		model.addAttribute("selectReviews", placeService.selectReview(placeDTO.getPlaceName()));
 		//별점 가져오기
 		model.addAttribute("selectAppraisal", placeService.selectAppraisal(placeDTO.getPlaceName()));
 		//장소 가져와서 바로 place.jsp에 보내기
 		model.addAttribute("placeDTO", placeDTO);
 		return "place";
 	}
+	
+	
 }

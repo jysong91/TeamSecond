@@ -1,5 +1,7 @@
 package com.TeamSecond.letsmeet.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,7 @@ public class PlaceServiceImpl implements PlaceService{
 	}
 
 	@Override
-	public ReviewDTO selectReview(String placeName) {
+	public List<ReviewDTO> selectReview(String placeName) {
 		return placeDAO.selectReview(placeName);
 	}
 
@@ -47,5 +49,20 @@ public class PlaceServiceImpl implements PlaceService{
 		placeDTO.setOutLine(placeD.getOutLine());
 		placeDAO.placeInsert(placeD);*/
 		return placeDAO.appraisalPlace(placeDTO.getPlaceName());
-	}
+	} 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -803,6 +803,7 @@
 	}
 	
 	if(""!="${quickKeyword}"){
+		isFindCenter="1";
 		quickSearch("${quickKeyword}");
 	}
 	
