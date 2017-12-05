@@ -163,7 +163,7 @@ $(document).ready(function(){
           <div class="input-group">
             <input type="text" class="form-control" id="email" name="email" placeholder="이메일 주소를 입력하세요">
              <span class="input-group-btn">
-               <button class="btn btn-success" id="authSendBtn" name="authSendBtn" >인증번호 확인</button>
+               <button type="button" class="btn btn-success" id="authSendBtn" name="authSendBtn" >인증번호 확인</button>
              </span> 
           </div>
           <p id="emailMsg"></p>
