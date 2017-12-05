@@ -4,15 +4,6 @@
 <c:url  var="res" value="/resources/" />
 <!DOCTYPE html>
 <html>
-<script src="${home }resources/js/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	var loginMsg = "${loginMsg}";
-	if(loginMsg!=""){
-		alert(loginMsg);
-	}
-});
-</script>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -180,9 +171,78 @@ $(document).ready(function(){
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
   <script type="text/javascript">
-  function goto(page){
-	  location.href=${home}+"mypage/"+page;
+  $(document).ready(function(){
+		$("#reviewExampleProc a").mouseenter(function(){
+			var placeName = $(this).attr("id");	
+			
+			$.ajax({
+				url:'${home}review/reviewExampleProc',
+				type:'POST',
+				data:{placeName:placeName},
+				success:function(data){
+					var aclass = $(".reviewExampleProc a").attr('class');
+					layer_popup(aclass);
+					$("#reviewTitle").html("리뷰 제목 : " + data.reviewTitle);
+					$("#reviewContents").html("리뷰 내용 : " + data.reviewContents);
+					var appraisal = data.reviewAppraisal;
+					var service = data.serviceScore;
+					var taste = data.tasteScore;
+					var mood = data.moodScore;
+					$("#reviewAppraisal a").each(function(item){
+						  if(appraisal == $(this).attr("id")){
+								$(this).addClass("on").prevAll("a").addClass("on");
+							}
+					}); 
+					$("#serviceScore a").each(function(item){
+						  if(service == $(this).attr("id")){
+								$(this).addClass("on").prevAll("a").addClass("on");
+							}
+					}); 
+					$("#tasteScore a").each(function(item){
+						  if(taste == $(this).attr("id")){
+								$(this).addClass("on").prevAll("a").addClass("on");
+							}
+					}); 
+					$("#moodScore a").each(function(item){
+						  if(mood == $(this).attr("id")){
+								$(this).addClass("on").prevAll("a").addClass("on");
+							}
+					}); 
+					  $(".pop-conts a").off("mouseenter");
+				}
+			});
+		});
+  function layer_popup(aclass){
+
+      var aclass = $(aclass);        //레이어의 id를 $el 변수에 저장
+
+      aclass.fadeIn();
+
+      var aclassWidth = ~~(aclass.outerWidth()),
+     	   aclassHeight = ~~(aclass.outerHeight()),
+     	   docWidth = $(document).width(),
+     	   docHeight = $(document).height();
+
+      // 화면의 중앙에 레이어를 띄운다.
+      if (aclassHeight < docHeight || aclassWidth < docWidth) {
+    	  aclass.css({
+              marginTop: -aclassHeight /2,
+              marginLeft: -aclassWidth/2
+          })
+      } else {
+          $el.css({top: 0, left: 0});
+      }
+
+      aclass.find('a.btn-layerClose').click(function(){
+    	  aclass.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+          return false;
+      });
   }
+	  function goto(page){
+		  location.href=${home}+"mypage/"+page;
+	  }
+  
+  });
   </script>
 </body>
 

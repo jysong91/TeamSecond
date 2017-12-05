@@ -28,4 +28,24 @@ public class PlaceServiceImpl implements PlaceService{
 	public String selectAppraisal(String placeName) {
 		return placeDAO.selectAppraisal(placeName);
 	}
+
+	@Override
+	public PlaceDTO placeForm(PlaceDTO placeDTO) {
+		placeDAO.placeInsert(placeDAO.placeForm(placeDTO));
+		return placeDAO.placeForm(placeDTO);
+	}
+
+	@Override
+	public PlaceDTO appraisalPlace(PlaceDTO placeDTO) {
+		/*PlaceDTO placeD = placeDAO.appraisalPlace(placeDTO.getPlaceName());
+		if(placeDTO.getId()==null){
+			placeDTO.setId("");
+		}
+		placeDTO.setPlaceName(placeD.getPlaceName());
+		placeDTO.setPlaceAddr(placeD.getPlaceAddr());
+		placeDTO.setTel(placeD.getTel());
+		placeDTO.setOutLine(placeD.getOutLine());
+		placeDAO.placeInsert(placeD);*/
+		return placeDAO.appraisalPlace(placeDTO.getPlaceName());
+	}
 }

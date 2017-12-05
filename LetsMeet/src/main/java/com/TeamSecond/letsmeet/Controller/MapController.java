@@ -1,14 +1,12 @@
 package com.TeamSecond.letsmeet.Controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,9 +31,11 @@ public class MapController {
 		model.addAttribute("calRst","37.566826, 126.9786567"); //占쏙옙占쏙옙占시�(占쏙옙占쏙옙트)
 		model.addAttribute("rad","5000"); 
 		model.addAttribute("isFindCenter", "0");
+		model.addAttribute("quickKeyword", "");
 		model.addAttribute("autoOverlay", false);
 		return "map";
 	}
+	
 	@RequestMapping(value = "/calMid")
 	public String calMid(@RequestParam("ppl") List<String> ppl,
 			Model model) {
@@ -50,7 +50,28 @@ public class MapController {
 		MapDTO map = new MapDTO();
 		map.setCalRst(pathSrv.calMid(ppl));
 		map.setRad("1000");
-		map.setIsFindCenter("0");
+		map.setIsFindCenter("1");
+		map.setAutoOverlay(true);
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "/quickSearch1")
+	public String quickSearch1(Model model, @RequestParam("keyword") String keyword) {
+		model.addAttribute("calRst","37.566826, 126.9786567"); //占쏙옙占쏙옙占시�(占쏙옙占쏙옙트)
+		model.addAttribute("rad","1000"); 
+		model.addAttribute("isFindCenter", "1");
+		model.addAttribute("quickKeyword", keyword);
+		model.addAttribute("autoOverlay", true);
+		
+		return "map";
+	}
+	
+	@RequestMapping(value = "/quickSearch2")
+	public @ResponseBody MapDTO quickSearch2() {
+		MapDTO map = new MapDTO();
+		map.setRad("1000");
+		map.setIsFindCenter("1");
 		map.setAutoOverlay(true);
 		
 		return map;

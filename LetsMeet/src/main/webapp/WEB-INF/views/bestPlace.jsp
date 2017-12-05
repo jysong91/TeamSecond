@@ -5,14 +5,6 @@
 <!DOCTYPE html>
 <html>
 <script src="${home }resources/js/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-	var loginMsg = "${loginMsg}";
-	if(loginMsg!=""){
-		alert(loginMsg);
-	}
-});
-</script>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -88,83 +80,21 @@ $(document).ready(function(){
   </div>
   <div class="py-0">
     <div class="container">
-      <div class="row mb-5">
-        <div class="col-md-7">
-          <h2 class="text-primary">#1 심리상담 &amp; 타로점</h2>
-          <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="col-md-5 align-self-center">
-          <img class="img-fluid d-block w-100 img-thumbnail" src="background/34ad1f724fdd84d76bb3424e068175aa.jpg"> </div>
-      </div>
-      <div class="row">
-        <div class="col-md-5">
-          <img class="img-fluid d-block mb-4 w-100 img-thumbnail" src="background/34ad1f724fdd84d76bb3424e068175aa.jpg"> </div>
-        <div class="col-md-7">
-          <h2 class="text-primary pt-3">#2 신당동 족발</h2>
-          <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-      </div>
+    <c:forEach var="appraisalPlaces" items="${appraisalPlace }">
+		      <div class="row mb-5">
+		        <div class="col-md-7">
+		          <h2 class="text-primary">
+		          <a href="${home }place/appraisalPlace?placeName=${appraisalPlaces.placeName }">${appraisalPlaces.placeName }</a></h2>
+		          <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+		            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		        </div>
+		        <div class="col-md-5 align-self-center">
+		          <img class="img-fluid d-block w-100 img-thumbnail" src="background/34ad1f724fdd84d76bb3424e068175aa.jpg"> </div>
+		      </div>
+    </c:forEach>   
     </div>
   </div>
-  <div class="py-0">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-md-7">
-          <h2 class="text-primary">#3 장충동 떡볶이</h2>
-          <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="col-md-5 align-self-center">
-          <img class="img-fluid d-block w-100 img-thumbnail" src="background/34ad1f724fdd84d76bb3424e068175aa.jpg"> </div>
-      </div>
-      <div class="row">
-        <div class="col-md-5">
-          <img class="img-fluid d-block mb-4 w-100 img-thumbnail" src="background/34ad1f724fdd84d76bb3424e068175aa.jpg"> </div>
-        <div class="col-md-7">
-          <h2 class="text-primary pt-3">#4 방탈출 카페</h2>
-          <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-0">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-md-7">
-          <h2 class="text-primary">#5 당 구 장</h2>
-          <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="col-md-5 align-self-center">
-          <img class="img-fluid d-block w-100 img-thumbnail" src="background/34ad1f724fdd84d76bb3424e068175aa.jpg"> </div>
-      </div>
-      <div class="row">
-        <div class="col-md-5">
-          <img class="img-fluid d-block mb-4 w-100 img-thumbnail" src="background/34ad1f724fdd84d76bb3424e068175aa.jpg"> </div>
-        <div class="col-md-7">
-          <h2 class="text-primary pt-3">#6 그랜드하얏트 호텔</h2>
-          <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="py-0">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-md-7">
-          <h2 class="text-primary">#7 찜 질 방</h2>
-          <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="col-md-5 align-self-center">
-          <img class="img-fluid d-block w-100 img-thumbnail" src="background/34ad1f724fdd84d76bb3424e068175aa.jpg"> </div>
-      </div>
-    </div>
-  </div>
+  
   <div class="bg-dark text-white">
     <div class="container">
       <div class="row">

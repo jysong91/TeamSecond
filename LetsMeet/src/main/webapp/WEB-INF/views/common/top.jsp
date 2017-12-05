@@ -24,11 +24,7 @@
     	opacity:0.5 !important;
 	}
   </style>
-  <script type="text/javascript">
-  	$(document).ready(function(){
-  		alert('${loginId}');
-  	});
-  </script>
+  
 </head>
   <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
     <div class="container">
@@ -53,9 +49,9 @@
         		<form action="${home }myPage" method="post"><button type="submit" class="btn navbar-btn ml-2 text-white btn-primary" >마이페이지</button></form>
         	</c:when>
         </c:choose>
-        <form class="form-inline m-0">
-          <input class="form-control mr-2 mx-2" type="text" placeholder="장소 바로검색!">
-          <button class="btn btn-primary" type="submit">검 색</button>
+        <form class="form-inline m-0" id="quickSearch" action="${home }map/quickSearch1">
+          <input class="form-control mr-2 mx-2" id="keyword" name="keyword" type="text" placeholder="장소 바로검색!">
+          <button class="btn btn-primary" type="button" onclick="searchPlaces()">검 색</button>
         </form>
       </div>
     </div>
@@ -95,3 +91,14 @@
       </div>
     </div>
   </div> 
+  <script type="text/javascript">
+  function searchPlaces() {
+	var keyword = document.getElementById('keyword').value;
+      if (!keyword.replace(/^\s+|\s+$/g, '')) {
+          alert('키워드를 입력해주세요!');
+          return false;
+      }
+      
+      document.getElementById('quickSearch').submit();
+  }
+  </script>  

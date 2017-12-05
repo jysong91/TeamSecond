@@ -17,4 +17,15 @@
 	<select id="selectAppraisal" parameterType="String" resultType="String">
 		select round(avg(reviewAppraisal),0) from review where placeName = #{placeName}
 	</select>
+	
+	<!-- 시간을 굳이 가져올 필요가 없다 해당 아이디와 해당 장소가 맞는걸 가져오면 된다 -->
+	<select id="placeForm" parameterType="com.TeamSecond.letsmeet.DTO.PlaceDTO" resultType="com.TeamSecond.letsmeet.DTO.PlaceDTO">
+		select distinct placeName,placeAddr,tel,outLine,id from place where placeName=#{placeName} and id=#{id} and ROWNUM =1
+	</select>
+	
+	<select id="appraisalPlace" parameterType="String" resultType="com.TeamSecond.letsmeet.DTO.PlaceDTO">
+		select distinct placeName,placeAddr,tel,outLine, id from place 
+		where placeName=#{placeName} and ROWNUM =1
+	</select>
+
 </mapper>

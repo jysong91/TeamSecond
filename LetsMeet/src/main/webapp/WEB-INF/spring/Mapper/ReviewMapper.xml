@@ -28,16 +28,22 @@
 	</select>
 	
 	<select id="selectMyReviewPlaceNameAll" parameterType="String" resultType="com.TeamSecond.letsmeet.DTO.PlaceDTO">
-	select placeName, placeAddr, outLine, tel, writeDate, rownum, id from (
-		select p.placeName, p.placeAddr, p.outLine, p.tel, to_char(r.writeDate, 'yyyy/mm/dd hh24:mi.ss')writeDate, r.id from review r  
-		left join place p
-		on p.placeName=r.placeName
-		order by writeDate desc
-	)
-	where id=#{id} and rownum<![CDATA[ < ]]>6
+	select placeName,writeDate from(
+		select placeName,to_char(writeDate , 'yyyy/mm/dd hh24:mi:ss')writeDate,rownum ,id from review order by writeDate desc
+		)
+	 where id=#{id} and rownum <![CDATA[ < ]]>13
 	</select>
 
 	<select id="reviewExampleProc" parameterType="map" resultType="com.TeamSecond.letsmeet.DTO.ReviewDTO">
 		select * from review where placeName=#{placeName} and id=#{id}
 	</select>
+	
+	<select id="bestAppraisalPlace" resultType="com.TeamSecond.letsmeet.DTO.ReviewDTO">
+	select placeName, score, rownum from(
+		select placeName, round(avg(reviewAppraisal),0)as score from(
+			SELECT placeName, reviewAppraisal FROM review WHERE writeDate >= TO_CHAR(SYSDATE-7,'YYYYMMDD')
+		) group by placeName order by score desc 
+	)where rownum <![CDATA[ < ]]> 8 
+	</select>
+	
 </mapper>

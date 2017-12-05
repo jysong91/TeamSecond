@@ -53,7 +53,7 @@ $(document).ready(function(){
             <br>
             <div>Weekly Top.7</div>
           </h1>
-          <a class="btn btn-lg btn-outline-primary" href="${home }bestPlace">View the gallery</a>
+          <a class="btn btn-lg btn-outline-primary" href="${home }review/bestAppraisalPlace">View the gallery</a>
         </div>
         <div class="col-md-6 p-0">
           <div id="carousel1" class="carousel slide" data-ride="carousel">

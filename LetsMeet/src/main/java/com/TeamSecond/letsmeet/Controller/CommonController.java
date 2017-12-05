@@ -56,6 +56,10 @@ public class CommonController {
 	public String top() {
 		return "common/top";
 	}
+	@RequestMapping("butNav")
+	public String butNav() {
+		return "common/butNav";
+	}
 
 	@RequestMapping("login")
 	public String login() {

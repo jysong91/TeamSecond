@@ -44,7 +44,7 @@ $(document).ready(function(){
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="text-black primary text-left display-4">${placeName }</h3>
+          <h3 class="text-black primary text-left display-4">${placeDTO.placeName }</h3>
         </div>
       </div>
       <div class="row">
@@ -60,8 +60,8 @@ $(document).ready(function(){
           </div>
         </div>
         <div class="col-md-6">
-          <h1>${placeName }</h1>
-          <p>${outLine }</p>
+          <h1>${placeDTO.placeName }</h1>
+          <p>${placeDTO.outLine }</p>
           	<c:set var="scoreNums">1,2,3,4,5</c:set>
             	<div>
 				<input type="hidden" id="reviewAppraisal" name="reviewAppraisal">
@@ -83,7 +83,7 @@ $(document).ready(function(){
             <form id="frm" action="${home }review" method="post">
             <button type="submit" class="btn btn-secondary">다음</button>
             <button type="submit" class="btn btn-secondary">이전</button>
-	            <input type="hidden" id="placeName" name="placeName" value="${placeName }">
+	            <input type="hidden" id="placeName" name="placeName" value="${placeDTO.placeName }">
        	    <button type="submit" class="btn btn-secondary">리뷰작성</button>
             </form>
         </div>
@@ -149,10 +149,10 @@ $(document).ready(function(){
     <div class="container">
       <div class="row">
         <div class="col-md-6 text-center align-self-center">
-          <h1 class="">${placeName }</h1>
+          <h1 class="">${placeDTO.placeName }</h1>
           <p class="mb-5"> <strong>Pingendo Inc.</strong>
-            <br>${placeAddr }
-            <br> <abbr title="Phone">P:</abbr> ${tel } </p>
+            <br>${placeDTO.placeAddr }
+            <br> <abbr title="Phone">P:</abbr> ${placeDTO.tel } </p>
         </div>
         <div class="col-md-6 p-0">
 <!--           <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyDW8nO9JhT_pEjebobq9pgUF2cEp0EUb1I&amp;&amp;markers=folsom+Ave+san+francisco&amp;center=folsom+Ave+san+francisco&amp;zoom=16&amp;size=640x300&amp;sensor=false&amp;scale=2">  -->

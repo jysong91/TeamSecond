@@ -25,81 +25,11 @@
     <link href="${res }css/map.css" rel="stylesheet" draggable="auto">
     <link href="${res }css/nav.css" rel="stylesheet" draggable="auto">
   </head>
+   <c:import url="/top"/>
   <body>
-    <nav class="navbar navbar-expand-md bg-secondary navbar-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="${home }">Yahmanaza</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="#">사용설명서</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link" href="${home }about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#mapSection">지도로 보기</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#listSection">리스트로 보기</a>
-          </li>
-        </ul>
-        <c:choose>
-        	<c:when test="${null eq loginId }">
-        		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal" >로그인</button>
-      		    <a class="btn navbar-btn ml-2 text-white btn-primary" href="${home }member"><i class="fa d-inline fa-lg fa-user-circle-o"></i> 회원가입</a>
-        	</c:when>
-        	<c:when test="${null ne loginId }">
-        		<form action="${home }member/logout"><button type="submit" class="logOutbtn" >로그아웃</button></form>
-        	</c:when>
-        </c:choose>
-        <form class="form-inline m-0">
-          <input class="form-control mr-2 mx-2" type="text" placeholder="장소 바로검색!">
-          <button class="btn btn-primary" type="submit">검 색</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-  
-    <!-- Modal -->
-  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="loginModal">
-    <div class="modal-dialog" role="document">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header" style="padding:35px 50px;">
-          <h4><span class="glyphicon glyphicon-lock"></span> 로그인</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body" style="padding:40px 50px;">
-          <form role="form" action="${home }member/loginProc">
-            <div class="form-group">
-              <label for="id"><span class="glyphicon glyphicon-eye-open"></span> 아이디</label>
-              <input type="text" class="form-control" id="id" name="id" placeholder="Enter id">
-            </div>
-            <div class="form-group">
-              <label for="pw"><span class="glyphicon glyphicon-eye-open"></span> 패스워드</label>
-              <input type="password" class="form-control" id="pw" name="pw" placeholder="Enter password">
-            </div>
-            <div class="checkbox">
-              <label><input type="checkbox" value="" checked> 아이디 기억하기</label>
-            </div>
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> 로그인</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-<!--           <button type="submit" class="btn btn-danger btn-default mx-auto" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> 취소</button> -->
-          <h6><a href="#">회원가입</a></h6>
-          <h6><a href="#">비밀번호찾기</a></h6>
-        </div>
-      </div>
-    </div>
-   </div>
-
 <div class="map_wrap" id="mapSection">
  <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;">
-	 <div id="layer_fixed">
+	 <!-- <div id="layer_fixed">
 	    <table cellspacing="0" cellpadding="0" style="width:100%; height:100%;">
 		    <tr>
 		       <td style="vertical-align:middle; padding-left: 20px; padding-right: 20px;">
@@ -112,8 +42,11 @@
 		       	</td>
 		    </tr>
 	    </table>
-	    </div>
-	</div>
+    </div> -->
+    <div id="butNav">
+    	<c:import url="/butNav"></c:import>
+    </div>
+ </div>
     <div id="menu_wrap" class="bg_white">
 		<div class="option" id="option">
 			<form class="form-inline" onsubmit="searchPlaces('keyword1');  return false;" style="flex-flow: inherit;">
@@ -127,6 +60,9 @@
 			<span id="addPerson"></span>
 			<button class="btn btn-lg" onclick="addPerson();" aria-label="Plus">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+			</button>
+			<button class="btn btn-lg" onclick="subPerson();" aria-label="Minus">
+				<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
 			</button>
 <form id="searchMidFrm" action="${home }map/calMid" method="post"> 
 			<input onclick="checkSearchText();" type="button" class="btn btn-primary" value="중간지점 찾기"> 
@@ -142,7 +78,7 @@
     
 </div>
 <hr>
-  <div id="listSection" class="py-4" style='background-image: url(${res}img/background/about_bg.jpg);'>
+  <%-- <div id="listSection" class="py-4" style='background-image: url(${res}img/background/about_bg.jpg);'>
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -150,8 +86,8 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="bg-light text-dark py-5">
+  </div> --%>
+  <!-- <div class="bg-light text-dark py-5">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -224,7 +160,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="text-white bg-light">
     <div class="container">
       <div class="row">
@@ -293,11 +229,16 @@
 	    
 	    // 지도를 생성합니다    
 	    var map = new daum.maps.Map(mapContainer, mapOption); 
-		
-	 	// 마커가 표시될 위치입니다 
+	 	
+	    // 마커가 표시될 위치입니다 
 	    var markerPosition  = new daum.maps.LatLng(${calRst}); 
-		
-    	// 마커를 생성합니다
+    	
+	    //중간지점에 표시할 마커를 담을 변수
+	    var midMarker = new daum.maps.Marker({
+	        position: markerPosition
+	    });
+	    
+	 	// 마커를 생성합니다
 	    var marker = new daum.maps.Marker({
 	        position: markerPosition
 	    });
@@ -401,7 +342,10 @@
 	            return;
 	        }
 	    } */
-
+	    
+	    //이벤트를 저장하기 위한 배열
+	    var events=[];
+	    
 	    // 검색 결과 목록과 마커를 표출하는 함수입니다
 	    function displayPlaces(places, remove) {
 	        var listEl = document.getElementById('placesList'), 
@@ -434,30 +378,27 @@
 	            // mouseout 했을 때는 인포윈도우를 닫습니다
 	            (function(marker, place) {
 	                //마커에 적용될 이벤트
-	            	daum.maps.event.addListener(marker, 'click', function(){
-	                	closeOverlay();
+	                var markerClick = function(){
+	        	    	closeOverlay();
 	                	var personLatlng = marker.getPosition();
-	                	if("1"==isFindCenter){
-	                		displayInfowindow(marker, place);
-	                	}else{
+	                	if("1"==isFindCenter)    	displayInfowindow(marker, place);
+	                	else{
 	                		displayLoc(marker, place);
-	                		document.getElementById('ppl'+search_ppl).value = personLatlng;
-	                		userMarkers[search_ppl-1] = marker;
-	                	}
-	                });
+	            			document.getElementById('ppl'+search_ppl).value = personLatlng;
+	            			$("#keyword"+search_ppl).val(place.place_name);
+	            			userMarkers[search_ppl-1] = marker;
+            			}
+                		panTo(personLatlng);
+	        	    }
+	        	    daum.maps.event.addListener(marker, 'click', markerClick);
+	            	events.push({
+        				target: marker, 
+        				type:'click', 
+        				handler: markerClick
+        				});
+	            	
 	                //목록에 적용될 이벤트
-	                itemEl.onclick = function(){
-	                	closeOverlay();
-	                	var personLatlng = marker.getPosition();
-	                	if("1"==isFindCenter){
-	                		displayInfowindow(marker, place);
-	                	}else{
-	                		displayLoc(marker, place);
-	                		document.getElementById('ppl'+search_ppl).value = personLatlng;
-	                		userMarkers[search_ppl-1] = marker;
-	                	}
-        	    		panTo(personLatlng);
-	                };
+	                itemEl.onclick = markerClick;
 	            })(marker, places[i]);
 
 	            fragment.appendChild(itemEl);
@@ -470,18 +411,7 @@
 	        map.setBounds(bounds);
 	    }
 	    
-	    //클릭 이벤트핸들러를 통합시켜주려고 만든 함수인데 제대로 작동안함.
-	    function markerClick(marker, place){
-	    	closeOverlay();
-        	var personLatlng = marker.getPosition();
-        	if("1"==isFindCenter)    	displayInfowindow(marker, place);
-        	else{
-        		displayLoc(marker, place);
-    			document.getElementById('ppl'+search_ppl).value = personLatlng;
-    			userMarkers[search_ppl-1] = marker;
-        	}
-        	panTo(personLatlng);
-	    }
+	    
 
 	    // 검색결과 항목을 Element로 반환하는 함수입니다
 	    function getListItem(index, places) {
@@ -603,11 +533,16 @@
             '    </div>' +    
             '</div>'; 
             
+           
+            
  			overlay = new daum.maps.CustomOverlay({
 		        content: content,
 		        map: map,
 		        position: marker.getPosition()       
 	   		 });
+ 			
+ 			 var frm = document.getElementById("frm");
+             frm.target = "_blank";
 	    }
 
 		// 위치 선택완료
@@ -648,7 +583,7 @@
 				tmpArr[i] = document.getElementById("keyword"+(i+1)).innerHTML;
 			}
 			
-			div.innerHTML += '<form class="form-inline"' +
+			div.innerHTML += '<form id="added'+cnt_ppl+'" class="form-inline"' +
 			'	onsubmit="searchPlaces(\'keyword'+cnt_ppl+'\'); return false;"' +
 			'	style="flex-flow: inherit;">' +
 			'	<input class="form-control"'+
@@ -664,14 +599,38 @@
 			}
 		}
 		
+		function subPerson(){
+			$("#added"+cnt_ppl).remove();
+			$("#ppl"+cnt_ppl).remove();
+			cnt_ppl--;
+		}
+		
+		var midkeyword;
+		
 		//반경 1km내의 상업시설들을 검색하는 함수. 해당하는 카테고리명으로 검색함
 	    function searchPlacesFromMid(keyword) {
+			midkeyword = keyword;
 	    	closeOverlay();
-	    	//circle.setMap(map);
- 	        ps.keywordSearch( keyword, placesSearchCB,{
+ 	        ps.keywordSearch( keyword, midSearchCB,{
 	        	location: markerPosition,
 	        	radius: 1000
 			})
+	    }
+		
+	    function midSearchCB(data, status, pagination) {
+	        if (status === daum.maps.services.Status.OK) {
+				$("#cateinfo").remove();
+		    	$("#option").prepend("<div id='cateinfo'><b><h5>"+midkeyword+"</h5></b> 검색 결과입니다.<br></div>");
+	            displayPlaces(data,true);
+	            displayPagination(pagination);
+				//midkeyword="";
+	        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
+	            alert('검색 결과가 존재하지 않습니다.');
+	            return;
+	        } else if (status === daum.maps.services.Status.ERROR) {
+	            alert('검색 중 오류가 발생했습니다.');
+	            return;
+	        }
 	    }
 		
 		//컨트롤러에서 중간지점 계산해서 페이지 리로딩 후에 실행되는 함수.
@@ -698,7 +657,7 @@
 			overlay = new daum.maps.CustomOverlay({
 		        content: content,
 		        map: map,
-		        position: position.getPosition() 
+		        position: position
 	   		 });
 			showCategory();
 	    }
@@ -735,6 +694,8 @@
 			        url : "${home }map/calMid2",
 			        datatype : "json",
 			        success : function(data) {
+			        	removeAllChildNods(document.getElementById('placesList'));
+			        	removeAllChildNods(document.getElementById('pagination'));
 			            removeMarker();
 			            closeOverlay();
 			            
@@ -745,7 +706,7 @@
 			            var y = Number(pos[1]);
 			          	
 			            markerPosition  = new daum.maps.LatLng(x, y);
-			            var midMarker = new daum.maps.Marker({
+			            midMarker = new daum.maps.Marker({
 					        position: markerPosition
 					    });
 						
@@ -760,11 +721,17 @@
 					    circle.setMap(map);
 					    
 					    //중간지점 위에 오버레이 표시
-				    	displayMidOverlay(midMarker);
+				    	displayMidOverlay(markerPosition);
 				    	
 				    	//좌측의 검색창을 없앤다.
 				    	removeWrap();
 				    	
+				    	//유저마커에 배정된 이벤트를 지운다.
+				    	events.forEach(function(e){
+				    		daum.maps.event.removeListener(e.target, e.type, e.handler);
+				    	})
+				    	events.length = 0;
+				    	var bounds = new daum.maps.LatLngBounds();
 			    	    for(var i=0; i<userMarkers.length; i++){
 			    	    	var linePath = [markerPosition, userMarkers[i].getPosition()]
 			    	    	var polyline = new daum.maps.Polyline({
@@ -774,10 +741,17 @@
 			    	    	    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
 			    	    	    strokeStyle: 'solid' // 선의 스타일입니다
 			    	    	});
+			    	    	//유저마커의 이미지를 교체한다
+			    	    	var markerImage = new daum.maps.MarkerImage(
+			    	    		    '${res}/img/marker/modfied_userMarker2.png',
+			    	    		    new daum.maps.Size(36, 36), new daum.maps.Point(18, 36));
 			    	    	polyline.setMap(map);
 			    	    	daum.maps.event.removeListener(userMarkers[i], 'click');
+			    	    	bounds.extend(userMarkers[i].getPosition());
+			    	    	userMarkers[i].setImage(markerImage);
 			    	    	userMarkers[i].setMap(map);
 			    	    }
+			    	    map.setBounds(bounds);
 			        }
 			    });
 				//document.getElementById("searchMidFrm").submit();
@@ -819,15 +793,99 @@
 				$('<div id="cate_wrap" class="bg_black">'+ 
 					buttonation(categories) +
 				    '</div>').appendTo("#map"),
-			    $(".category").on('click', function(event) {
-					$("#cateinfo").remove(),
-			    	$("#option").prepend("<div id='cateinfo'><b><h5>"+$(this).text()+"</h5></b> 검색 결과입니다.<br></div>")
-				})
+				closeOverlay(),
+				removeMarker(),
+				map.setCenter(markerPosition),
+				midMarker.setPosition(markerPosition),
+				midMarker.setMap(map);
 			})
 		})
 	}
 	
+	if(""!="${quickKeyword}"){
+		quickSearch("${quickKeyword}");
+	}
 	
+	function quickSearch(keyword){
+		removeWrap();
+		ps.keywordSearch( keyword, quickSearchCB, {category_group_code:'SW8'});
+	}
+	
+	function quickSearchCB(data, status){
+		if (status === daum.maps.services.Status.OK) {
+			displayPlacesQuick(data,true);
+        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
+            alert('검색 결과가 존재하지 않습니다.');
+            return;
+        } else if (status === daum.maps.services.Status.ERROR) {
+            alert('검색 중 오류가 발생했습니다.');
+            return;
+        }
+	}
+	
+	
+	function displayPlacesQuick(places, remove) {
+        var listEl = document.getElementById('placesList'), 
+        menuEl = document.getElementById('menu_wrap'),
+        fragment = document.createDocumentFragment(), 
+        bounds = new daum.maps.LatLngBounds(), 
+        listStr = '';
+        
+        // 검색 결과 목록에 추가된 항목들을 제거합니다
+        removeAllChildNods(listEl);
+
+        // 지도에 표시되고 있는 마커를 제거합니다
+        if(remove==true){
+	        removeMarker();
+        }
+        
+        for ( var i=0; i<places.length; i++ ) {
+
+            // 마커를 생성하고 지도에 표시합니다
+            var placePosition = new daum.maps.LatLng(places[i].y, places[i].x),
+                marker = addMarker(placePosition, i), 
+                itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+
+            // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+            // LatLngBounds 객체에 좌표를 추가합니다
+            bounds.extend(placePosition);
+			
+            // 마커와 검색결과 항목에 mouseover 했을때
+            // 해당 장소에 인포윈도우에 장소명을 표시합니다
+            // mouseout 했을 때는 인포윈도우를 닫습니다
+            (function(marker, place) {
+                //마커에 적용될 이벤트
+            	daum.maps.event.addListener(marker, 'click', function(){
+                	closeOverlay();
+                	markerPosition = marker.getPosition();
+                	circle.setPosition(markerPosition);
+				    circle.setMap(map);
+                	displayMidOverlay(markerPosition);
+                });
+                //목록에 적용될 이벤트
+                itemEl.onclick = function(){
+                	closeOverlay();
+                	markerPosition = marker.getPosition();
+                	circle.setPosition(markerPosition);
+				    circle.setMap(map);
+                	displayMidOverlay(marker.getPosition());
+    	    		panTo(personLatlng);
+                };
+            })(marker, places[i]);
+
+            fragment.appendChild(itemEl);
+        }
+
+        // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
+        listEl.appendChild(fragment);
+        menuEl.scrollTop = 0;
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map.setBounds(bounds);
+    }
+	
+	function setCenter(){
+		panTo(markerPosition);
+	}
 	
     </script>    
     
